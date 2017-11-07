@@ -1,0 +1,68 @@
+@charset "UTF-8";
+/* This is the CSS document for the desktop site. */
+
+/*CSS for index.php*/
+
+#left {
+  width: 50%;
+  display: table;
+  position: absolute;
+  float: left;
+  height: 100vh;
+}
+
+#right {
+  width: 50%;
+  display: table;
+  float: right;
+  height: 100vh;
+}
+
+.loginField{
+  height: 56px;
+  font-size: 36px;
+}
+
+.details{
+  font-size: 42px;
+  padding: 30px;
+}
+
+
+
+.hoursLeft{
+  float: left;
+  width: 48%;
+}
+
+.hoursRight{
+  float: right;
+  width: 48%;
+}
+
+.booksLeft{
+  float: left;
+  width: 48%;
+}
+
+.booksRight{
+  float: right;
+  width: 48%;
+}
+
+.book{
+  margin: 10px;
+  widows: 45%;
+}
+
+.mobile-only{
+  display: none;
+}
+
+.collapse{
+  display: block;
+}
+
+.title{
+  font-size: 36px;
+}

@@ -1,0 +1,241 @@
+@charset "UTF-8";
+/* This is the main CSS document for the summer reading site.*/
+html, body {
+	margin: 0px;
+	padding: 0px;
+  background-color: #253e50;
+}
+
+#left{
+  background-color: #253e50;
+}
+
+#right{
+  background-color: white;
+  text-align: center;
+}
+
+#login {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inputLabel {
+    color: black;
+}
+
+.tableLeft {
+  text-align: right;
+}
+.tableRight {
+  text-align: left;
+}
+.textInput {
+  background-color: inherit;
+  border-color: #0100F3;
+}
+
+.loginTable{
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.loginField{
+  margin: 8px;
+  border-color: #005e84;
+  border-width: thick;
+  border-style: solid;
+  background-color: inherit;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
+}
+
+#loginButton{
+  color: white;  
+  background-color: #005E84
+}
+
+.loginField:focus{
+  border-color: #00AFDA;
+  outline: none;
+}
+
+.details{
+  color: white;
+  text-align: justify;
+}
+
+.forgotPassword{
+  text-decoration: none; 
+  color: grey;
+}
+
+
+
+/*CSS for hours section*/
+.hours{
+  background-color: white;
+  height: auto;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  border-color: rgb(227, 203, 146);
+  border-width: 10px;
+  border-style: solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hoursLeft{
+  text-align: center;
+  padding: 10px;
+  height: inherit;
+}
+
+.hoursRight{
+  text-align: center;
+  height: inherit;
+}
+
+.minutes{
+  height: 56px;
+  font-size: 36px;
+  width: 70px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: rgb(80, 107, 177);
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.minutes:focus{
+  border-color: #00AFDA;
+  outline: none;
+}
+
+.booker{
+  margin: 10px;
+}
+
+.bookerIP{
+  
+}
+    
+.bookerCP{
+
+}
+
+.bookerDN{
+  opacity: .5
+}
+
+.DN{
+  opacity: .5
+}
+
+.books{
+  background-color: white;
+  height: auto;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  border-color: rgb(227, 203, 146);
+  border-width: 10px;
+  border-style: solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.booksLeft{
+  text-align: center;
+  padding: 10px;
+  height: inherit;
+}
+
+.booksRight{
+  text-align: center;
+  height: inherit;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow: auto;
+}
+
+.title{
+  height: 56px;
+  width: 80%;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: rgb(80, 107, 177);
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mobileButton{
+  color: black;
+  background-color: rgb(227, 203, 146);
+  border-color: black;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 100%;
+}
+
+
+/*Admin Page CSS*/
+
+.main{
+  background-color: white;
+}
+
+.cardScan{
+  margin: 8px;
+  border-color: #005e84;
+  border-width: thick;
+  border-style: solid;
+  background-color: inherit;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
+  height: 80px;
+  width: 60%;
+  font-size: 48px;
+}
+
+.children{
+  padding: 30px;
+}
+
+.hiddenCheckbox{
+  display: none;
+}

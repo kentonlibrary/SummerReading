@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* This is the CSS document for the mobile site. */
+
+/*CSS for index.php*/
+
+#left {
+  background-color: #253e50;
+  width: 100%;
+  display: block;
+}
+
+#right {
+  width: 100%;
+  display: block;
+  padding-bottom: 20px;
+}
+
+.loginField{
+  width: 80%;
+  height: 24px;
+  font-size: 18px;
+}
+
+#loginButton{
+  height: 36px;
+}
+
+.details{
+  font-size: 24px;
+  padding: 10px;
+}
+
+
+.hoursLeft{
+  display: block;
+  width: 100%;
+}
+
+.hoursRight{
+  display: block;
+  width: 100%;
+}
+
+.booksLeft{
+  display: block;
+  width: 100%;
+}
+
+.booksRight{
+  display: block;
+  width: 100%;
+}
+
+.book{
+  margin: 10px;
+  width: 90%;
+}
+
+.title{
+  font-size: 36px;
+}
