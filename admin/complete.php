@@ -71,7 +71,7 @@ foreach($results as $result){
         $remainingMinutes = $remainingMinutes - 150;
     }
   }
-    elseif($readerCategory == 'youngChild'){
+    elseif($readerCategory == 'youngChild'){ //If reader is young child
       $readerID = $result['readerID'];
       $loggedHours = $connection->query("SELECT COUNT(*) AS minutes FROM youngChildLog WHERE readerID = '$readerID'");
 
