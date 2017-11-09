@@ -1,3 +1,39 @@
+<?php
+include('assets/scripts.php'); //File with connection information and functions
+
+if(isset($_POST['loginButton'])){ //Check if login form has been submitted
+	
+	$barcode = $_POST['card'];
+	
+	$query = "SELECT accountID FROM account WHERE barcode = ?";
+	
+	if( $stmt = $connection->prepare($query)){
+		$stmt->bind_param("s", $barcode);
+		$stmt->execute();
+		
+		$stmt->bind_result($accountID);
+		$stmt->fetch();
+		
+		if(isset($accountID)){
+			
+			session_start();
+			$_SESSION['accountID'] = $accountID;
+			
+			header("Location: log.php");
+		}
+		else{
+			header("Location: register.php?barcode=" . $barcode);
+		}
+		
+		
+		$stmt->close();
+	}
+	
+	$connection->close();
+	
+}
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -14,11 +50,11 @@
     
     <div id="login"> <!-- Login form for website -->
       <img src="assets/KCPL_Logo-Horiz_Color.png" width="90%" alt="logo"/>
-      <form action="log.php" method="post">
+      <form action="" method="post">
         <input class="loginField" type="text" placeholder="Library Card Number" maxlength="14" name="card" id="card" pattern="\d*"><br>
-        <input class="loginField" type="password" placeholder="Pin" name="pin" id="pin"><br>
+<br>
         <input class="loginField" type="submit" value="Login" id="loginButton" name="loginButton"><br><br>
-        <a class="forgotPassword" href="https://catalog.kentonlibrary.org/eg/opac/password_reset" target="_blank">Forgot Password?</a> | <a class="forgotPassword" href="admin/index.php">Library Staff</a>
+        <a class="forgotPassword" href="admin/index.php">Library Staff Login</a>
     </form>
 	  </div>
 	

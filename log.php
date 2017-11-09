@@ -27,11 +27,10 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
 
 //Looks up users in logged in account from database
 
-///////////////////////////////////////////////////
-//                  REPLACE 1 WITH LOGGED        //
-//                  IN VARIABLE                  //
-///////////////////////////////////////////////////
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader WHERE accountID = '1'");
+session_start();
+
+$accountID = $_SESSION['accountID'];
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader WHERE accountID = '$accountID'");
 
 ?>
 <!doctype html>
