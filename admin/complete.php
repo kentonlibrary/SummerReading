@@ -54,7 +54,7 @@ foreach($results as $result){
       }
       elseif( $bookAward == 1 ){
         ?>
-          <input onChange="level2(''<?php echo $result['readerID'] . "', '" . $readerCategory; ?>'" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
+          <input onChange="level2('<?php echo $result['readerID'] . "', '" . $readerCategory; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
           <label for="<?php echo $readerID . 'book' . $bookAward;?>" class="hiddenLabel">
           <img src="../assets/tshirt.png" height="80px"></label>
         <?php
