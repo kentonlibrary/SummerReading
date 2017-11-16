@@ -1,4 +1,4 @@
-<?
+<?php
 include('assets/scripts.php'); //File with connection information and functions
 
 if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to see if a form needs to be submitted, or to load the page normally
