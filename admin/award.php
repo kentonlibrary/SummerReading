@@ -1,6 +1,6 @@
 <?
 include('../assets/scripts.php');
-if(!isset($_COOKIE['Branch'])){
+if(isset($_COOKIE['Branch']) == false){
   header('Location: index.php');
 }
 ?>
