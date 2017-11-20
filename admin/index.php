@@ -1,6 +1,7 @@
 <?php
 if(isset($_POST['branch'])){
-  setcookie("Branch", $_POST['branch'], time + (3600 * 24));
+  setcookie("Branch", $_POST['branch'], time() + (3600 * 24));
+  //echo "Cookie: " . $_COOKIE["Branch"];
   header('Location: award.php');
   
 }
