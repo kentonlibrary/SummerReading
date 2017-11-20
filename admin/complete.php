@@ -15,6 +15,7 @@
 include('../assets/scripts.php');
 
 $barcode=$_GET['cardNumber'];
+$branch=$_GET['branch'];
   
 
 $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND barcode = '$barcode'");  //
@@ -46,7 +47,7 @@ foreach($results as $result){
       
       if( $bookAward == 0 ){
         ?>
-          <input onChange="level1('<?php echo $result['readerID'] . "', '" . $readerCategory; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
+          <input onChange="level1('<?php echo $result['readerID'] . "', '" . $readerCategory . ", " . $branch; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
           <label for="<?php echo $readerID . 'book' . $bookAward;?>" class="hiddenLabel">
           <img src="../assets/bookaward.png" height="80px"></label>
         <?php
@@ -54,7 +55,7 @@ foreach($results as $result){
       }
       elseif( $bookAward == 1 ){
         ?>
-          <input onChange="level2('<?php echo $result['readerID'] . "', '" . $readerCategory; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
+          <input onChange="level2('<?php echo $result['readerID'] . "', '" . $readerCategory . ", " . $branch; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
           <label for="<?php echo $readerID . 'book' . $bookAward;?>" class="hiddenLabel">
           <img src="../assets/tshirt.png" height="80px"></label>
         <?php
@@ -62,7 +63,7 @@ foreach($results as $result){
       }
       elseif( $bookAward >= 2 ){
         ?>
-          <input onChange="level3('<?php echo $result['readerID'] . "', '" . $readerCategory; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
+          <input onChange="level3('<?php echo $result['readerID'] . "', '" . $readerCategory . ", " . $branch; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
           <label for="<?php echo $readerID . 'book' . $bookAward;?>" class="hiddenLabel">
           <img src="../assets/challenge.jpg" height="80px"></label>
         <?php
