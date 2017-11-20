@@ -7,7 +7,7 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
     $minutes = $_POST['minutes'];
 
     //SQL Block to insert time into database
-    $query = $connection->prepare("INSERT INTO OlderChildLog (readerID, timeRead) VALUES (?, ?)");
+    $query = $connection->prepare("INSERT INTO olderChildLog (readerID, timeRead) VALUES (?, ?)");
     $query->bind_param("ii", $readerID, $minutes);
     $query->execute();
     $query->close();
