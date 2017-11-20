@@ -1,3 +1,10 @@
+<?php
+if(isset($_POST['branch'])){
+  setcookie("Branch", $_POST['branch'], time + (3600 * 24));
+  header('Location: award.php');
+  
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -14,11 +21,15 @@
     
     <div id="login">
       <img src="../assets/KCPL_Logo-Horiz_Color.png" width="90%" alt="logo"/>
-      <form action="award.php" method="post">
-        <input class="loginField" type="text" placeholder="Library Card Number" maxlength="14" name="card" id="card" pattern="\d*"><br>
-        <input class="loginField" type="password" placeholder="Pin" name="pin" id="pin"><br>
+      <form action="" method="post">
+        <select name="branch" id="branch">
+          <option value="Covington">Covington</option>
+          <option value="Durr">William E. Durr</option>
+          <option value="Erlanger">Erlanger</option>
+        </select>
+        <br>
         <input class="loginField" type="submit" value="Login" id="loginButton" name="loginButton"><br><br>
-        <a class="forgotPassword" href="https://catalog.kentonlibrary.org/eg/opac/password_reset" target="_blank">Forgot Password?</a> | <a class="forgotPassword" href="../index.php">Patron Login</a>
+        <a class="forgotPassword" href="../index.php">Patron Login</a>
     </form>
 	  </div>
 	

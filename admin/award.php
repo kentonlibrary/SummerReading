@@ -1,5 +1,8 @@
 <?
 include('../assets/scripts.php');
+if(!isset($_COOKIE['Branch'])){
+  header('Location: index.php');
+}
 ?>
 <!doctype html>
 <html>
