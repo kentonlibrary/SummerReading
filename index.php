@@ -4,33 +4,15 @@ include('assets/scripts.php'); //File with connection information and functions
 if(isset($_POST['loginButton'])){ //Check if login form has been submitted
 	
 	$barcode = $_POST['card'];
-	
-	$query = "SELECT accountID FROM account WHERE barcode = ?";
-	
-	if( $stmt = $connection->prepare($query)){
-		$stmt->bind_param("s", $barcode);
-		$stmt->execute();
-		
-		$stmt->bind_result($accountID);
-		$stmt->fetch();
-		
-		if(isset($accountID)){
-			
-			session_start();
-			$_SESSION['accountID'] = $accountID;
-			
-			header("Location: log.php");
-		}
-		else{
-			header("Location: register.php?barcode=" . $barcode);
-		}
-		
-		
-		$stmt->close();
-	}
-	
-	$connection->close();
-	
+  
+  setcookie("Barcode", $_POST['card'], time() + (3600 * 24));
+  			
+
+  
+}
+
+if(isset($_COOKIE["Barcode"])){
+  header("Location: log.php");
 }
 
 ?>
@@ -38,11 +20,17 @@ if(isset($_POST['loginButton'])){ //Check if login form has been submitted
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+  <meta name="apple-mobile-web-app-title" content="KCPL SCR" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <title>Home</title>
+  <link rel="apple-touch-icon" href="assets/Stamp_iPhone.jpg">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/Stamp_iPhone.jpg">
   <link href="assets/main.css" rel="stylesheet" type="text/css">
   <link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
   <link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
+  <link rel="apple-touch-startup-image" href="assets/splash.jpg">
 </head>
 
 <body>
@@ -64,5 +52,19 @@ if(isset($_POST['loginButton'])){ //Check if login form has been submitted
       Welcome to the Kenton County Public Library Summer Reading Program.  Click on the link below to download the paper summer reading form, or login with your library card and pin to use the digital reading log.
     </div>
   </div>
+  
+<script type="text/javascript">
+$(document).ready(function(){
+        // iOS web app full screen hacks.
+        if(window.navigator.standalone == true) {
+                // make all link remain in web app mode.
+                $('a').click(function() {
+                        window.location = $(this).attr('href');
+            return false;
+                });
+        }
+});
+</script>
+
 </body>
 </html>

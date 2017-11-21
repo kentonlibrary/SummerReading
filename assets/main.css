@@ -268,3 +268,14 @@ html, body {
 .label{
 	font-size: 32px;
 }
+
+
+@font-face {
+    font-family: 'code39azalearegular';
+    src: url('code39azalea-webfont.woff2') format('woff2'),
+         url('code39azalea-webfont.woff') format('woff'),
+         url('code39azalea-webfont.ttf') format('tff');
+    font-weight: normal;
+    font-style: normal;
+
+}

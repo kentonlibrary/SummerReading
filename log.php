@@ -27,7 +27,29 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
 
 //Looks up users in logged in account from database
 
-session_start();
+$barcode = $_COOKIE["Barcode"];
+
+$query = "SELECT accountID FROM account WHERE barcode = ?";
+	
+	if( $stmt = $connection->prepare($query)){
+		$stmt->bind_param("s", $barcode);
+		$stmt->execute();
+		
+		$stmt->bind_result($accountID);
+		$stmt->fetch();
+		
+		if(isset($accountID)){
+			
+			session_start();
+			$_SESSION['accountID'] = $accountID;
+		}
+		else{
+			header("Location: register.php?barcode=" . $barcode);
+		}
+		
+		
+		$stmt->close();
+	}
 
 $accountID = $_SESSION['accountID'];
 $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader WHERE accountID = '$accountID'");
@@ -37,12 +59,17 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+  <meta name="apple-mobile-web-app-title" content="KCPL SRC" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <title>Log</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="assets/main.css" rel="stylesheet" type="text/css">
   <link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-  width:480px)">
   <link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:481px)">
+  <link rel="apple-touch-icon" href="assets/Stamp_iPhone.jpg">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/Stamp_iPhone.jpg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -171,6 +198,10 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
     }
   }
 ?>
+<div style="background-color: white; padding: 10px; text-align: justify;">
+  <p style="font-family: 'code39azalearegular'; font-size: 48px; text-align: center; margin-bottom: -10px">*<?php echo $barcode; ?>*</p> 
+  <p style="text-align: center;"><?php echo $barcode; ?></p>
+</div>
 </body>
 </html>
 
