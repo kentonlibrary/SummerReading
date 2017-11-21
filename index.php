@@ -6,7 +6,7 @@ if(isset($_POST['loginButton'])){ //Check if login form has been submitted
 	$barcode = $_POST['card'];
   
   setcookie("Barcode", $_POST['card'], time() + (3600 * 24));
-  			
+  header("Location: log.php");
 
   
 }
