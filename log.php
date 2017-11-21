@@ -43,6 +43,9 @@ $query = "SELECT accountID FROM account WHERE barcode = ?";
 			session_start();
 			$_SESSION['accountID'] = $accountID;
 		}
+    elseif( $barcode == "" ){
+      header("Location: index.php");
+    }
 		else{
 			header("Location: register.php?barcode=" . $barcode);
 		}
