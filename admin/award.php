@@ -60,29 +60,29 @@ function loadDoc() { //loads complete.php into awards div
 
 //fuctions to be performed when images are clicked
   
-function level1( readerID, readerType, branch ){
+function level1( readerID, readerType ){
   alert("Please allow child to select a book");
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=book" + '&reader=' + readerType + "&branch=" + branch, true);
+  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=book" + '&reader=' + readerType + "&branch=<?php echo $branch;?>", true);
   xhttp.send();
   
 }
   
-function level2( readerID, readerType, branch ){
+function level2( readerID, readerType ){
   var winfeatures="width=800,height=510,scrollbars=1,resizable=1,toolbar=1,location=1,menubar=1,status=1,directories=0";
   alert("Please allow child to pick out a T-Shirt or Tote Bag");
   window.open('raffleTicket.php?readerID=' + readerID + '&type=Raffle', "", winfeatures);
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=shirt" + '&reader=' + readerType + "&branch=" + branch, true);
+  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=shirt" + '&reader=' + readerType + "&branch=<?php echo $branch;?>", true);
   xhttp.send();
 }
   
-function level3( readerID, readerType, branch ){
+function level3( readerID, readerType ){
   var winfeatures="width=800,height=510,scrollbars=1,resizable=1,toolbar=1,location=1,menubar=1,status=1,directories=0";
   alert("Please place raffle ticket in correct basket");
   window.open('raffleTicket.php?readerID=' + readerID + '&type=Challenge', "", winfeatures);
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=challenge" + '&reader=' + readerType + "&branch=" + branch, true);
+  xhttp.open("GET", "markAward.php?readerID=" + readerID + "&type=challenge" + '&reader=' + readerType + "&branch=<?php echo $branch;?>", true);
   xhttp.send();
 }
 
