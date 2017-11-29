@@ -22,6 +22,16 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
     $query->execute();
     $query->close();
   }
+  if($_POST['readerCategory'] == 'teen'){ //Starts code loop for younger child
+    $readerID = $_POST['readerID'];
+    $title = $_POST['title'];
+    
+    //SQL Block to insert time into database
+    $query = $connection->prepare("INSERT INTO teenLog (readerID, title) VALUES (?, ?)");
+    $query->bind_param("is", $readerID, $title);
+    $query->execute();
+    $query->close();
+  }
 }
 
 
@@ -194,6 +204,43 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
       if($remainder > 0){ //If there is a remainder of books left
       ?>
       <img src="assets/book<?php echo $remainder;?>.png" height="75px" alt="book" class="book"> <!-- show image that corrisponds with the remaining books -->
+      <?php } ?>
+    </div> 
+  </div>
+<?php
+    }
+        if($result['readerCategory'] == 'teen'){ //Loops throug young children on the logged in account
+      $readerID = $result['readerID'];
+      
+      //SQL Block
+      $logs = $connection->query("SELECT timestamp FROM teenLog WHERE readerID = '$readerID'");
+      $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
+  ?>
+  <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
+  <div class="books collapse" id="<?php echo $result['readerID'];?>">
+    <div class="booksLeft">
+      <form action="" method="post">
+        <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
+        <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
+        <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
+        <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
+        <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
+      </form>
+    </div>
+    <div class="booksRight">
+      <?php
+        while( $book = $logs->fetch_array(MYSQLI_ASSOC)){
+          $bookNumber = rand(1, 4);
+        ?>
+        <div class="bookContainer">
+          <img src="assets/bookSelf<?php echo $bookNumber;?>.png" height="75px" alt="book" class="book">
+          <div class="spineText">
+      <?php
+        $dateTime = new DateTime($book['timestamp']);
+        echo $dateTime->format('m/d');
+      ?>
+        </div>
+      </div>
       <?php } ?>
     </div> 
   </div>

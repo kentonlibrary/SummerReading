@@ -279,3 +279,17 @@ html, body {
     font-style: normal;
 
 }
+
+.bookContainer{
+  position: relative;
+  text-align: center;
+  color: white;
+  width: 75px;
+  display: inline;
+}
+
+.spineText{
+  position: absolute;
+  top: -12px;
+  left: 14px;
+}
