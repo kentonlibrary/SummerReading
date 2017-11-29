@@ -69,9 +69,16 @@
   
   
   //Awards Given.
-  $awardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward GROUP BY branch");
+  $youngAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward GROUP BY branch");
   
-  foreach( $awardsGiven as $awardCount){
+  foreach( $youngAwardsGiven as $awardCount){
+    $key = $awardCount['branch'];
+    $awards[$key] = $awardCount['awarded'];
+  }
+  
+   $olderAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM olderChildAward GROUP BY branch");
+  
+  foreach( $olderAwardsGiven as $awardCount){
     $key = $awardCount['branch'];
     $awards[$key] = $awardCount['awarded'];
   }
