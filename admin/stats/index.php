@@ -86,17 +86,19 @@
 ?>
 <body>
   <h1>Statistics for Summer Reading</h1>
+  <h2>Childrens</h2>
   <div id="LogsGiven">
-    <h2>Total Logs Given Out: <?php echo $covingtonChildLogsTotal + $erlangerChildLogsTotal + $durrChildLogsTotal;?></h2>
+    <h3>Total Logs Given Out: <?php echo $covingtonChildLogsTotal + $erlangerChildLogsTotal + $durrChildLogsTotal;?></h3>
     <p>Covington: <?php echo $covingtonChildLogsTotal;?></p>
     <p>Erlanger: <?php echo $erlangerChildLogsTotal;?></p>
     <p>Durr: <?php echo $durrChildLogsTotal;?></p>
   <div>
     <div id="AwardsGiven">
-      <h2>Total Awards Given Out: <?php echo $awards['Covington'] + $awards['Durr'] + $awards['Erlanger'];?></h2>
+      <h3>Total Awards Given Out: <?php echo $awards['Covington'] + $awards['Durr'] + $awards['Erlanger'];?></h3>
       <p>Covington: <?php echo $awards['Covington'];?></p>
       <p>Erlanger: <?php echo $awards['Erlanger'];?></p>
       <p>Durr: <?php echo $awards['Durr'];?></p>
   <div>
+    
 </body>
 </html>
