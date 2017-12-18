@@ -66,3 +66,7 @@
 .title{
   font-size: 36px;
 }
+
+.barcode{
+  display: none;
+}

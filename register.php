@@ -119,6 +119,11 @@ if(isset($_POST['barcode'])){
 	<form method="post" action="">
 		<input type="hidden" name="barcode" id="barcode" value="<?php echo $_GET['barcode'];?>">
 		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number"><br>
+    <select class="forminput" type="text" name="branch" id="branch">
+      <option value="Covington">Covington</option>
+      <option value="Durr">William E. Durr</option>
+      <option value="Erlanger">Erlanger</option>
+    </select>
 		
 		<div>
 			<div id="container">

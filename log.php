@@ -248,7 +248,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
     }
   }
 ?>
-<div style="background-color: white; padding: 10px; text-align: justify;">
+<div class="barcode" style="background-color: white; padding: 10px; text-align: justify;">
   <p style="font-family: 'code39azalearegular'; font-size: 48px; text-align: center; margin-bottom: -10px">*<?php echo $barcode; ?>*</p> 
   <p style="text-align: center;"><?php echo $barcode; ?></p>
 </div>
