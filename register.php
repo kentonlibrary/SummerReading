@@ -6,9 +6,16 @@ if(isset($_POST['barcode'])){
 	unset($_POST['barcode']);
 	$phone = $_POST['phone'];
 	unset($_POST['phone']);
+  $branch = $_POST['branch'];
+  unset($_POST['branch']);
+  $email = $_POST['email'];
+  unset($_POST['email']);
 	
-	$accountQuery = $connection->prepare("INSERT INTO account (barcode, phoneNumber) VALUES (?, ?)");
-	$accountQuery->bind_param("ss", $barcode, $phone);
+	$accountQuery = $connection->prepare("INSERT INTO account (barcode, phoneNumber, branch, emailAddress) VALUES (?, ?, ?, ?)");
+	if ( $accountQuery->bind_param("ssss", $barcode, $phone, $branch, $email) ){}
+   else{
+    print_r( $accountQuery->error );
+  }
 	
 	$accountQuery->execute();
 	$accountID = $accountQuery->insert_id;
@@ -27,14 +34,13 @@ if(isset($_POST['barcode'])){
 		$query->bind_param("issssss", $accountID, $firstName, $lastName, $birthdate, $category, $school, $grade);
 		
 		$query->execute();
-		print_r( $query );
 		$query->close();
 	}
 	
 	session_start();
 	$_SESSION['accountID'] = $accountID;
 	$accountQuery->close();
-	header("Location: log.php");
+	header('Location: log.php');
 	
 }
 
@@ -62,6 +68,7 @@ if(isset($_POST['barcode'])){
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
                 "<font class='label' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br>"+
 				 "<font class='label' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]'>" + 
+                "<option selected disabled>Select a Grade</option>" +
                 "<option value='4 Year Old'>4 Year Old</option>" +
                 "<option value='5 Year Old'>5 Year Old</option>" +
                 "<option value='Kindergarten'>Kindergarten</option>" +
@@ -70,10 +77,22 @@ if(isset($_POST['barcode'])){
                 "<option value='3rd Grade'>3rd Grade</option>" +
                 "<option value='4th Grade'>4th Grade</option>" +
                 "<option value='5th Grade'>5th Grade</option>" +
+                "<option value='6th Grade'>6th Grade</option>" +
+                "<option value='7th Grade'>7th Grade</option>" +
+                "<option value='8th Grade'>8th Grade</option>" +
+                "<option value='9th Grade'>9th Grade</option>" +
+                "<option value='10th Grade'>10th Grade</option>" +
+                "<option value='11th Grade'>11th Grade</option>" +
+                "<option value='12th Grade'>12th Grade</option>" +
                 "</select>" +
                 "</font><br><br>"+
-				 "<font class='label' id='Labelch" + childCount + "[category]'><input type='radio' name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' value='olderChild'>Track Time(Older Child) <input type='radio' name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' value='youngChild'>Track Books(Younger Child) " + 
+				"<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]'>" + 
+                "<option selected disabled>Select a Program</option>" +
+                "<option value='olderChild'>Track Time(Older Child)</option>" +
+                "<option value='youngChild'>Track Books(Younger Child)</option>" +
+                "<option value='teen'>Teen</option>" +
                 "</select>" +
+                "</font><br><br>"+
                 "</font><br>"+
 				"<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br>"+
                 "</div>"
@@ -87,11 +106,7 @@ if(isset($_POST['barcode'])){
      
     $(function(){
         $("#addchild").bind("click", function(){
-            $("#container").addChildForms();
-            submitReadyChild = true;    
-            if( submitReadyPickup && submitReadyChild ){
-                    document.getElementById("submit").className="label";
-            }
+            $("#container").addChildForms();   
         });
     });
 		
@@ -107,6 +122,31 @@ if(isset($_POST['barcode'])){
         var removeID = $(divID);
         removeID.remove();   
     }
+    
+//Number Only Field
+    function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+    
+//Phone validation
+    function checkPhone (obj) {
+  str = obj.value.replace(/[^0-9]+?/g, '');
+  switch (str.length) {
+   case 0:
+     obj.select();
+     return;
+   case 10:
+     str = "("+str.substr(0,3)+")"+str.substr(3,3)+"-"+str.substr(6,4);
+     break;
+   default:
+     obj.select();
+     return;
+  }
+  obj.value = str;
+ }
      
 	</script>
 </head>
@@ -118,8 +158,10 @@ if(isset($_POST['barcode'])){
 	<p>Fill out the following information so you don't have to fill it out again</p>
 	<form method="post" action="">
 		<input type="hidden" name="barcode" id="barcode" value="<?php echo $_GET['barcode'];?>">
-		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number"><br>
+		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number" onChange="checkPhone(this)" onKeyPress="return isNumberKey(event)"><br>
+    <input class="forminput" type="text" name="email" id="email" placeholder="Email Address"><br>
     <select class="forminput" type="text" name="branch" id="branch">
+      <option disabled selected>Select a Branch</option>
       <option value="Covington">Covington</option>
       <option value="Durr">William E. Durr</option>
       <option value="Erlanger">Erlanger</option>
