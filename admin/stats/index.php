@@ -31,6 +31,13 @@
     $covingtonChildLogsTotal +=$individualYoungLogs['logs'];
   }
   
+    //Total Patrons Signed up
+  $covingtonPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington'");
+  $covingtonPatronsTotal = 0;
+  foreach( $covingtonPatrons as $covingtonPatron ){
+    $covingtonPatronsTotal +=$covingtonPatron['count'];
+  }
+  
   ////////////////////////////////////
   //                                //
   //          Erlanger              //
@@ -49,6 +56,12 @@
     $erlangerChildLogsTotal +=$individualYoungLogs['logs'];
   }
   
+  //Total Patrons Signed up
+  $erlangerPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger'"); 
+  $erlangerPatronsTotal = 0;
+  foreach( $erlangerPatrons as $erlangerPatron ){
+    $erlangerPatronsTotal +=$erlangerPatron['count'];
+  }
   ////////////////////////////////////
   //                                //
   //          Durr                  //
@@ -65,6 +78,13 @@
   $durrChildLogsTotal = 0;
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $durrChildLogsTotal +=$individualYoungLogs['logs'];
+  }
+  
+  //Total Patrons Signed up
+  $durrPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr'");
+  $durrPatronsTotal = 0;
+  foreach( $durrPatrons as $durrPatron ){
+    $durrPatronsTotal +=$durrPatron['count'];
   }
   
   
@@ -98,6 +118,13 @@
       <p>Covington: <?php echo $awards['Covington'];?></p>
       <p>Erlanger: <?php echo $awards['Erlanger'];?></p>
       <p>Durr: <?php echo $awards['Durr'];?></p>
+  <div>
+<h2>All Stats</h2>
+<div id="totalPatrons">
+    <h3>Total Patrons: <?php echo $covingtonPatronsTotal + $erlangerPatronsTotal + $durrPatronsTotal?></h3>
+    <p>Covington: <?php echo $covingtonPatronsTotal;?></p>
+    <p>Erlanger: <?php echo $erlangerPatronsTotal;?></p>
+    <p>Durr: <?php echo $durrPatronsTotal;?></p>
   <div>
     
 </body>
