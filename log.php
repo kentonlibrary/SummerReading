@@ -209,11 +209,11 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   </div>
 <?php
     }
-        if($result['readerCategory'] == 'teen'){ //Loops throug young children on the logged in account
+        if($result['readerCategory'] == 'teen'){ //Loops throug teens on the logged in account
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT timestamp FROM teenLog WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT COUNT(*) as count FROM teenLog WHERE WEEK(timestamp, 1) = WEEK(CURDATE(), 1) AND readerID = '$readerID'");
       $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
   ?>
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
@@ -228,20 +228,10 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
       </form>
     </div>
     <div class="booksRight">
-      <?php
-        while( $book = $logs->fetch_array(MYSQLI_ASSOC)){
-          $bookNumber = rand(1, 4);
-        ?>
         <div class="bookContainer">
-          <img src="assets/bookSelf<?php echo $bookNumber;?>.png" height="75px" alt="book" class="book">
-          <div class="spineText">
-      <?php
-        $dateTime = new DateTime($book['timestamp']);
-        echo $dateTime->format('m/d');
-      ?>
-        </div>
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in this week drawing.";?></font>
+
       </div>
-      <?php } ?>
     </div> 
   </div>
 <?php
