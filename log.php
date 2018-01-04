@@ -24,7 +24,7 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
   }
   if($_POST['readerCategory'] == 'teen'){ //Starts code loop for younger child
     $readerID = $_POST['readerID'];
-    $title = $_POST['title'];
+    $title = $_POST['titleTeen'];
     
     //SQL Block to insert time into database
     $query = $connection->prepare("INSERT INTO teenLog (readerID, title) VALUES (?, ?)");
@@ -223,7 +223,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
-        <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
+        <input class="title" type="text" id="titleTeen" name="titleTeen" style="vertical-align: middle">
         <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
       </form>
     </div>
