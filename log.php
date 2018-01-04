@@ -31,7 +31,6 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
     $query->bind_param("is", $readerID, $title);
     $query->execute();
     $query->close();
-    echo "Query Has been run";
   }
 }
 
