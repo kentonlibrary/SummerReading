@@ -41,7 +41,9 @@ foreach($results as $result){
       $bookGiven = mysqli_fetch_array($bookGivenCheck);
       $bookAward = $bookGiven['book'];
     
-    while($remainingMinutes >= 150){
+    $totalMinutesNeeded = 150;
+    
+    while($remainingMinutes >= $totalMinutesNeeded){
       
       if( $bookAward == 0 ){
         ?>
@@ -50,6 +52,7 @@ foreach($results as $result){
           <img src="../assets/bookaward.png" height="80px"></label>
         <?php
         $bookAward++;
+        $remainingMinutes = $remainingMinutes - 150;
       }
       elseif( $bookAward == 1 ){
         ?>
@@ -58,6 +61,8 @@ foreach($results as $result){
           <img src="../assets/tshirt.png" height="80px"></label>
         <?php
         $bookAward++;
+        $remainingMinutes = $remainingMinutes - 150;
+        $totalMinutesNeeded = 300;
       }
       elseif( $bookAward >= 2 ){
         ?>
@@ -66,8 +71,8 @@ foreach($results as $result){
           <img src="../assets/challenge.jpg" height="80px"></label>
         <?php
         $bookAward++;
+        $remainingMinutes = $remainingMinutes - 300;
       }
-        $remainingMinutes = $remainingMinutes - 150;
     }
   }
     elseif($readerCategory == 'youngChild'){ //If reader is young child

@@ -103,16 +103,18 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
       $rewarded = 0;
       $complete = 0;
       $remainder = 0;
+      $totalMinutesNeeded = 150;
       
       while($timeLogged > 0){ //While there is time that has been unprocessed
-        if($timeLogged >= 150){ //If more than 150 minutes (2.5 Hours) have not been counted
-          $complete += 1;  //Add 1 to the completed challenges count
-          $timeLogged = $timeLogged - 150; //Remove 150 minutes from unprocessed time
-        }
-        else{ //If there is less than 150 minute remaining
-          $remainder = $timeLogged;
-          $timeLogged = $timeLogged - $timeLogged; //Resets time Logged to 0
-        }
+        if($complete > 1){ $totalMinutesNeeded = 300; }
+          if($timeLogged >= $totalMinutesNeeded){ //If more than 150 minutes (2.5 Hours) have not been counted
+            $complete += 1;  //Add 1 to the completed challenges count
+            $timeLogged = $timeLogged - $totalMinutesNeeded; //Remove 150 minutes from unprocessed time
+          }
+          else{ //If there is less than 150 minute remaining
+            $remainder = $timeLogged;
+            $timeLogged = $timeLogged - $timeLogged; //Resets time Logged to 0
+          }
       }
   ?>
   <button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $readerID;?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
@@ -142,14 +144,19 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
         $complete--; //Subtract 1 from the added images loop counter
       };
       
-      $percentage = 100 - ( ( $remainder / 150 ) * 100 ); //Create a percentage for how full to fill the booker image on the remaining minutes
+      
+      $percentage = 100 - ( ( $remainder / $totalMinutesNeeded ) * 100 ); //Create a percentage for how full to fill the booker image on the remaining minutes
       ?>
-      <img src="assets/booker.png" height="150px" alt="booker" class="booker bookerIP" style="-webkit-clip-path: inset(<?php echo $percentage; ?>% 0 0 0); clip-path: inset(<?php echo $percentage; ?>% 0 0 0);"/> 
+      <div class="bookerContainer">
+        <img src="assets/booker.png" alt="booker" class="booker bookerIP" style="-webkit-clip-path: inset(<?php echo $percentage; ?>% 0 0 0); clip-path: inset(<?php echo $percentage; ?>% 0 0 0); height: 100%"/> 
+        <div class="bookerText"><?php echo $remainder . "/" . $totalMinutesNeeded . "<br>minutes";?></div>
+        
+      </div>
     </div>
   </div>
   <?php
     }
-    if($result['readerCategory'] == 'youngChild'){ //Loops throug young children on the logged in account
+    if($result['readerCategory'] == 'youngChild'){ //Loops through young children on the logged in account
       $readerID = $result['readerID'];
       
       //SQL Block
