@@ -216,9 +216,9 @@ if(isset($_SESSION['accountID'])){
         <input placeholder="First Name" class="chfirstName forminput" type="text" name="<?php echo $readerID; ?>[firstName]" id="<?php echo $readerID; ?>[firstName]" value="<?php echo $readerFirstName ?>"><br>
         <input placeholder="Last Name" class="chlastName forminput" type="text" name="<?php echo $readerID; ?>[lastName]" id="<?php echo $readerID; ?>[lastName]"  value="<?php echo $readerLastName ?>"><br>
         <font class="label" id="Label<?php echo $readerID; ?>[birthday]">Birthday: 
-          <input class="birthday chbirthMonth forminput" type="text" name="<?php echo $readerID; ?>[birthMonth]" id="<?php echo $readerID; ?>[birthMonth]" placeholder="MM" size="2" maxlength="2" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<? echo $readerBirthMonth; ?>">
-          <input class="birthday chbirthDay forminput" type="text" name="<?php echo $readerID; ?>[birthDay]" id="<?php echo $readerID; ?>[birthDay]" placeholder="DD" size="2" maxlength="2" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<? echo $readerBirthDay; ?>">
-          <input class="birthday chbirthYear forminput" type="text" name="<?php echo $readerID; ?>[birthYear]" id="<?php echo $readerID; ?>[birthYear]" placeholder="YYYY" size="4" maxlength="4" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<? echo $readerBirthYear; ?>">
+          <input class="birthday chbirthMonth forminput" type="text" name="<?php echo $readerID; ?>[birthMonth]" id="<?php echo $readerID; ?>[birthMonth]" placeholder="MM" size="2" maxlength="2" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<?php echo $readerBirthMonth; ?>">
+          <input class="birthday chbirthDay forminput" type="text" name="<?php echo $readerID; ?>[birthDay]" id="<?php echo $readerID; ?>[birthDay]" placeholder="DD" size="2" maxlength="2" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<?php echo $readerBirthDay; ?>">
+          <input class="birthday chbirthYear forminput" type="text" name="<?php echo $readerID; ?>[birthYear]" id="<?php echo $readerID; ?>[birthYear]" placeholder="YYYY" size="4" maxlength="4" onkeyup="autoTab(this)" onkeypress="return isNumberKey(event)" value="<?php echo $readerBirthYear; ?>">
         </font><br>
         <font class="label" id="Label<?php echo $readerID; ?>[grade]">Last Grade Completed: 
           <select name="<?php echo $readerID; ?>[grade]" id="<?php echo $readerID; ?>[grade]">
