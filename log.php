@@ -88,6 +88,9 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
 </head>
 
 <body>
+  <div class="editInfo" style="text-align: right">
+    <a href="information.php">Edit Information</a>
+  </div>
   <?php
   foreach( $results as $result){ //Loops through found users in database
     if($result['readerCategory'] == 'olderChild'){ //Loop for older children
