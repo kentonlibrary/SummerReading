@@ -142,7 +142,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
           $dn = ""; //Leave the next image unmarked
         }
         ?>
-        <img src="assets/booker.png" height="150px" alt="booker" class="booker bookerCP <?php echo $dn; ?>"/> <!-- Show a completed booker image.  $dn either make image opaque if award has been given, or left alone if award has not been given -->
+        <img src="assets/tree.png" height="150px" alt="booker" class="booker bookerCP <?php echo $dn; ?>"/> <!-- Show a completed booker image.  $dn either make image opaque if award has been given, or left alone if award has not been given -->
       <?php
         $complete--; //Subtract 1 from the added images loop counter
       };
@@ -151,7 +151,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
       $percentage = 100 - ( ( $remainder / $totalMinutesNeeded ) * 100 ); //Create a percentage for how full to fill the booker image on the remaining minutes
       ?>
       <div class="bookerContainer">
-        <img src="assets/booker.png" alt="booker" class="booker bookerIP" style="-webkit-clip-path: inset(<?php echo $percentage; ?>% 0 0 0); clip-path: inset(<?php echo $percentage; ?>% 0 0 0); height: 100%"/> 
+        <img src="assets/tree.png" alt="booker" class="booker bookerIP" style="-webkit-clip-path: inset(<?php echo $percentage; ?>% 0 0 0); clip-path: inset(<?php echo $percentage; ?>% 0 0 0); height: 100%"/> 
         <div class="bookerText"><?php echo $remainder . "/" . $totalMinutesNeeded . "<br>minutes";?></div>
         
       </div>
