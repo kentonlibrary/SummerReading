@@ -156,9 +156,6 @@ html, body {
   font-size: 18pt;
   font-weight: bold;
   color: black;
-   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 3px;
-   -webkit-text-stroke-color: black;
 }
 
 .books{
