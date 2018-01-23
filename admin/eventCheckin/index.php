@@ -48,7 +48,7 @@ include('../../assets/scripts.php');
 <h2>Scan Library Card</h2>
 
 <!-- Trigger/Open The Modal -->
-  <form action="javascript:openModal()" method="post">
+  <form action="javascript:openModal()" method="post" name="card" id="card">
       <input type="text" name="cardNumber" id="cardNumber" placeholder="Library Card" class="cardScan" maxlength="14" autofocus>
     </form>
 
@@ -97,6 +97,7 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
     $("#cardNumber").focus().bind('blur', function() {
         $(this).focus(); 
       $('#cardNumber').select();
+      document.getElementById('card').reset();
     }); 
     
     //disable tabindex on elements
