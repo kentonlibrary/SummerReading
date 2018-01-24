@@ -3,9 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Statistics</title>
-<link href="../assets/main.css" rel="stylesheet" type="text/css">
-<link href="../assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
-<link href="../assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
   
 <?php
@@ -13,11 +44,11 @@
   include('../../assets/scripts.php');
   
   
-  ////////////////////////////////////
-  //                                //
+  ///////////////////////////////////
+  //                               //
   //          Covington            //
   //                               //
-  //////////////////////////////////
+  ///////////////////////////////////
   //Older Child Logs
   $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY olderChildLog.readerID"); 
   $covingtonChildLogsTotal = 0;
@@ -41,8 +72,8 @@
   ////////////////////////////////////
   //                                //
   //          Erlanger              //
-  //                               //
-  //////////////////////////////////
+  //                                //
+  ////////////////////////////////////
     //Older Child Logs
   $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY olderChildLog.readerID"); 
   $erlangerChildLogsTotal = 0;
@@ -65,8 +96,8 @@
   ////////////////////////////////////
   //                                //
   //          Durr                  //
-  //                               //
-  //////////////////////////////////
+  //                                //
+  ////////////////////////////////////
     //Older Child Logs
   $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY olderChildLog.readerID"); 
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
@@ -119,6 +150,33 @@
       <p>Erlanger: <?php echo $awards['Erlanger'];?></p>
       <p>Durr: <?php echo $awards['Durr'];?></p>
   <div>
+    
+<h2>Teen Stats</h2>
+  <div>
+    <h3>Drawing</h3>
+    <form action="javascript:openModal()" method="POST">
+      Start Date:<input type="datetime" name="startDate" id="startDate">
+      Stop Date:<input type="datetime" name="stopDate" id="stopDate">
+      <select name="branch" id="branch">
+          <option value="Covington">Covington</option>
+          <option value="Durr">William E. Durr</option>
+          <option value="Erlanger">Erlanger</option>
+        </select>
+      <input type="submit">
+    </form>
+  </div>
+    
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content close" id="popup">
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
+    
 <h2>All Stats</h2>
 <div id="totalPatrons">
     <h3>Total Patrons: <?php echo $covingtonPatronsTotal + $erlangerPatronsTotal + $durrPatronsTotal?></h3>
@@ -126,6 +184,38 @@
     <p>Erlanger: <?php echo $erlangerPatronsTotal;?></p>
     <p>Durr: <?php echo $durrPatronsTotal;?></p>
   <div>
+    
+<script>
+  var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+function openModal() {
+    modal.style.display = "block";
+    var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("popup").innerHTML =
+      this.responseText;
+    }
+  };
+  var startDate = $( '#startDate' ).val();
+  var stopDate = $( '#stopDate' ).val();
+  var branch = $( '#branch' ).val();
+  xhttp.open("GET", "raffle.php?startDate=" + startDate + "&stopDate=" + stopDate + "&branch=" + branch, true);
+  xhttp.send();
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+    </script>
     
 </body>
 </html>
