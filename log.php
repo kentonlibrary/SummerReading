@@ -32,6 +32,16 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
     $query->execute();
     $query->close();
   }
+  if($_POST['readerCategory'] == 'r2r'){ //Starts code loop for younger child
+    $readerID = $_POST['readerID'];
+    $title = $_POST['title'];
+    
+    //SQL Block to insert time into database
+    $query = $connection->prepare("INSERT INTO r2rLog (readerID, bookTitle) VALUES (?, ?)");
+    $query->bind_param("is", $readerID, $title);
+    $query->execute();
+    $query->close();
+  }
 }
 
 
@@ -65,7 +75,7 @@ $query = "SELECT accountID FROM account WHERE barcode = ?";
 	}
 
 $accountID = $_SESSION['accountID'];
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader WHERE accountID = '$accountID'");
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID, reader.readerSchool FROM reader WHERE accountID = '$accountID'");
 
 ?>
 <!doctype html>
@@ -245,6 +255,71 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
     </div> 
   </div>
 <?php
+    }
+if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
+      $readerID = $result['readerID'];
+      
+      //SQL Block
+      $logs = $connection->query("SELECT COUNT(bookTitle) AS booksLogged FROM r2rLog WHERE readerID = '$readerID'");
+      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM r2rAward WHERE readerID = '$readerID'");
+      $timeLogged = mysqli_fetch_array($logs)['booksLogged'];
+      $prized = mysqli_fetch_array($awarded)['awarded'];
+      
+      //Reset Image Variables
+      $rewarded = 0;
+      $complete = 0;
+      $remainder = 0;
+      $totalMinutesNeeded = 30;
+      
+      while($timeLogged > 0){ //While there is time that has been unprocessed
+          if($timeLogged >= $totalMinutesNeeded){ //If more than 150 minutes (2.5 Hours) have not been counted
+            $complete += 1;  //Add 1 to the completed challenges count
+            $timeLogged = $timeLogged - $totalMinutesNeeded; //Remove 150 minutes from unprocessed time
+          }
+          else{ //If there is less than 150 minute remaining
+            $remainder = $timeLogged;
+            $timeLogged = $timeLogged - $timeLogged; //Resets time Logged to 0
+          }
+      }
+  ?>
+  <button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $readerID;?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
+  <div class="hours collapse" id="<?php echo $readerID;?>">
+    <div class="hoursLeft">
+      <form action="" method="post">
+        <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
+        <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
+        <font size="+3">What book did <?php echo $result['readerSchool'];?> read?</font><br>
+        <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
+        <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
+      </form>
+    </div>
+    <div class="hoursRight">
+      <?php
+      while ( $complete > 0){ //While there are unshown completed logs images
+        if($prized > 0){ // If not all prizes have been marked
+          $dn = "DN"; //Mark the next image as awarded
+          $prized--; //Subtract 1 from awarded loop
+        }
+        else{ //If all price images have been marked
+          $dn = ""; //Leave the next image unmarked
+        }
+        ?>
+        <img src="assets/tree.png" height="150px" alt="booker" class="booker bookerCP <?php echo $dn; ?>"/> <!-- Show a completed booker image.  $dn either make image opaque if award has been given, or left alone if award has not been given -->
+      <?php
+        $complete--; //Subtract 1 from the added images loop counter
+      };
+      
+      
+      $percentage = 100 - ( ( $remainder / $totalMinutesNeeded ) * 100 ); //Create a percentage for how full to fill the booker image on the remaining minutes
+      ?>
+      <div class="bookerContainer">
+        <img src="assets/tree.png" alt="booker" class="booker bookerIP" style="-webkit-clip-path: inset(<?php echo $percentage; ?>% 0 0 0); clip-path: inset(<?php echo $percentage; ?>% 0 0 0); height: 100%"/> 
+        <div class="bookerText"><?php echo $remainder . "/" . $totalMinutesNeeded . "<br>Books";?></div>
+        
+      </div>
+    </div>
+  </div>
+  <?php
     }
   }
 ?>

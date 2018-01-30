@@ -78,7 +78,7 @@ html, body {
 /*CSS for hours section*/
 .hours{
   background-color: white;
-  height: auto;
+  height: 100%;
   overflow: auto;
   margin-left: auto;
   margin-right: auto;
