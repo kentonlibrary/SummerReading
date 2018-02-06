@@ -1,11 +1,17 @@
 <?php
 include('assets/scripts.php'); //File with connection information and functions
 
+if(isset($_GET['logout'])){
+  unset($_COOKIE['Barcode']);
+  setcookie("Barcode", '', time() - 3600);
+}
+
+
 if(isset($_POST['loginButton'])){ //Check if login form has been submitted
 	
 	$barcode = $_POST['card'];
   
-  setcookie("Barcode", $_POST['card'], time() + (3600 * 24));
+  setcookie("Barcode", $_POST['card'], time() + (3600 * 24 * 90));
   header("Location: log.php");
 
   
@@ -49,7 +55,7 @@ if(isset($_COOKIE["Barcode"])){
 	</div>
   <div id="left"> <!-- More information panel on left side of the page -->
     <div class="details">
-      Welcome to the Kenton County Public Library Summer Reading Program.  Click on the link below to download the paper summer reading form, or login with your library card and pin to use the digital reading log.
+      Welcome to the Kenton County Public Library Summer Reading Program.  Click on the link below to download the paper summer reading form, or login with your library card for identification to use the digital reading log.
     </div>
   </div>
   
@@ -68,3 +74,4 @@ $(document).ready(function(){
 
 </body>
 </html>
+

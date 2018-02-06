@@ -49,7 +49,7 @@ if(isset($_POST['barcode'])){
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Register</title>
+	<title>Enter Summer Reading Contest</title>
 	<link href="assets/main.css" rel="stylesheet" type="text/css">
 	<link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
 	<link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
@@ -171,7 +171,7 @@ if(isset($_POST['barcode'])){
 			<div id="container">
 				
 			</div>
-			<button id="addchild" class="label" type="button">Add Child</button><br>
+			<button id="addchild" class="label" type="button">Add Entrant</button><br>
     		<button id="submit" class="label submit" type="submit">Register</button>
 		</div>
 	</form>

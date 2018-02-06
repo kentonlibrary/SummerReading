@@ -99,7 +99,8 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
 
 <body>
   <div class="editInfo" style="text-align: right">
-    <a href="information.php">Edit Information</a>
+    <a href="index.php?logout=true">Logoff &nbsp</a>
+    <a href="information.php">&nbsp Edit Information</a>
   </div>
   <?php
   foreach( $results as $result){ //Loops through found users in database

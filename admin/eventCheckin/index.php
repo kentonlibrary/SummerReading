@@ -1,7 +1,38 @@
 <?php
 include('../../assets/scripts.php');
 
+session_start();
 
+if(isset($_POST['eventName'])){
+  $eventQuery = $connection->prepare("INSERT INTO event (eventName, branch) VALUES (?, ?)");
+	if ( $eventQuery->bind_param("ss", $_POST['eventName'], $_POST['branch']) ){}
+   else{
+    print_r( $eventQuery->error );
+  }
+	
+	$eventQuery->execute();
+	$eventID = $eventQuery->insert_id;
+  $_SESSION['event'] = $eventID;
+}
+
+if(!isset($_SESSION['event'])){
+  ?>
+  <!DOCTYPE html>
+<html>
+  <body>
+    <form method="post" action="">
+    Event Name<input type="text" name="eventName" id="eventName">
+    Branch<select name="branch" id="branch">
+          <option value="Covington">Covington</option>
+          <option value="Durr">William E. Durr</option>
+          <option value="Erlanger">Erlanger</option>
+        </select>
+    <input type="submit">
+  </body>
+</html>
+<?php
+}
+else{
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +74,8 @@ include('../../assets/scripts.php');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-
+<body style="">
+<div style="text-align: center; padding-top: 20%; ">
 <h2>Scan Library Card</h2>
 
 <!-- Trigger/Open The Modal -->
@@ -61,6 +92,7 @@ include('../../assets/scripts.php');
   </div>
 
 </div>
+</div>
 
 <script>
 // Get the modal
@@ -75,11 +107,11 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 function openModal() {
     modal.style.display = "block";
+    
     var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("popup").innerHTML =
-      this.responseText;
+      document.getElementById("popup").innerHTML = this.responseText;
     }
   };
   var cardNumber = $( '#cardNumber' ).val();
@@ -89,9 +121,9 @@ function openModal() {
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+//span.onclick = function() {
+//    modal.style.display = "none";
+//}
 
 $(document).ready(function() { //Keeps the cardNumber field focused for easy scanning
     $("#cardNumber").focus().bind('blur', function() {
@@ -108,8 +140,36 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
       $('#cardNumber').select();
     });        
 });
+  
+  
+ function selectEmotion( ele ) {
+  var emotion = document.getElementById(ele.id);
+  var oldClass = document.getElementsByClassName("selectedChoice");
+  var readerID = ele.id.substr(0, ele.id.length - 8);
+  var rating = ele.id.charAt(ele.id.length - 2);
+  var cardNumber = cardNumber = $( '#cardNumber' ).val();
+  [].forEach.call(oldClass, function(el){
+    el.className = el.className.replace(/\bselectedChoice\b/, "");
+  })
+  emotion.className = "selectedChoice";
+  
+  //Update Database
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("popup").innerHTML =
+      this.responseText;
+    }
+  };
+  var cardNumber = $( '#cardNumber' ).val();
+  xhttp.open("GET", "signin.php?readerID=" + readerID + "&rating=" + rating + "&cardNumber=" + cardNumber, true);
+  xhttp.send();
+  
+}
 
 </script>
 
 </body>
 </html>
+
+<?php } ?>
