@@ -48,7 +48,6 @@ if(isset($_COOKIE["Barcode"])){
         <input class="loginField" type="text" placeholder="Library Card Number" maxlength="14" name="card" id="card"><br>
 <br>
         <input class="loginField" type="submit" value="Login" id="loginButton" name="loginButton"><br><br>
-        <a class="forgotPassword" href="admin/index.php">Library Staff Login</a>
     </form>
 	  </div>
 	
