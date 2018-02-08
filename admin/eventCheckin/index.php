@@ -70,6 +70,23 @@ else{
     text-decoration: none;
     cursor: pointer;
 }
+  
+.personButton {
+  background-color: rgba(0,65,255,1.00);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: large;
+}
+  
+  #attendee{
+    display: none;
+  }
+  
+
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -164,8 +181,29 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
   var cardNumber = $( '#cardNumber' ).val();
   xhttp.open("GET", "signin.php?readerID=" + readerID + "&rating=" + rating + "&cardNumber=" + cardNumber, true);
   xhttp.send();
+   
+   var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            modal.style.display = 'none';
+        }
+        modal.style.opacity = op;
+        modal.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
+  //modal.style.display = "none";
   
 }
+  
+  function openReader( readerID ){
+    var reader = document.getElementById(readerID);
+    var attendeeBlock = document.getElementById("attendee");
+    var namesBlock = document.getElementById("names");
+    attendeeBlock.style.display = "block";
+    reader.style.display = "block";
+    namesBlock.style.display = "none";
+  }
 
 </script>
 
