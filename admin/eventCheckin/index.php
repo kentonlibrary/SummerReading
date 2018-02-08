@@ -123,6 +123,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 function openModal() {
+    modal.style.opacity = 1;
     modal.style.display = "block";
     
     var xhttp = new XMLHttpRequest();
