@@ -38,9 +38,9 @@ if(isset($_GET['readerID'])){
 
 $barcode=$_GET['cardNumber'];  
 
+$eventID = $_SESSION['event'];
 
-
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND barcode = '$barcode' AND reader.readerCategory = 'teen' AND NOT EXISTS (SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.readerID)");  // 
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND barcode = '$barcode' AND reader.readerCategory = 'teen' AND NOT EXISTS (SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.readerID AND eventRating.eventID = '$eventID')");  // 
 ?>
 <div id="names">
   <h1>Who is checking in?</h1>
