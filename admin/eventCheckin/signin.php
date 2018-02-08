@@ -2,8 +2,7 @@
 
 session_start();
 
-?>
-<head>
+?><head>
   <style>
     /* CSS for hiding the checkbox and hiding the image once checked */
     .hiddenCheckbox{
@@ -41,8 +40,9 @@ $barcode=$_GET['cardNumber'];
 
 
 
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND barcode = '$barcode' AND reader.readerCategory = 'teen' AND NOT EXISTS (SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.readerID)");  //
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND barcode = '$barcode' AND reader.readerCategory = 'teen'");  // AND NOT EXISTS (SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.readerID)
 ?>
+
 <h1>Please rate our event!</h1>
 <?php
 foreach($results as $result){
