@@ -157,8 +157,8 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("popup").innerHTML =
-      this.responseText;
+      //document.getElementById("popup").innerHTML =
+      //this.responseText;
     }
   };
   var cardNumber = $( '#cardNumber' ).val();
