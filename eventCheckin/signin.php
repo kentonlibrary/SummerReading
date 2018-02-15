@@ -23,7 +23,7 @@ session_start();
   </style>
 </head>
 <?php
-include('../../assets/scripts.php');
+include('../assets/scripts.php');
 
 if(isset($_GET['readerID'])){
 

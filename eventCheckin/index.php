@@ -1,5 +1,5 @@
 <?php
-include('../../assets/scripts.php');
+include('../assets/scripts.php');
 
 session_start();
 
