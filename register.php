@@ -68,7 +68,7 @@ if(isset($_POST['barcode'])){
                 "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
                 "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' onChange='readingProgram(this)'>" + 
-                "<option selected disabled>Select a Program</option>" +
+                "<option value ='' selected disabled>Select a Program</option>" +
                 "<option value='olderChild'>Track Time(Older Child)</option>" +
                 "<option value='youngChild'>Track Books(Younger Child)</option>" +
                 "<option value='teen'>Teen</option>" +
@@ -78,7 +78,7 @@ if(isset($_POST['barcode'])){
                 "</font><br>"+
                 "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
 				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]' class='grade'>" + 
-                "<option selected disabled>Select a Grade</option>" +
+                "<option value='' selected disabled>Select a Grade</option>" +
                 "<option value='4 Year Old'>4 Year Old</option>" +
                 "<option value='5 Year Old'>5 Year Old</option>" +
                 "<option value='Kindergarten'>Kindergarten</option>" +
@@ -99,10 +99,10 @@ if(isset($_POST['barcode'])){
 				        "<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
                 
                 "<font class='label ageRangeLabel' id='Label" + childCount + "[ageRange]'>Age Range</font><br>"+
-                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange1]' value='18-28'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-28</font><br>"+
-                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange2]' value='29-39'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>29-39</font><br>"+
-                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange3]' value='40-54'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>40-54</font><br>"+
-                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange4]' value='55+'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>55+</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange1]' value='18-28'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-28</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='29-39'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>29-39</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='40-54'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>40-54</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange4]' value='55+'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>55+</font><br><br><br>"+
                 
                 "</div>"
  
@@ -174,13 +174,13 @@ function readingProgram(obj){
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       break;
     case 'youngChild':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -197,13 +197,13 @@ function readingProgram(obj){
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       break;
     case 'teen':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -220,13 +220,13 @@ function readingProgram(obj){
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       break;
     case 'adult':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -243,15 +243,101 @@ function readingProgram(obj){
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "inline";
-      document.getElementById(entrantID + "[ageRange1]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "inline";
-      document.getElementById(entrantID + "[ageRange2]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "inline";
-      document.getElementById(entrantID + "[ageRange3]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "inline";
-      document.getElementById(entrantID + "[ageRange4]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "inline";
       break;
   }
+}
+    
+function validateForm(){
+  var phoneNumber, email, branch, phoneExp, emailExp, shouldReturn;
+  phoneNumber = document.forms["register"]["phone"].value;
+  email = document.forms["register"]["email"].value;
+  branch = document.forms["register"]["branch"].value;
+  
+  phoneExp = /^\([0-9]{3}\)[0-9]{3}-[0-9]{4}$/;
+  emailExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  shouldReturn = true
+  //phoneExp = /^\d{10}$/
+  if( (phoneExp.test(phoneNumber)) || ( emailExp.test(email)) ){}
+  else{
+    document.getElementById('email').style.borderBottom = "5px solid red";
+    document.getElementById('phone').style.borderBottom = "5px solid red";
+    document.getElementById('phoneEmail').style.color = "red";
+    document.getElementById('phoneEmail').style.fontWeight = "bold";
+    shouldReturn = false;
+  }
+  if(branch == ''){
+    document.getElementById('branch').style.borderBottom = "5px solid red";
+    shouldReturn = false;
+  }
+  for (i = 1, len = childCount, text = ""; i < len; i++){
+    var firstName = '', lastName = '', readingProgram = '', birthDay = '', birthMonth = '', birthYear = '', grade = '', school = '', ageRange = '', ageRange_Value = '';
+    firstName = document.getElementById("ch" + i + "[firstName]").value;
+    if(firstName == ''){
+      document.getElementById("ch" + i + "[firstName]").style.borderBottom = "5px solid red";
+      shouldReturn = false;
+    }
+    lastName = document.getElementById("ch" + i + "[lastName]").value;
+    if(lastName == ''){
+      document.getElementById("ch" + i + "[lastName]").style.borderBottom = "5px solid red";
+      shouldReturn = false;
+    }
+    readingProgram = document.getElementById("ch" + i + "[category]").value;
+    if(readingProgram == ''){
+      document.getElementById("ch" + i + "[category]").style.borderBottom = "5px solid red";
+      shouldReturn = false;
+    }
+    if(readingProgram == "olderChild" || readingProgram == "youngChild" || readingProgram == "teen"){
+      birthDay = document.getElementById("ch" + i + "[birthDay]").value;
+      if(birthDay > 31 || birthDay < 1 || birthDay == ''){
+        document.getElementById("ch" + i + "[birthDay]").style.borderBottom = "5px solid red";
+        shouldReturn = false;
+      }
+      birthMonth = document.getElementById("ch" + i + "[birthMonth]").value;
+      if(birthMonth > 12 || birthMonth < 1 || birthMonth == ''){
+        document.getElementById("ch" + i + "[birthMonth]").style.borderBottom = "5px solid red";
+        shouldReturn = false;
+      }
+      birthYear = document.getElementById("ch" + i + "[birthYear]").value;
+      if(birthYear >= 2018 || birthYear <= 1800 || birthYear == ''){
+        document.getElementById("ch" + i + "[birthYear]").style.borderBottom = "5px solid red";
+        shouldReturn = false;
+      }
+      grade = document.getElementById("ch" + i + "[grade]").value;
+      if(grade == ''){
+        document.getElementById("ch" + i + "[grade]").style.borderBottom = "5px solid red";
+        shouldReturn = false;
+      }
+      school = document.getElementById("ch" + i + "[school]").value;
+      if(school == ''){
+        document.getElementById("ch" + i + "[school]").style.borderBottom = "5px solid red";
+        shouldReturn = false;
+      }
+      //alert("Entrant " + i + "\n" + "Name: " + firstName + " " + lastName + "\nBirthday: " + birthMonth + "/" + birthDay + "/" + birthYear + "\nGrade: " + grade + "\nSchool: " + school);
+    }
+    if(readingProgram == "adult"){
+      ageRange = document.getElementsByName('ch' + i + '[ageRange]');
+      
+      for(var x = 0; x < ageRange.length; x++){
+        if(ageRange[x].checked){
+          ageRange_Value = ageRange[x].value;
+        }
+      }
+      if(ageRange_Value == ''){
+        document.getElementById("Label" + i + "[ageRange]").style.color = "red";
+        document.getElementById("Label" + i + "[ageRange]").style.fontWeight = "bold";
+        shouldReturn = false;
+      }
+      //alert("Entrant " + i + "\n" + "Name: " + firstName + " " + lastName + "\nAge Range: " + ageRange_Value);
+    }
+  }
+  return shouldReturn;
 }
      
 	</script>
@@ -262,12 +348,13 @@ function readingProgram(obj){
 <div class="register">
 	<h1>Register for KCPL Summer Reading</h1>
 	<p>Fill out the following information so you don't have to fill it out again</p>
-	<form method="post" action="">
+  <p id="phoneEmail">Please fill out either phone number or email or both</p>
+	<form method="post" action="" onSubmit="return validateForm()" name="register" id="register">
 		<input type="hidden" name="barcode" id="barcode" value="<?php echo $_GET['barcode'];?>">
 		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number" onChange="checkPhone(this)" onKeyPress="return isNumberKey(event)"><br>
     <input class="forminput" type="text" name="email" id="email" placeholder="Email Address"><br>
     <select class="forminput" type="text" name="branch" id="branch">
-      <option disabled selected>Select a Branch</option>
+      <option disabled selected value="">Select a Branch</option>
       <option value="Covington">Covington</option>
       <option value="Durr">William E. Durr</option>
       <option value="Erlanger">Erlanger</option>
