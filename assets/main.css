@@ -285,6 +285,27 @@ html, body {
 	font-size: 32px;
 }
 
+.birthday{
+  display: none;
+}
+
+.grade{
+  display: none;
+}
+
+.chschool{
+  display: none;
+}
+
+.ageRange{
+  display: none;
+  font-size: medium;
+}
+
+.ageRangeLabel{
+  display: none;
+}
+
 
 @font-face {
     font-family: 'code39azalearegular';

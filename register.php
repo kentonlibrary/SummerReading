@@ -28,10 +28,11 @@ if(isset($_POST['barcode'])){
 		$grade = $value['grade'];
 		$school = $value['school'];
 		$category = $value['category'];
+    $ageRange = $value['ageRange'];
 		
-		$query = $connection->prepare("INSERT INTO reader (accountID, readerFirstName, readerLastName, readerBirthDate, readerCategory, readerSchool, readerGrade) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		$query = $connection->prepare("INSERT INTO reader (accountID, readerFirstName, readerLastName, readerBirthDate, readerCategory, readerSchool, readerGrade, readerAgeRange) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		
-		$query->bind_param("issssss", $accountID, $firstName, $lastName, $birthdate, $category, $school, $grade);
+		$query->bind_param("isssssss", $accountID, $firstName, $lastName, $birthdate, $category, $school, $grade, $ageRange);
 		
 		$query->execute();
 		$query->close();
@@ -63,11 +64,20 @@ if(isset($_POST['barcode'])){
     (function($){
         $.fn.addChildForms = function(){
             var myform = "<div class='child' id='ch" + childCount + "'>" +
-                "<h3 style='display: inline;'>Child #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
+                "<h3 style='display: inline;'>Entrant #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
                 "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
-                "<font class='label' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br>"+
-				 "<font class='label' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]'>" + 
+                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' onChange='readingProgram(this)'>" + 
+                "<option selected disabled>Select a Program</option>" +
+                "<option value='olderChild'>Track Time(Older Child)</option>" +
+                "<option value='youngChild'>Track Books(Younger Child)</option>" +
+                "<option value='teen'>Teen</option>" +
+                "<option value='adult'>Adult</option>" +
+                "</select>" +
+                "</font><br><br>"+
+                "</font><br>"+
+                "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
+				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]' class='grade'>" + 
                 "<option selected disabled>Select a Grade</option>" +
                 "<option value='4 Year Old'>4 Year Old</option>" +
                 "<option value='5 Year Old'>5 Year Old</option>" +
@@ -85,16 +95,15 @@ if(isset($_POST['barcode'])){
                 "<option value='11th Grade'>11th Grade</option>" +
                 "<option value='12th Grade'>12th Grade</option>" +
                 "</select>" +
-                "</font><br><br>"+
-				"<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]'>" + 
-                "<option selected disabled>Select a Program</option>" +
-                "<option value='olderChild'>Track Time(Older Child)</option>" +
-                "<option value='youngChild'>Track Books(Younger Child)</option>" +
-                "<option value='teen'>Teen</option>" +
-                "</select>" +
-                "</font><br><br>"+
-                "</font><br>"+
-				"<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br>"+
+                "</font><br class='grade' id='br" + childCount + "[grade1]'><br class='grade' id='br" + childCount + "[grade2]'>"+
+				        "<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
+                
+                "<font class='label ageRangeLabel' id='Label" + childCount + "[ageRange]'>Age Range</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange1]' value='18-28'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-28</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange2]' value='29-39'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>29-39</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange3]' value='40-54'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>40-54</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange4]' value='55+'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>55+</font><br>"+
+                
                 "</div>"
  
             $("button", $(myform)).click(function(){ $(this).parent().remove();});
@@ -147,6 +156,103 @@ if(isset($_POST['barcode'])){
   }
   obj.value = str;
  }
+    
+function readingProgram(obj){
+  switch (obj.value) {
+    case 'olderChild':
+      entrantID = obj.name.substring(2, obj.name.length - 10);
+      document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
+      
+      document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      break;
+    case 'youngChild':
+      entrantID = obj.name.substring(2, obj.name.length - 10);
+      document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
+      
+      document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      break;
+    case 'teen':
+      entrantID = obj.name.substring(2, obj.name.length - 10);
+      document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
+      document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
+      
+      document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
+      break;
+    case 'adult':
+      entrantID = obj.name.substring(2, obj.name.length - 10);
+      document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "none";
+      document.getElementById("Labelch" + entrantID + "[grade]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[grade]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[school]").style.display = "none";
+      document.getElementById("br" + entrantID + "[grade1]").style.display = "none";
+      document.getElementById("br" + entrantID + "[grade2]").style.display = "none";
+      document.getElementById("br" + entrantID + "[birthday]").style.display = "none";
+      
+      document.getElementById("Label" + entrantID + "[ageRange]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "inline";
+      break;
+  }
+}
      
 	</script>
 </head>

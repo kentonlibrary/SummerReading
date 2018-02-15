@@ -32,6 +32,16 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
     $query->execute();
     $query->close();
   }
+if($_POST['readerCategory'] == 'adult'){ //Starts code loop for younger child
+    $readerID = $_POST['readerID'];
+    $title = $_POST['titleAdult'];
+    
+    //SQL Block to insert time into database
+    $query = $connection->prepare("INSERT INTO adultLog (readerID, title) VALUES (?, ?)");
+    $query->bind_param("is", $readerID, $title);
+    $query->execute();
+    $query->close();
+  }
   if($_POST['readerCategory'] == 'r2r'){ //Starts code loop for younger child
     $readerID = $_POST['readerID'];
     $title = $_POST['title'];
@@ -321,6 +331,34 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
     </div>
   </div>
   <?php
+    }
+    
+    if($result['readerCategory'] == 'adult'){ //Loops throug teens on the logged in account
+      $readerID = $result['readerID'];
+      
+      //SQL Block
+      $logs = $connection->query("SELECT COUNT(*) as count FROM adultLog WHERE readerID = '$readerID'");
+      $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
+  ?>
+  <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
+  <div class="books collapse" id="<?php echo $result['readerID'];?>">
+    <div class="booksLeft">
+      <form action="" method="post">
+        <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
+        <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
+        <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
+        <input class="title" type="text" id="titleAdult" name="titleAdult" style="vertical-align: middle">
+        <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
+      </form>
+    </div>
+    <div class="booksRight">
+        <div class="bookContainer">
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in Summer Reading.";?></font>
+
+      </div>
+    </div> 
+  </div>
+<?php
     }
   }
 ?>
