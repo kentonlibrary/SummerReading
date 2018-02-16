@@ -99,11 +99,11 @@ if(isset($_POST['barcode'])){
 				        "<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
                 
                 "<font class='label ageRangeLabel' id='Label" + childCount + "[ageRange]'>Age Range</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange1]' value='18-28'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-28</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='29-39'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>29-39</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='40-54'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>40-54</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange4]' value='55+'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>55+</font><br><br><br>"+
-                
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange1]' value='18-30'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-30</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='31-40'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>31-40</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='41-50'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>41-50</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='51-60'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>51-60</font><br>"+
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br><br><br>"+ 
                 "</div>"
  
             $("button", $(myform)).click(function(){ $(this).parent().remove();});
@@ -181,6 +181,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
       break;
     case 'youngChild':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -204,6 +206,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
       break;
     case 'teen':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -227,6 +231,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
       break;
     case 'adult':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -250,6 +256,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "inline";
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "inline";
       break;
   }
 }
