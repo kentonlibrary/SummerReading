@@ -147,7 +147,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $readerID;?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="hours collapse" id="<?php echo $readerID;?>">
     <div class="hoursLeft">
-      <form action="" method="post">
+      <form action="#<?php echo $readerID;?>" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">How many minutes did <?php echo $result['readerFirstName'];?> read?</font><br>
@@ -212,7 +212,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="" method="post">
+      <form action="#<?php echo $readerID;?>" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
@@ -253,7 +253,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="" onSubmit="return openModal()" method="post">
+      <form action="#<?php echo $readerID;?>" onSubmit="return openModal()" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
@@ -299,7 +299,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $readerID;?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="hours collapse" id="<?php echo $readerID;?>">
     <div class="hoursLeft">
-      <form action="" method="post">
+      <form action="#<?php echo $readerID;?>" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerSchool'];?> read?</font><br>
@@ -346,7 +346,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="" method="post">
+      <form action="#<?php echo $readerID;?>" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
