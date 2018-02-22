@@ -64,7 +64,7 @@ if(isset($_POST['barcode'])){
     (function($){
         $.fn.addChildForms = function(){
             var myform = "<div class='child' id='ch" + childCount + "'>" +
-                "<h3 style='display: inline;'>Entrant #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
+                "<h3 style='display: inline;'>Human #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
                 "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
                 "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' onChange='readingProgram(this)'>" + 
@@ -79,6 +79,8 @@ if(isset($_POST['barcode'])){
                 "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
 				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]' class='grade'>" + 
                 "<option value='' selected disabled>Select a Grade</option>" +
+                "<option value='2 Year Old'>2 Year Old</option>" +
+                "<option value='3 Year Old'>3 Year Old</option>" +
                 "<option value='4 Year Old'>4 Year Old</option>" +
                 "<option value='5 Year Old'>5 Year Old</option>" +
                 "<option value='Kindergarten'>Kindergarten</option>" +
@@ -372,7 +374,7 @@ function validateForm(){
 			<div id="container">
 				
 			</div>
-			<button id="addchild" class="label" type="button">Add Entrant</button><br>
+			<button id="addchild" class="label" type="button">Add Human</button><br>
     		<button id="submit" class="label submit" type="submit">Register</button>
 		</div>
 	</form>

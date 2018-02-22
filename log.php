@@ -108,6 +108,9 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
 </head>
 
 <body>
+  <script>
+
+</script>
   <div class="editInfo" style="text-align: right">
     <a href="index.php?logout=true">Logoff &nbsp</a>
     <a href="information.php">&nbsp Edit Information</a>
@@ -250,7 +253,7 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="" method="post">
+      <form action="" onSubmit="return openModal()" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
@@ -366,6 +369,8 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <p style="font-family: 'code39azalearegular'; font-size: 48px; text-align: center; margin-bottom: -10px">*<?php echo $barcode; ?>*</p> 
   <p style="text-align: center;"><?php echo $barcode; ?></p>
 </div>
+  
+
 </body>
 </html>
 
