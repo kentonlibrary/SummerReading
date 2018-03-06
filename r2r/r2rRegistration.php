@@ -1,19 +1,15 @@
 <?php
-include('assets/scripts.php'); //File with connection information and functions
+include('../assets/scripts.php'); //File with connection information and functions
 if(isset($_POST['formType'])){
   if($_POST['formType'] == "register"){
     $barcode = $_POST['barcode'];
     unset($_POST['barcode']);
-    $phone = $_POST['phone'];
-    unset($_POST['phone']);
     $branch = $_POST['branch'];
     unset($_POST['branch']);
-    $email = $_POST['email'];
-    unset($_POST['email']);
     unset($_POST['formType']);
 
-    $accountQuery = $connection->prepare("INSERT INTO account (barcode, phoneNumber, branch, emailAddress) VALUES (?, ?, ?, ?)");
-    if ( $accountQuery->bind_param("ssss", $barcode, $phone, $branch, $email) ){}
+    $accountQuery = $connection->prepare("INSERT INTO account (barcode, branch) VALUES (?, ?)");
+    if ( $accountQuery->bind_param("ss", $barcode, $branch) ){}
      else{
       print_r( $accountQuery->error );
     }
@@ -25,15 +21,13 @@ if(isset($_POST['formType'])){
     foreach($_POST as $key => $value){
       $firstName = $value['firstName'];
       $lastName = $value['lastName'];
-      $birthdate = $value['birthYear'] . "-" . $value['birthMonth'] . "-" . $value['birthDay'];
-      $grade = $value['grade'];
-      $school = $value['school'];
       $category = $value['category'];
       $ageRange = $value['ageRange'];
+      $readerNumber = $value['readerNumber'];
 
-      $query = $connection->prepare("INSERT INTO reader (accountID, readerFirstName, readerLastName, readerBirthDate, readerCategory, readerSchool, readerGrade, readerAgeRange) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+      $query = $connection->prepare("INSERT INTO reader (accountID, readerFirstName, readerLastName, readerCategory, readerAgeRange, readerNumber) VALUES (?, ?, ?, ?, ?, ?)");
 
-      $query->bind_param("isssssss", $accountID, $firstName, $lastName, $birthdate, $category, $school, $grade, $ageRange);
+      $query->bind_param("isssss", $accountID, $firstName, $lastName, $category, $ageRange, $readerNumber);
 
       $query->execute();
       $query->close();
@@ -42,7 +36,7 @@ if(isset($_POST['formType'])){
     session_start();
     $_SESSION['accountID'] = $accountID;
     $accountQuery->close();
-    header('Location: log.php');
+    header('Location: ../log.php');
   }
 
   //Save information
@@ -124,9 +118,9 @@ else{
 <head>
 	<meta charset="utf-8">
 	<title>Enter Summer Reading Contest</title>
-	<link href="assets/main.css" rel="stylesheet" type="text/css">
-	<link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
-	<link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
+	<link href="../assets/main.css" rel="stylesheet" type="text/css">
+	<link href="../assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
+	<link href="../assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
@@ -137,48 +131,13 @@ else{
     (function($){
         $.fn.addChildForms = function(){
             var myform = "<div class='child' id='ch" + childCount + "'>" +
-                "<h3 style='display: inline;'>Reader #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
-                "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
-                "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
-                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' onChange='readingProgram(this)'>" + 
-                "<option value ='' selected disabled>Select a Program</option>" +
-                "<option value='olderChild'>Track Time(Older Child)</option>" +
-                "<option value='youngChild'>Track Books(Younger Child)</option>" +
-                "<option value='teen'>Teen</option>" +
-                "<option value='adult'>Adult</option>" +
-                "</select>" +
-                "</font><br><br>"+
-                "</font><br>"+
-                "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
-				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]' class='grade'>" + 
-                "<option value='' selected disabled>Select a Grade</option>" +
-                "<option value='2 Year Old'>2 Year Old</option>" +
-                "<option value='3 Year Old'>3 Year Old</option>" +
-                "<option value='4 Year Old'>4 Year Old</option>" +
-                "<option value='5 Year Old'>5 Year Old</option>" +
-                "<option value='Kindergarten'>Kindergarten</option>" +
-                "<option value='1st Grade'>1st Grade</option>" +
-                "<option value='2nd Grade'>2nd Grade</option>" +
-                "<option value='3rd Grade'>3rd Grade</option>" +
-                "<option value='4th Grade'>4th Grade</option>" +
-                "<option value='5th Grade'>5th Grade</option>" +
-                "<option value='6th Grade'>6th Grade</option>" +
-                "<option value='7th Grade'>7th Grade</option>" +
-                "<option value='8th Grade'>8th Grade</option>" +
-                "<option value='9th Grade'>9th Grade</option>" +
-                "<option value='10th Grade'>10th Grade</option>" +
-                "<option value='11th Grade'>11th Grade</option>" +
-                "<option value='12th Grade'>12th Grade</option>" +
-                "</select>" +
-                "</font><br class='grade' id='br" + childCount + "[grade1]'><br class='grade' id='br" + childCount + "[grade2]'>"+
-				        "<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
-                
-                "<font class='label ageRangeLabel' id='Label" + childCount + "[ageRange]'>Age Range</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange1]' value='18-30'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-30</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='31-40'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>31-40</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='41-50'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>41-50</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange4]' value='51-60'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>51-60</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br><br><br>"+ 
+                "<h3 style='display: inline;'>Class #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
+                "<input placeholder='Class Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
+                "<input placeholder='Center Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
+                "<input placeholder='Age Range' class='chlastName forminput' type='text' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange]' value='" + "' maxlength='6'></font><br>"+
+                "<input placeholder='Number of Students' class='chlastName forminput' type='text' name='ch" + childCount + "[readerNumber]' id='ch" + childCount + "[readerNumber]' value='" + "' maxlength='3'></font>"+
+                "<input type='hidden' name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' value='r2r'>" + 
+                "</font>"+
                 "</div>"
  
             $("button", $(myform)).click(function(){ $(this).parent().remove();});
@@ -444,9 +403,7 @@ function readingProgramExisting(obj){
 }
     
 function validateForm(){
-  var phoneNumber, email, branch, phoneExp, emailExp, shouldReturn;
-  phoneNumber = document.forms["register"]["phone"].value;
-  email = document.forms["register"]["email"].value;
+  var shouldReturn;
   branch = document.forms["register"]["branch"].value;
   
   phoneExp = /^\([0-9]{3}\)[0-9]{3}-[0-9]{4}$/;
@@ -538,100 +495,17 @@ function validateForm(){
 	<h1>Register for KCPL Summer Reading</h1>
 	<p>Fill out the following information so you don't have to fill it out again</p>
   <p id="phoneEmail">Please fill out either phone number or email or both</p>
-	<form method="post" action="" onSubmit="return validateForm()" name="register" id="register">
+	<form method="post" action="" name="register" id="register">
    <?php
     if($formType == "register"){
       ?>
-    <input type="hidden" name="barcode" id="barcode" value="<?php echo $barcode;?>">
-    <input type="hidden" name="formType" id="formType" value="<?php echo $formType;?>">
-		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number" onChange="checkPhone(this)" onKeyPress="return isNumberKey(event)"><br>
-    <input class="forminput" type="text" name="email" id="email" placeholder="Email Address"><br>
-    <select class="forminput" type="text" name="branch" id="branch">
-      <option disabled selected value="">Select a Branch</option>
-      <option value="Covington">Covington</option>
-      <option value="Durr">William E. Durr</option>
-      <option value="Erlanger">Erlanger</option>
-    </select>
+    <input type="hidden" name="formType" id="formType" value="register">
+    <input class="forminput" type="text" name="barcode" id="barcode" placeholder="Lookup ID"><br>
+    <input class="forminput" type="hidden" name="branch" id="branch" value="r2r">
     <br><br>
     <?php
     }
-    
-    if($formType == "update"){
-      while( $accountInfo->fetch() ){
-  ?>
-		<input type="hidden" name="barcode" id="barcode" value="<?php echo $barcode;?>">
-    <input type="hidden" name="formType" id="formType" value="<?php echo $formType;?>">
-		<input class="forminput" type="tel" name="phone" id="phone" placeholder="Phone Number" onChange="checkPhone(this)" onKeyPress="return isNumberKey(event)" value="<?php echo $phoneNumber; ?>"><br>
-    <input class="forminput" type="text" name="email" id="email" placeholder="Email Address" value="<?php echo $emailAddress; ?>"><br>
-    <select class="forminput" type="text" name="branch" id="branch">
-      <option disabled selected value="">Select a Branch</option>
-      <option value="Covington" <?php if($branch == "Covington"){echo "Selected";} ?>>Covington</option>
-      <option value="Durr" <?php if($branch == "Durr"){echo "Selected";} ?>>William E. Durr</option>
-      <option value="Erlanger" <?php if($branch == "Erlanger"){echo "Selected";} ?>>Erlanger</option>
-    </select>
-		<?php } ?>
-		<div>
-			<div id="container2">
-
-    <div id="container">
-          
-    <?php
-    $readerQuery = "SELECT readerID, readerFirstName, readerLastName, YEAR(readerBirthDate), MONTH(readerBirthDate), DAY(readerBirthDate), readerAgeRange, readerCategory, readerSchool, readerGrade FROM reader WHERE accountID = ?";
-    if( $readerInfo = $connection->prepare($readerQuery)){
-		$readerInfo->bind_param("i", $accountID);
-		$readerInfo->execute();
-		
-		$readerInfo->bind_result($readerID, $readerFirstName, $readerLastName, $readerBirthYear, $readerBirthMonth, $readerBirthDay, $readerAgeRange, $readerCategory, $readerSchool, $readerGrade);
-		while( $readerInfo->fetch() ){
-    ?>
-          <br><br><br><br>
-			<h3 style='display: inline;'><?php echo $readerFirstName . " " . $readerLastName; ?></h3><br>
-                <input placeholder='First Name' class='chfirstName forminput' type='text' name='<?php echo $readerID; ?>[firstName]' id='<?php echo $readerID; ?>[firstName]' value="<?php echo $readerFirstName ?>"><br>
-                <input placeholder='Last Name' class='chlastName forminput' type='text' name='<?php echo $readerID; ?>[lastName]' id='<?php echo $readerID; ?>[lastName]' value='<?php echo $readerLastName ?>'></font><br>
-                <font class='label' id='Labelch<?php echo $readerID; ?>[category]'>Reading Program: <select name='<?php echo $readerID; ?>[category]' id='<?php echo $readerID; ?>[category]' onChange='readingProgram(this)'>
-                <option value ='' selected disabled>Select a Program</option>
-                <option value='olderChild' <?php if($readerCategory == "olderChild"){echo "Selected";} ?>>Track Time(Older Child)</option>
-                <option value='youngChild' <?php if($readerCategory == "youngChild"){echo "Selected";} ?>>Track Books(Younger Child)</option>
-                <option value='teen' <?php if($readerCategory == "teen"){echo "Selected";} ?>>Teen</option>
-                <option value='adult' <?php if($readerCategory == "adult"){echo "Selected";} ?>>Adult</option>
-                </select>
-                </font><br><br>
-                </font><br>
-                <font class='label birthday' id='Labelch<?php echo $readerID; ?>[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='<?php echo $readerID; ?>[birthMonth]' id='<?php echo $readerID; ?>[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)' value="<?php echo $readerBirthMonth; ?>"><input class='birthday chbirthDay forminput' type='text' name='<?php echo $readerID; ?>[birthDay]' id='<?php echo $readerID; ?>[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'  value="<?php echo $readerBirthDay; ?>"><input class='birthday chbirthYear forminput' type='text' name='<?php echo $readerID; ?>[birthYear]' id='<?php echo $readerID; ?>[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)' value="<?php echo $readerBirthYear; ?>"></font><br class='birthday' id='br<?php echo $readerID; ?>[birthday]'>
-				 <font class='label grade' id='Labelch<?php echo $readerID; ?>[grade]'>Last Grade Completed: <select name='<?php echo $readerID; ?>[grade]' id='<?php echo $readerID; ?>[grade]' class='grade'>
-                <option value='' selected disabled>Select a Grade</option>
-                <option value='2 Year Old' <?php if($readerGrade == "2 Year Old"){echo "Selected";} ?>>2 Year Old</option>
-                <option value='3 Year Old' <?php if($readerGrade == "3 Year Old"){echo "Selected";} ?>>3 Year Old</option>
-                <option value='4 Year Old' <?php if($readerGrade == "4 Year Old"){echo "Selected";} ?>>4 Year Old</option>
-                <option value='5 Year Old' <?php if($readerGrade == "5 Year Old"){echo "Selected";} ?>>5 Year Old</option>
-                <option value='Kindergarten' <?php if($readerGrade == "Kindergarten"){echo "Selected";} ?>>Kindergarten</option>
-                <option value='1st Grade' <?php if($readerGrade == "1st Grade"){echo "Selected";} ?>>1st Grade</option>
-                <option value='2nd Grade' <?php if($readerGrade == "2nd Grade"){echo "Selected";} ?>>2nd Grade</option>
-                <option value='3rd Grade' <?php if($readerGrade == "3rd Grade"){echo "Selected";} ?>>3rd Grade</option>
-                <option value='4th Grade' <?php if($readerGrade == "4th Grade"){echo "Selected";} ?>>4th Grade</option>
-                <option value='5th Grade' <?php if($readerGrade == "5th Grade"){echo "Selected";} ?>>5th Grade</option>
-                <option value='6th Grade' <?php if($readerGrade == "6th Grade"){echo "Selected";} ?>>6th Grade</option>
-                <option value='7th Grade' <?php if($readerGrade == "7th Grade"){echo "Selected";} ?>>7th Grade</option>
-                <option value='8th Grade' <?php if($readerGrade == "8th Grade"){echo "Selected";} ?>>8th Grade</option>
-                <option value='9th Grade' <?php if($readerGrade == "9th Grade"){echo "Selected";} ?>>9th Grade</option>
-                <option value='10th Grade' <?php if($readerGrade == "10th Grade"){echo "Selected";} ?>>10th Grade</option>
-                <option value='11th Grade' <?php if($readerGrade == "11th Grade"){echo "Selected";} ?>>11th Grade</option>
-                <option value='12th Grade' <?php if($readerGrade == "12th Grade"){echo "Selected";} ?>>12th Grade</option>
-                </select>
-                </font><br class='grade' id='br<?php echo $readerID; ?>[grade1]'><br class='grade' id='br<?php echo $readerID; ?>[grade2]'>
-				        <input placeholder='School' class='chschool forminput' type='text' name='<?php echo $readerID; ?>[school]' id='<?php echo $readerID; ?>[school]' value="<?php echo $readerSchool ?>"><br class='school' id='br<?php echo $readerID; ?>[school]'>
-                      
-                <font class='label ageRangeLabel' id='Label<?php echo $readerID; ?>[ageRange]'>Age Range</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange1]' value='18-30' <?php if($readerAgeRange == "18-30"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange1]'>18-30</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange2]' value='31-40' <?php if($readerAgeRange == "31-40"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange2]'>31-40</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange3]' value='41-50' <?php if($readerAgeRange == "41-50"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange3]'>41-50</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange4]' value='51-60' <?php if($readerAgeRange == "51-60"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange4]'>51-60</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange5]' value='61+' <?php if($readerAgeRange == "61+"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange5]'>61+</font><br><br><br> 
-                <script>
-                    selectObject = document.getElementById("<?php echo $readerID; ?>[category]");
-                    window.onload = readingProgramExisting(selectObject);  
-                </script>
-          <?php } } }?>
+?>
       	<div>
 			<div id="container2">
 
@@ -639,7 +513,7 @@ function validateForm(){
       
         </div>
 				
-			<button id="addchild" class="label" type="button">Add Reader</button><br>
+			<button id="addchild" class="label" type="button">Add Class</button><br>
     		<button id="submit" class="label submit" type="submit">Finish</button>
 		</div>
 	</form>
