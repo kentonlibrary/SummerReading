@@ -36,7 +36,7 @@ if(isset($_POST['formType'])){
     session_start();
     $_SESSION['accountID'] = $accountID;
     $accountQuery->close();
-    header('Location: ../log.php');
+    header('Location: ../it log.php');
   }
 
   //Save information

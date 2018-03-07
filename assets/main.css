@@ -3,7 +3,7 @@
 html, body {
 	margin: 0px;
 	padding: 0px;
-  background-color: #253e50;
+  background-color: #253E51;
 }
 
 #left{
@@ -65,7 +65,7 @@ html, body {
 
 .details{
   color: white;
-  text-align: justify;
+  text-align: left;
 }
 
 .forgotPassword{
@@ -83,7 +83,7 @@ html, body {
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  border-color: rgb(227, 203, 146);
+  border-color: #7F939F;
   border-width: 10px;
   border-style: solid;
   border-radius: 5px;
@@ -108,7 +108,7 @@ html, body {
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border-color: rgb(80, 107, 177);
+  border-color: #7F939F;
   border-style: solid;
   border-width: 5px;
   border-radius: 10px;
@@ -165,7 +165,7 @@ html, body {
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  border-color: rgb(227, 203, 146);
+  border-color: #7F939F;
   border-width: 10px;
   border-style: solid;
   border-radius: 5px;
@@ -333,15 +333,16 @@ html, body {
 
 /*CSS for hours section*/
 .editInfo{
-  background-color: rgb(227, 203, 146);
+  background-color: #7F939F;
   height: auto;
   overflow: auto;
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  border-color: rgb(227, 203, 146);
+  border-color: #7F939F;
   border-width: 10px;
   border-style: solid;
   border-radius: 5px;
   margin-bottom: 10px;
+  color: white;
 }
