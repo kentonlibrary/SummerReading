@@ -85,7 +85,15 @@ $query = "SELECT accountID FROM account WHERE barcode = ?";
 	}
 
 $accountID = $_SESSION['accountID'];
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID, reader.readerSchool FROM reader WHERE accountID = '$accountID'");
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerCategory, reader.readerID, reader.readerSchool, account.lastLogin FROM reader, account WHERE reader.accountID = account.accountID AND reader.accountID = '$accountID'");
+
+
+  $updateLoginQuery = "UPDATE account SET lastLogin = NOW() WHERE barcode = ?";
+  if( $stmt = $connection->prepare($updateLoginQuery)){
+    $stmt->bind_param("s", $barcode);
+		$stmt->execute();		
+		$stmt->close();
+	}
 
 ?>
 <!doctype html>
@@ -109,9 +117,16 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
 
 <body>
   <script>
-
+function ShowHelp() {
+  document.getElementById('tutorial').style.display = 'block';
+};
+    
+function HideHelp() {
+  document.getElementById('tutorial').style.display = 'none';
+};
 </script>
   <div class="editInfo" style="text-align: right">
+    <a style="color:white;" href="javascript:ShowHelp();">Help &nbsp &nbsp</a>
     <a style="color:white;" href="index.php?logout=true">Logoff &nbsp</a>
     <a style="color:white;" href="information.php">&nbsp Edit Information</a>
   </div>
@@ -263,7 +278,16 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
     </div>
     <div class="booksRight">
         <div class="bookContainer">
-          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in this week drawing.";?></font>
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in this week drawing.";?></font><br>
+          <font color="#F26722" size="+2">
+          <?php
+          while($loggedBooks['count'] > 0){
+            echo "# ";
+            $loggedBooks['count'] = $loggedBooks['count'] - 1;
+          }
+      
+          ?>
+          </font>
 
       </div>
     </div> 
@@ -356,8 +380,16 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
     </div>
     <div class="booksRight">
         <div class="bookContainer">
-          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in Summer Reading.";?></font>
-
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in Summer Reading.";?></font><br>
+          <font color="#00B0DB" size="+2">
+          <?php
+          while($loggedBooks['count'] > 0){
+            echo "# ";
+            $loggedBooks['count'] = $loggedBooks['count'] - 1;
+          }
+      
+          ?>
+          </font>
       </div>
     </div> 
   </div>
@@ -369,8 +401,16 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <p style="font-family: 'code39azalearegular'; font-size: 48px; text-align: center; margin-bottom: -10px">*<?php echo $barcode; ?>*</p> 
   <p style="text-align: center;"><?php echo $barcode; ?></p>
 </div>
-  
 
+<div class="tutorial" id="tutorial" onclick='HideHelp()'>
+  <div id="topArrows">
+    Look here to sign out, edit your information, and bring up this help screen.<img src="assets/arrow.svg" height="60px"></img>
+  </div>
+  <div id="tutorialTitle">
+    <h1>Thanks for reading this summer with KCPL</h1>
+    <p>Use this site to log your reading to gain prizes throughout the summer.</p>
+  </div>
+</div>  
 </body>
 </html>
 

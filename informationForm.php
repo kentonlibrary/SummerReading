@@ -632,17 +632,14 @@ function validateForm(){
                     window.onload = readingProgramExisting(selectObject);  
                 </script>
           <?php } } }?>
-      	<div>
-			<div id="container2">
-
-    <div id="container">
-      
-        </div>
+    </div>
+      <div id="container3">
 				
 			<button id="addchild" class="label" type="button">Add Reader</button><br>
     		<button id="submit" class="label submit" type="submit">Finish</button>
 		</div>
 	</form>
 </div>
+  </div>
 </body>
 </html>
