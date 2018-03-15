@@ -34,6 +34,7 @@ $stmt = $connection->query($statsQuery);
 </head>
 
 <body>
+  <a href="../../r2r/r2rRegistration.php">Registration</a>
   <h1>Racing to Read Statistics</h1>
   <?php
   foreach($stmt as $result){
