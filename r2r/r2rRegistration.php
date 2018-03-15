@@ -36,11 +36,11 @@ if(isset($_POST['formType'])){
     session_start();
     $_SESSION['accountID'] = $accountID;
     $accountQuery->close();
-    header('Location: ../it log.php');
+    echo "Saved";
   }
 
   //Save information
-  if(($_POST['formType'] == "update")){
+  if((isset($_POST['formType']) == "update")){
     unset($_POST['formType']);
     $phone = $_POST['phone'];
     unset($_POST['phone']);
@@ -108,7 +108,6 @@ if(isset($_SESSION['accountID'])){
   $formType = "update";
 }
 else{
-  $barcode = $_GET['barcode'];
   $formType = "register";
 }
 
@@ -490,7 +489,6 @@ function validateForm(){
 </head>
 
 <body>
-<?php echo $headerNav; ?>
 <div class="register">
 	<h1>Register for KCPL Summer Reading</h1>
 	<p>Fill out the following information so you don't have to fill it out again</p>

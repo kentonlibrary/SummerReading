@@ -184,7 +184,7 @@
     <p>Erlanger: <?php echo $erlangerPatronsTotal;?></p>
     <p>Durr: <?php echo $durrPatronsTotal;?></p>
   <div>
-    
+    <a href="r2r.php">Racing to Read Stats</a>
 <script>
   var modal = document.getElementById('myModal');
 
