@@ -39,6 +39,7 @@ else{
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../assets/keyboard/keyboard.css" />
 <style>
 /* The Modal (background) */
 .modal {
@@ -99,6 +100,7 @@ else{
   <form action="javascript:openModal()" method="post" name="card" id="card">
       <input type="text" name="cardNumber" id="cardNumber" placeholder="Library Card" class="cardScan" maxlength="14" autofocus>
     </form>
+    <?php include_once('../assets/keyboard/keyboard.php'); ?>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -144,11 +146,11 @@ function openModal() {
 //}
 
 $(document).ready(function() { //Keeps the cardNumber field focused for easy scanning
-    $("#cardNumber").focus().bind('blur', function() {
-        $(this).focus(); 
-      $('#cardNumber').select();
-      document.getElementById('card').reset();
-    }); 
+    //$("#cardNumber").focus().bind('blur', function() {
+        //$(this).focus(); 
+      //$('#cardNumber').select();
+      //document.getElementById('card').reset();
+    //}); 
     
     //disable tabindex on elements
     $("input").attr("tabindex", "-1");
@@ -158,7 +160,6 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
       $('#cardNumber').select();
     });        
 });
-  
   
  function selectEmotion( ele ) {
   var emotion = document.getElementById(ele.id);
@@ -207,7 +208,8 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
   }
 
 </script>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/keyboard/keyboard.js"></script>
 </body>
 </html>
 
