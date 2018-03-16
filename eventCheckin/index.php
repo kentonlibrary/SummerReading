@@ -104,7 +104,7 @@ else{
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
+  <h1 onClick="closeModal()" style="color: red">X</h1>
   <!-- Modal content -->
   <div class="modal-content close" id="popup">
     <p>Some text in the Modal..</p>
@@ -205,6 +205,10 @@ $(document).ready(function() { //Keeps the cardNumber field focused for easy sca
     attendeeBlock.style.display = "block";
     reader.style.display = "block";
     namesBlock.style.display = "none";
+  }
+  
+  function closeModal(){
+    modal.style.display = "none";
   }
 
 </script>
