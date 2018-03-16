@@ -238,7 +238,7 @@ else{
           <div id="container3">
 				
 			<button id="addchild" class="label" type="button" onclick="addChild();">Add Reader</button><br>
-    		<button id="submit" class="label submit" type="submit" style="display: none;">Finish</button>
+    		<button id="submit" class="label submit" type="submit" <?php if($formType == 'register'){?>style="display: none;"<?php } ?>>Finish</button>
 		</div>
     </div>
 	</form>
