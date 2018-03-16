@@ -25,10 +25,11 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
   if($_POST['readerCategory'] == 'teen'){ //Starts code loop for younger child
     $readerID = $_POST['readerID'];
     $title = $_POST['titleTeen'];
+    $rating = $_POST['rating'];
     
     //SQL Block to insert time into database
-    $query = $connection->prepare("INSERT INTO teenLog (readerID, title) VALUES (?, ?)");
-    $query->bind_param("is", $readerID, $title);
+    $query = $connection->prepare("INSERT INTO teenLog (readerID, title, rating) VALUES (?, ?, ?)");
+    $query->bind_param("isi", $readerID, $title, $rating);
     $query->execute();
     $query->close();
   }
@@ -113,6 +114,9 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <link rel="apple-touch-icon" sizes="120x120" href="assets/Stamp_iPhone.jpg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+
+</style>
 </head>
 
 <body>
@@ -268,14 +272,13 @@ function HideHelp() {
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="#<?php echo $readerID;?>" onSubmit="return openModal()" method="post">
+      <form action="#<?php echo $result['readerID'];?>" method="post">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
         <input class="title" type="text" id="titleTeen" name="titleTeen" style="vertical-align: middle">
-        <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
-      </form>
-    </div>
+        <img src="assets/add.png" width="50px" alt="Submit" onclick="openModel(<?php echo $readerID;?>)"/>
+</div>
     <div class="booksRight">
         <div class="bookContainer">
           <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in this week drawing.";?></font><br>
@@ -292,6 +295,16 @@ function HideHelp() {
       </div>
     </div> 
   </div>
+  
+<div id="rating[<?php echo $result['readerID'];?>]" class="ratingModal">
+  <h2>What did you think of your book?</h2>
+  <input type="image" name="rating" id="rating" class="emotion" width="80px" value="5" src="assets/Grin.png" alt="Submit">
+  <input type="image" name="rating" id="rating" class="emotion" width="80px" value="4" src="assets/Smile.png" alt="Submit">
+  <input type="image" name="rating" id="rating" class="emotion" width="80px" value="3" src="assets/Frown.png" alt="Submit">
+  <input type="image" name="rating" id="rating" class="emotion" width="80px" value="2" src="assets/Sad.png" alt="Submit">
+  <input type="image" name="rating" id="rating" class="emotion" width="80px" value="1" src="assets/Angry.png" alt="Submit">
+</div>
+</form>  
 <?php
     }
 if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
@@ -407,10 +420,24 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
     Look here to sign out, edit your information, and bring up this help screen.<img src="assets/arrow.svg" height="60px"></img>
   </div>
   <div id="tutorialTitle">
-    <h1>Thanks for reading this summer with KCPL</h1>
+    <h1>Thank you for reading this summer with KCPL</h1>
     <p>Use this site to log your reading to gain prizes throughout the summer.</p>
   </div>
 </div>  
+<script>
+function openModel(readerID){
+  ratingModal = document.getElementById("rating[" + readerID + "]").style.display = 'inline-block';
+}  
+  
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
 </body>
 </html>
 
