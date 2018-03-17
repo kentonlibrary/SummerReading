@@ -22,7 +22,7 @@ $bookTotals['teacher'] = 0;
 
 
 
-$statsQuery = "SELECT barcode, accountID FROM account WHERE branch = 'r2r'";
+$statsQuery = "SELECT barcode, accountID FROM account WHERE branch = 'r2r' ORDER BY barcode";
 $stmt = $connection->query($statsQuery);
 
 ?>
@@ -37,8 +37,14 @@ $stmt = $connection->query($statsQuery);
   <a href="../../r2r/r2rRegistration.php">Registration</a>
   <h1>Racing to Read Statistics</h1>
   <?php
+  $letters = range('A', 'Z');
+  
+  foreach ($letters as $letter){
+    echo "<a href='#" . strtolower($letter) . "'>&nbsp $letter &nbsp</a>";
+  }
+
   foreach($stmt as $result){
-    echo "<h3>" . $result['barcode'] . "</h3>";
+    echo "<h3 id='" . strtolower($result['barcode'][0]) . "'>" . $result['barcode'] . "</h3>";
     $accountID = $result['accountID'];
     $statsQueryReader = "SELECT r1.readerFirstName, r1.readerNumber, r1.readerID, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID";
     $classResults = $connection->query($statsQueryReader);
