@@ -3,7 +3,7 @@ include('../../assets/scripts.php'); //File with connection information and func
 
 // output headers so that the file is downloaded rather than displayed
 header('Content-type: text/csv');
-$filename = "AS-SRC " . date("Y-m-d h:ma");
+$filename = "TEEN-SRC " . date("Y-m-d h:ma");
 header('Content-Disposition: attachment; filename="' . $filename . '"');
  
 // do not cache the file
