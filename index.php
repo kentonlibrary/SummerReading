@@ -63,7 +63,7 @@ if(isset($_COOKIE["Barcode"])){
       <h2>Kids: (ages 2-12)</h2>
 Pick up a booklog OR register online at src.kentonlibrary.org and start reading or listening to books.
 After 10 books or 5 hours of reading, return the log to receive your 2018 SRC T-Shirt OR a drawstring bag (NOTE: drawstring bags are for
-ages 5 and up ONLY; all prizers are awarded while supplies last) and a raf e ticket for a chance to win one of 3 grand prizes: a Technology Basket, a Sports Basket, or an Art Basket.
+ages 5 and up ONLY; all prizers are awarded while supplies last) and a raffle ticket for a chance to win one of 3 grand prizes: a Technology Basket, a Sports Basket, or an Art Basket.
 Keep reading for more chances to win the grand prizes
       
       <h2>Teens: (grades 6-12)</h2>
