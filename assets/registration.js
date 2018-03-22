@@ -137,6 +137,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'youngChild':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -162,6 +164,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'teen':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -187,6 +191,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'adult':
       entrantID = obj.name.substring(2, obj.name.length - 10);
@@ -212,6 +218,8 @@ function readingProgram(obj){
       document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "inline";
       document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "inline";
+      document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "inline";
+      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "inline";
       break;
   }
 }
