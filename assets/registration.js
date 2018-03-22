@@ -50,7 +50,7 @@ var submitReadyChild = false;
                 "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='31-40'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>31-40</font><br>"+
                 "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='41-50'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>41-50</font><br>"+
                 "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange4]' value='51-60'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>51-60</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br><br><br>"+ 
+                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br>"+ 
                 "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange6]' value='N/A'><font class='label ageRange' id='Label" + childCount + "[ageRange6]'>Perfer not to say</font><br><br><br>"+ 
                 "</div>";
  
