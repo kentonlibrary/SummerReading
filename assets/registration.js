@@ -8,11 +8,11 @@ var submitReadyChild = false;
 		 //This funtion adds the child boxes to the form.
         function addChildForms(){
           "use strict";
-            var myform = "<div class='child' id='ch" + childCount + "'>" +
+            var myform = "<div class='child' id='" + childCount + "'>" +
                 "<h3 style='display: inline;'>Reader #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
                 "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
-                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' onChange='readingProgram(this)'>" + 
+                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='" + childCount + "[category]' id='" + childCount + "[category]' onChange='readingProgram(this)'>" + 
                 "<option value ='' selected disabled>Select a Program</option>" +
                 "<option value='olderChild'>Track Time(Older Child)</option>" +
                 "<option value='youngChild'>Track Books(Younger Child)</option>" +
@@ -21,8 +21,8 @@ var submitReadyChild = false;
                 "</select>" +
                 "</font><br><br>"+
                 "</font><br>"+
-                "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='ch" + childCount + "[birthMonth]' id='ch" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='ch" + childCount + "[birthDay]' id='ch" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='ch" + childCount + "[birthYear]' id='ch" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
-				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='ch" + childCount + "[grade]' id='ch" + childCount + "[grade]' class='grade'>" + 
+                "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='" + childCount + "[birthMonth]' id='" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='" + childCount + "[birthDay]' id='" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='" + childCount + "[birthYear]' id='" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
+				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='" + childCount + "[grade]' id='" + childCount + "[grade]' class='grade'>" + 
                 "<option value='' selected disabled>Select a Grade</option>" +
                 "<option value='2 Year Old'>2 Year Old</option>" +
                 "<option value='3 Year Old'>3 Year Old</option>" +
@@ -43,15 +43,15 @@ var submitReadyChild = false;
                 "<option value='12th Grade'>12th Grade</option>" +
                 "</select>" +
                 "</font><br class='grade' id='br" + childCount + "[grade1]'><br class='grade' id='br" + childCount + "[grade2]'>"+
-				        "<input placeholder='School' class='chschool forminput' type='text' name='ch" + childCount + "[school]' id='ch" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
+				        "<input placeholder='School' class='chschool forminput' type='text' name='" + childCount + "[school]' id='" + childCount + "[school]'><br class='school' id='br" + childCount + "[school]'>"+
                 
                 "<font class='label ageRangeLabel' id='Label" + childCount + "[ageRange]'>Age Range</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange1]' value='18-30'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-30</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange2]' value='31-40'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>31-40</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange3]' value='41-50'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>41-50</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange4]' value='51-60'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>51-60</font><br>"+
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br>"+ 
-                "<input type='radio' class='ageRange' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange6]' value='N/A'><font class='label ageRange' id='Label" + childCount + "[ageRange6]'>Perfer not to say</font><br><br><br>"+ 
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange1]' value='18-30'><font class='label ageRange' id='Label" + childCount + "[ageRange1]'>18-30</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange2]' value='31-40'><font class='label ageRange' id='Label" + childCount + "[ageRange2]'>31-40</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange3]' value='41-50'><font class='label ageRange' id='Label" + childCount + "[ageRange3]'>41-50</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange4]' value='51-60'><font class='label ageRange' id='Label" + childCount + "[ageRange4]'>51-60</font><br>"+
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange5]' value='61+'><font class='label ageRange' id='Label" + childCount + "[ageRange5]'>61+</font><br>"+ 
+                "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange6]' value='N/A'><font class='label ageRange' id='Label" + childCount + "[ageRange6]'>Perfer not to say</font><br><br><br>"+ 
                 "</div>";
  
             $("button", $(myform)).click(function(){ $(this).parent().remove();});
@@ -114,112 +114,112 @@ function readingProgram(obj){
   "use strict";
   switch (obj.value) {
     case 'olderChild':
-      var entrantID = obj.name.substring(2, obj.name.length - 10);
+      var entrantID = obj.name.substring(0, obj.name.length - 10);
       document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById(entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById(entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById(entrantID + "[birthYear]").style.display = "inline";
       document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById(entrantID + "[grade]").style.display = "inline";
+      document.getElementById(entrantID + "[school]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
       document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'youngChild':
-      entrantID = obj.name.substring(2, obj.name.length - 10);
+      entrantID = obj.name.substring(0, obj.name.length - 10);
       document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById(entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById(entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById(entrantID + "[birthYear]").style.display = "inline";
       document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById(entrantID + "[grade]").style.display = "inline";
+      document.getElementById(entrantID + "[school]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
       document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'teen':
-      entrantID = obj.name.substring(2, obj.name.length - 10);
+      entrantID = obj.name.substring(0, obj.name.length - 10);
       document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "inline";
+      document.getElementById(entrantID + "[birthMonth]").style.display = "inline";
+      document.getElementById(entrantID + "[birthDay]").style.display = "inline";
+      document.getElementById(entrantID + "[birthYear]").style.display = "inline";
       document.getElementById("Labelch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[grade]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[school]").style.display = "inline";
+      document.getElementById(entrantID + "[grade]").style.display = "inline";
+      document.getElementById(entrantID + "[school]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade1]").style.display = "inline";
       document.getElementById("br" + entrantID + "[grade2]").style.display = "inline";
       document.getElementById("br" + entrantID + "[birthday]").style.display = "inline";
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange5]").style.display = "none";
       document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "none";
+      document.getElementById(entrantID + "[ageRange6]").style.display = "none";
       break;
     case 'adult':
-      entrantID = obj.name.substring(2, obj.name.length - 10);
+      entrantID = obj.name.substring(0, obj.name.length - 10);
       document.getElementById("Labelch" + entrantID + "[birthday]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[birthMonth]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[birthDay]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[birthYear]").style.display = "none";
+      document.getElementById(entrantID + "[birthMonth]").style.display = "none";
+      document.getElementById(entrantID + "[birthDay]").style.display = "none";
+      document.getElementById(entrantID + "[birthYear]").style.display = "none";
       document.getElementById("Labelch" + entrantID + "[grade]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[grade]").style.display = "none";
-      document.getElementById("ch" + entrantID + "[school]").style.display = "none";
+      document.getElementById(entrantID + "[grade]").style.display = "none";
+      document.getElementById(entrantID + "[school]").style.display = "none";
       document.getElementById("br" + entrantID + "[grade1]").style.display = "none";
       document.getElementById("br" + entrantID + "[grade2]").style.display = "none";
       document.getElementById("br" + entrantID + "[birthday]").style.display = "none";
       
       document.getElementById("Label" + entrantID + "[ageRange]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange1]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange1]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange1]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange2]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange2]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange2]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange3]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange3]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange3]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange4]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange4]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange4]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange5]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange5]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange5]").style.display = "inline";
       document.getElementById("Label" + entrantID + "[ageRange6]").style.display = "inline";
-      document.getElementById("ch" + entrantID + "[ageRange6]").style.display = "inline";
+      document.getElementById(entrantID + "[ageRange6]").style.display = "inline";
       break;
   }
 }

@@ -128,7 +128,7 @@ else{
 	<link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width: 500px)">
 	<link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:501px)">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
-	
+	<script type="text/javascript" src="assets/registration.js"></script>
 
 </head>
 
@@ -226,8 +226,9 @@ else{
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange2]' value='31-40' <?php if($readerAgeRange == "31-40"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange2]'>31-40</font><br>
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange3]' value='41-50' <?php if($readerAgeRange == "41-50"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange3]'>41-50</font><br>
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange4]' value='51-60' <?php if($readerAgeRange == "51-60"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange4]'>51-60</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange5]' value='61+' <?php if($readerAgeRange == "61+"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange5]'>61+</font><br><?php
-                if($readerAgeRange == "N/A"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange6]'>Perfer not to say</font><br><br><br>
+                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange5]' value='61+' <?php if($readerAgeRange == "61+"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange5]'>61+</font><br>
+                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange6]' value='N/A' <?php if($readerAgeRange == "N/A"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange6]'>Perfer not to say</font>
+                <br><br><br>
                 <script>
                     selectObject = document.getElementById("<?php echo $readerID; ?>[category]");
                     window.onload = readingProgramExisting(selectObject);  
@@ -245,6 +246,6 @@ else{
 	</form>
 </div>
   </div>
-  <script type="text/javascript" src="assets/registration.js"></script>
+  
   </body>
 </html>
