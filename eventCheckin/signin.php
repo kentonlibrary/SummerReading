@@ -40,7 +40,7 @@ $barcode=$_GET['cardNumber'];
 
 $eventID = $_SESSION['event'];
 
-$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND account.barcode = '$barcode' AND reader.readerCategory = 'adult' AND NOT EXISTS (SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.eventID = '$eventID');");  // 
+$results = $connection->query("SELECT reader.readerFirstName, reader.readerLastName, reader.readerID FROM reader, account WHERE account.accountID = reader.accountID AND account.barcode = '$barcode' AND (reader.readerCategory = 'adult' OR reader.readerCategory = 'teen') AND NOT EXISTS ( SELECT 1 FROM eventRating WHERE reader.readerID = eventRating.readerID AND eventRating.eventID = '$eventID');");  // 
 
 ?>
 <div id="names">

@@ -138,6 +138,9 @@ function openModal() {
   xhttp.open("GET", "signin.php?cardNumber=" + cardNumber, true);
   xhttp.send();
   $('#cardNumber').select();
+  
+  var write = document.getElementById('cardNumber');
+  write.value = '';
 }
 
 // When the user clicks on <span> (x), close the modal

@@ -9,6 +9,9 @@ $(function(){
             write.value = (write.value.substr(0, write.value.length - 1));
             return false;
          }
+          if ($this.hasClass('return')) {             
+            return false;
+         }
          
         // Add the character
         write.value = write.value + character;
