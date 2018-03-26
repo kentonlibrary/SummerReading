@@ -186,7 +186,12 @@ function HideHelp() {
         }
         ?>
         <img src="assets/tiger.png" height="150px" alt="booker" class="booker bookerCP <?php echo $dn; ?>"/> <!-- Show a completed booker image.  $dn either make image opaque if award has been given, or left alone if award has not been given -->
+      <?php 
+        if($dn == ""){
+      ?>
+      <p>Come claim your prize</p>
       <?php
+      }
         $complete--; //Subtract 1 from the added images loop counter
       };
       
