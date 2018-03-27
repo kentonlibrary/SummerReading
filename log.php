@@ -128,6 +128,20 @@ function ShowHelp() {
 function HideHelp() {
   document.getElementById('tutorial').style.display = 'none';
 };
+    
+function showlast(){
+  $('#' + getAnchor()).collapse("show");
+  
+}
+    
+function getAnchor(){
+  var currentURL = document.URL,
+      urlParts = currentURL.split('#');
+  
+  return (urlParts.length > 1) ? urlParts[1] : null;
+}
+    
+window.onload = showlast;
 </script>
   <div class="editInfo" style="text-align: right">
     <a style="color:white;" href="javascript:ShowHelp();">Help &nbsp &nbsp</a>
