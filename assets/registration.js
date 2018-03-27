@@ -7,11 +7,11 @@ var submitReadyChild = false;
 		
 		 //This funtion adds the child boxes to the form.
         function addChildForms(){
-          "use strict";
-            var myform = "<div class='child' id='" + childCount + "'>" +
+            var myform = "<div class='child' id='ch" + childCount + "'>" +
                 "<h3 style='display: inline;'>Reader #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
-                "<input placeholder='First Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
-                "<input placeholder='Last Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
+                "<input type='hidden' name='" + childCount + "[readerSave]' id='" + childCount + "[readerSave]' value='new'>"+
+                "<input placeholder='First Name' class='chfirstName forminput' type='text' name='" + childCount + "[firstName]' id='" + childCount + "[firstName]'><br>"+
+                "<input placeholder='Last Name' class='chlastName forminput' type='text' name='" + childCount + "[lastName]' id='" + childCount + "[lastName]' value='" + "'></font><br>"+
                 "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='" + childCount + "[category]' id='" + childCount + "[category]' onChange='readingProgram(this)'>" + 
                 "<option value ='' selected disabled>Select a Program</option>" +
                 "<option value='olderChild'>Track Time(Older Child)</option>" +
@@ -54,16 +54,14 @@ var submitReadyChild = false;
                 "<input type='radio' class='ageRange' name='" + childCount + "[ageRange]' id='" + childCount + "[ageRange6]' value='N/A'><font class='label ageRange' id='Label" + childCount + "[ageRange6]'>Perfer not to say</font><br><br><br>"+ 
                 "</div>";
  
-            $("button", $(myform)).click(function(){ $(this).parent().remove();});
             var container = document.getElementById('readerSection');
             var submitButton = document.getElementById('submit');
             submitButton.style.display = "inline-block";  
-            container.innerHTML += myform;
+            $("#readerSection").append(myform);
             childCount++;
         }
      
     function addChild(){
-      "use strict";
             addChildForms();   
     }
 		

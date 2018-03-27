@@ -48,6 +48,7 @@ if(isset($_POST['formType'])){
   //Save information
   if(($_POST['formType'] == "update")){
     unset($_POST['formType']);
+    unset($_POST['barcode']);
     $phone = $_POST['phone'];
     unset($_POST['phone']);
     $email = $_POST['email'];
@@ -58,7 +59,7 @@ if(isset($_POST['formType'])){
     unset($_POST['formType']);
 
     foreach($_POST as $key => $value){
-      if( 'ch' == substr($key, 0, 2)){
+      if( $value['readerSave'] == 'new'){
         $firstName = $value['firstName'];
         $lastName = $value['lastName'];
         $birthdate = $value['birthYear'] . "-" . $value['birthMonth'] . "-" . $value['birthDay'];
@@ -73,17 +74,21 @@ if(isset($_POST['formType'])){
         $query->execute();
         $query->close();
       }
-      else{
+      elseif( $value['readerSave'] == 'existing'){
         $firstName = $value['firstName'];
         $lastName = $value['lastName'];
         $birthdate = $value['birthYear'] . "-" . $value['birthMonth'] . "-" . $value['birthDay'];
         $grade = $value['grade'];
         $school = $value['school'];
         $category = $value['category'];
+        if(isset($value['ageRange'])){
+          $ageRange = $value['ageRange'];
+        }
+        else $ageRange = NULL;
 
-        $query = $connection->prepare("UPDATE reader SET readerFirstName = ?, readerLastName = ?, readerBirthDate = ?, readerCategory = ?, readerSchool = ?, readerGrade = ? WHERE readerID = ?");
+        $query = $connection->prepare("UPDATE reader SET readerFirstName = ?, readerLastName = ?, readerBirthDate = ?, readerCategory = ?, readerSchool = ?, readerGrade = ?, readerAgeRange = ? WHERE readerID = ?");
 
-        $query->bind_param("ssssssi", $firstName, $lastName, $birthdate, $category, $school, $grade, $key);
+        $query->bind_param("sssssssi", $firstName, $lastName, $birthdate, $category, $school, $grade, $ageRange, $key);
 
         $query->execute();
         $query->close();
@@ -186,6 +191,7 @@ else{
     ?>
           <br><br><br><br>
 			<h3 style='display: inline;'><?php echo $readerFirstName . " " . $readerLastName; ?></h3><br>
+                <input type='hidden' name='<?php echo $readerID; ?>[readerSave]' id='<?php echo $readerID; ?>[readerSave]' value="existing">
                 <input placeholder='First Name' class='chfirstName forminput' type='text' name='<?php echo $readerID; ?>[firstName]' id='<?php echo $readerID; ?>[firstName]' value="<?php echo $readerFirstName ?>"><br>
                 <input placeholder='Last Name' class='chlastName forminput' type='text' name='<?php echo $readerID; ?>[lastName]' id='<?php echo $readerID; ?>[lastName]' value='<?php echo $readerLastName ?>'></font><br>
                 <font class='label' id='Labelch<?php echo $readerID; ?>[category]'>Reading Program: <select name='<?php echo $readerID; ?>[category]' id='<?php echo $readerID; ?>[category]' onChange='readingProgram(this)'>
@@ -239,7 +245,7 @@ else{
           </div>
           <div id="container3">
 				
-			<button id="addchild" class="label" type="button" onclick="addChild();">Add Reader</button><br>
+			<button id="addchild" class="label" type="button" onclick="addChildForms();">Add Reader</button><br>
     		<button id="submit" class="label submit" type="submit" <?php if($formType == 'register'){?>style="display: none;"<?php } ?>>Finish</button>
 		</div>
     </div>
