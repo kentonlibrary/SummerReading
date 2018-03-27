@@ -4,8 +4,8 @@ include('../assets/scripts.php');
 session_start();
 
 if(isset($_POST['eventName'])){
-  $eventQuery = $connection->prepare("INSERT INTO event (eventName, branch) VALUES (?, ?)");
-	if ( $eventQuery->bind_param("ss", $_POST['eventName'], $_POST['branch']) ){}
+  $eventQuery = $connection->prepare("INSERT INTO event (eventName, branch, eventYoungChild, eventOlderChild, eventTeen, eventAdult) VALUES (?, ?, ?, ?, ?, ?)"); //, eventYoungChild, eventOlderChild, eventReen, eventAdult
+	if ( $eventQuery->bind_param("ssssss", $_POST['eventName'], $_POST['branch'], $_POST['youngChild'], $_POST['olderChild'], $_POST['teen'], $_POST['adult'])){} //, $_POST['youngChild'], $_POST['olderChild'], $_POST['teen'], $_POST['adult']
    else{
     print_r( $eventQuery->error );
   }
@@ -13,6 +13,13 @@ if(isset($_POST['eventName'])){
 	$eventQuery->execute();
 	$eventID = $eventQuery->insert_id;
   $_SESSION['event'] = $eventID;
+  $_SESSION['programCatagories'] = array();
+  if($_POST['youngChild'] == "1"){ $_SESSION['programCatagories']['youngChild'] = "youngChild"; }
+  if($_POST['olderChild'] == "1"){ $_SESSION['programCatagories']['olderChild'] = "olderChild"; }
+  if($_POST['teen'] == "1"){ $_SESSION['programCatagories']['teen'] = "teen"; }
+  if($_POST['adult'] == "1"){ $_SESSION['programCatagories']['adult'] = "adult"; }
+  
+
 }
 
 if(!isset($_SESSION['event'])){
@@ -26,7 +33,16 @@ if(!isset($_SESSION['event'])){
           <option value="Covington">Covington</option>
           <option value="Durr">William E. Durr</option>
           <option value="Erlanger">Erlanger</option>
-        </select>
+        </select><br>
+    Who can check in?<br>
+    <input type="hidden" name="youngChild" id="youngChild" value="0">
+    <Label><input type="checkbox" name="youngChild" id="youngChild" value="1">Young Child</Label><br>
+    <input type="hidden" name="olderChild" id="olderChild" value="0">
+      <label><input type="checkbox" name="olderChild" id="olderChild" value="1">Older Child<br></label>
+    <input type="hidden" name="teen" id="teen" value="0">
+      <label><input type="checkbox" name="teen" id="teen" value="1">Teen<br></label>
+    <input type="hidden" name="adult" id="adult" value="0">
+      <label><input type="checkbox" name="adult" id="adult" value="1">Adult<br></label>
     <input type="submit">
   </body>
 </html>
