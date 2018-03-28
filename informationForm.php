@@ -233,7 +233,7 @@ else{
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange3]' value='41-50' <?php if($readerAgeRange == "41-50"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange3]'>41-50</font><br>
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange4]' value='51-60' <?php if($readerAgeRange == "51-60"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange4]'>51-60</font><br>
                 <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange5]' value='61+' <?php if($readerAgeRange == "61+"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange5]'>61+</font><br>
-                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange6]' value='N/A' <?php if($readerAgeRange == "N/A"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange6]'>Perfer not to say</font>
+                <input type='radio' class='ageRange' name='<?php echo $readerID; ?>[ageRange]' id='<?php echo $readerID; ?>[ageRange6]' value='N/A' <?php if($readerAgeRange == "N/A"){echo "checked";} ?>><font class='label ageRange' id='Label<?php echo $readerID; ?>[ageRange6]'>Prefer not to say</font>
                 <br><br><br>
                 <script>
                     selectObject = document.getElementById("<?php echo $readerID; ?>[category]");
