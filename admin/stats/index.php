@@ -198,6 +198,7 @@
   <div>
     <a href="r2r.php">Racing to Read Stats</a><br>
     <a href="asSpreadsheet.php">Adult Services Spreadsheet</a><br>
+    <a href="eventSpreadsheet.php">Event Spreadsheet</a><br>
     <a href="teenSpreadsheet.php">Teen Spreadsheet</a>
 <script>
   var modal = document.getElementById('myModal');
