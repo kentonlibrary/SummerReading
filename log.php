@@ -24,7 +24,7 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
   }
   if($_POST['readerCategory'] == 'teen'){ //Starts code loop for younger child
     $readerID = $_POST['readerID'];
-    $title = $_POST['titleTeen'];
+    $title = $_POST['title'];
     $rating = $_POST['rating'];
     
     //SQL Block to insert time into database
@@ -35,7 +35,7 @@ if(isset($_POST['readerCategory'])){ //Checks to see if readerCategory is set to
   }
 if($_POST['readerCategory'] == 'adult'){ //Starts code loop for younger child
     $readerID = $_POST['readerID'];
-    $title = $_POST['titleAdult'];
+    $title = $_POST['title'];
     
     //SQL Block to insert time into database
     $query = $connection->prepare("INSERT INTO adultLog (readerID, title) VALUES (?, ?)");
