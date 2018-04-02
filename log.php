@@ -108,8 +108,8 @@ $results = $connection->query("SELECT reader.readerFirstName, reader.readerLastN
   <title>Log</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="assets/main.css" rel="stylesheet" type="text/css">
-  <link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-  width:480px)">
-  <link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:481px)">
+  <link href="assets/mobile.css" rel="stylesheet" type="text/css" media="screen and (max-device-width:550px)">
+  <link href="assets/desktop.css" rel="stylesheet" type="text/css" media="screen and (min-device-width:551px)">
   <link rel="apple-touch-icon" href="assets/Stamp_iPhone.jpg">
   <link rel="apple-touch-icon" sizes="120x120" href="assets/Stamp_iPhone.jpg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
