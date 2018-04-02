@@ -236,7 +236,7 @@ window.onload = showlast;
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT COUNT(*) AS loggedBooks FROM youngChildLog WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM youngChildLog WHERE readerID = '$readerID') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID') AS loggedBooks");
       $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM youngChildAward WHERE readerID = '$readerID'");
       $loggedBooks = mysqli_fetch_array($logs)['loggedBooks']; //Find how many books child has logged
       $prized = mysqli_fetch_array($awarded)['awarded']; //How many book prizes have been awarded
@@ -296,7 +296,7 @@ window.onload = showlast;
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT COUNT(*) as count FROM teenLog WHERE WEEK(timestamp, 1) = WEEK(CURDATE(), 1) AND readerID = '$readerID'");
+      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM teenLog WHERE WEEK(timestamp, 1) = WEEK(CURDATE(), 1) AND readerID = '$readerID') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID' AND WEEK(timestamp, 1) = WEEK(CURDATE(), 1)) AS count");
       $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
   ?>
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
@@ -407,7 +407,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT COUNT(*) as count FROM adultLog WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM adultLog WHERE readerID = '$readerID') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID') AS count");
       $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
   ?>
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
