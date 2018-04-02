@@ -141,6 +141,17 @@ function getAnchor(){
   return (urlParts.length > 1) ? urlParts[1] : null;
 }
     
+function bookTitleValidation(form){
+  var bookTitle = form.title.value;
+  if(bookTitle.length < 2){
+    alert("Please enter a book title");
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+    
 window.onload = showlast;
 </script>
   <div class="editInfo" style="text-align: right">
@@ -250,7 +261,7 @@ window.onload = showlast;
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="#<?php echo $readerID;?>" method="post">
+      <form action="#<?php echo $readerID;?>" onsubmit="return bookTitleValidation(this)" method="post" name="<?php echo $readerID;?>" id="<?php echo $readerID;?>">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
@@ -291,11 +302,11 @@ window.onload = showlast;
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="#<?php echo $result['readerID'];?>" method="post">
+      <form action="#<?php echo $result['readerID'];?>" onsubmit="return bookTitleValidation(this)" method="post" name="<?php echo $readerID;?>" id="<?php echo $readerID;?>">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
-        <input class="title" type="text" id="titleTeen" name="titleTeen" style="vertical-align: middle">
+        <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
         <img src="assets/add.png" width="50px" alt="Submit" onclick="openModel(<?php echo $readerID;?>)"/>
 </div>
     <div class="booksRight">
@@ -355,7 +366,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $readerID;?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="hours collapse" id="<?php echo $readerID;?>">
     <div class="hoursLeft">
-      <form action="#<?php echo $readerID;?>" method="post">
+      <form action="#<?php echo $readerID;?>" onsubmit="return bookTitleValidation(this)" method="post" name="<?php echo $readerID;?>" id="<?php echo $readerID;?>">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerSchool'];?> read?</font><br>
@@ -402,11 +413,11 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>
   <div class="books collapse" id="<?php echo $result['readerID'];?>">
     <div class="booksLeft">
-      <form action="#<?php echo $readerID;?>" method="post">
+      <form action="#<?php echo $readerID;?>" method="post" onsubmit="return bookTitleValidation(this)" name="<?php echo $readerID;?>" id="<?php echo $readerID;?>">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
         <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
-        <input class="title" type="text" id="titleAdult" name="titleAdult" style="vertical-align: middle">
+        <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
         <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
       </form>
     </div>
