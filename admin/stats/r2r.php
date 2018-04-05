@@ -46,10 +46,11 @@ $stmt = $connection->query($statsQuery);
   foreach($stmt as $result){
     echo "<h3 id='" . strtolower($result['barcode'][0]) . "'>" . $result['barcode'] . "</h3>";
     $accountID = $result['accountID'];
-    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerNumber, r1.readerID, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID";
+    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerNumber, r1.readerID, IFNULL((SELECT COUNT(r2rL.bookTitle) AS totalBooks FROM r2rLog r2rL WHERE r2rL.readerID = r1.readerID), 0) AS totalBooks, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID";
     $classResults = $connection->query($statsQueryReader);
     foreach($classResults as $classResult){
       echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students<br>";
+      echo $classResult['totalBooks'] . " Books read<br>";
       ?>
   <table width="200" border="0">
   <tbody>
