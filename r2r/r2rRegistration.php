@@ -4,6 +4,8 @@ if(isset($_POST['formType'])){
   if($_POST['formType'] == "register"){
     $barcode = $_POST['barcode'];
     unset($_POST['barcode']);
+    $centerName = $_POST['centerName'];
+    unset($_POST['centerName']);
     $branch = $_POST['branch'];
     unset($_POST['branch']);
     unset($_POST['formType']);
@@ -20,14 +22,13 @@ if(isset($_POST['formType'])){
 
     foreach($_POST as $key => $value){
       $firstName = $value['firstName'];
-      $lastName = $value['lastName'];
       $category = $value['category'];
       $ageRange = $value['ageRange'];
       $readerNumber = $value['readerNumber'];
 
       $query = $connection->prepare("INSERT INTO reader (accountID, readerFirstName, readerLastName, readerCategory, readerAgeRange, readerNumber) VALUES (?, ?, ?, ?, ?, ?)");
 
-      $query->bind_param("isssss", $accountID, $firstName, $lastName, $category, $ageRange, $readerNumber);
+      $query->bind_param("isssss", $accountID, $firstName, $centerName, $category, $ageRange, $readerNumber);
 
       $query->execute();
       $query->close();
@@ -132,7 +133,6 @@ else{
             var myform = "<div class='child' id='ch" + childCount + "'>" +
                 "<h3 style='display: inline;'>Class #" + childCount + "</h3><button id='removech" + childCount + "' class='removeButton' type='button' onClick='removeit(ch" + childCount + ")'>Remove</button><br>" +
                 "<input placeholder='Class Name' class='chfirstName forminput' type='text' name='ch" + childCount + "[firstName]' id='ch" + childCount + "[firstName]'><br>"+
-                "<input placeholder='Center Name' class='chlastName forminput' type='text' name='ch" + childCount + "[lastName]' id='ch" + childCount + "[lastName]' value='" + "'></font><br>"+
                 "<input placeholder='Age Range' class='chlastName forminput' type='text' name='ch" + childCount + "[ageRange]' id='ch" + childCount + "[ageRange]' value='" + "' maxlength='6'></font><br>"+
                 "<input placeholder='Number of Students' class='chlastName forminput' type='text' name='ch" + childCount + "[readerNumber]' id='ch" + childCount + "[readerNumber]' value='" + "' maxlength='3'></font>"+
                 "<input type='hidden' name='ch" + childCount + "[category]' id='ch" + childCount + "[category]' value='r2r'>" + 
@@ -490,6 +490,7 @@ function validateForm(){
 
 <body>
 <div class="register">
+  <a href="../admin/stats/r2r.php">Back</a>
 	<h1>Register for KCPL Summer Reading</h1>
 	<p>Fill out the following information so you don't have to fill it out again</p>
   <p id="phoneEmail">Please fill out either phone number or email or both</p>
@@ -499,6 +500,7 @@ function validateForm(){
       ?>
     <input type="hidden" name="formType" id="formType" value="register">
     <input class="forminput" type="text" name="barcode" id="barcode" placeholder="Lookup ID"><br>
+    <input class="forminput" type="text" name="centerName" id="centerName" placeholder="Center Name"><br>
     <input class="forminput" type="hidden" name="branch" id="branch" value="r2r">
     <br><br>
     <?php

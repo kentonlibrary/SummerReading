@@ -18,11 +18,11 @@ $bookTotals['picture'] = 0;
 $bookTotals['easyReader'] = 0;
 $bookTotals['teacher'] = 0;
 
+$titlePrint = 1;
 
 
 
-
-$statsQuery = "SELECT barcode, accountID FROM account WHERE branch = 'r2r' ORDER BY barcode";
+$statsQuery = "SELECT account.barcode, account.accountID, reader.readerLastName FROM account, (SELECT DISTINCT reader.readerLastName, reader.accountID FROM reader) AS reader WHERE account.branch = 'r2r' AND account.accountID = reader.accountID ORDER BY reader.readerLastName";
 $stmt = $connection->query($statsQuery);
 
 ?>
@@ -44,11 +44,16 @@ $stmt = $connection->query($statsQuery);
   }
 
   foreach($stmt as $result){
-    echo "<h3 id='" . strtolower($result['barcode'][0]) . "'>" . $result['barcode'] . "</h3>";
+    $titlePrint = 1;
+    
     $accountID = $result['accountID'];
-    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerNumber, r1.readerID, IFNULL((SELECT COUNT(r2rL.bookTitle) AS totalBooks FROM r2rLog r2rL WHERE r2rL.readerID = r1.readerID), 0) AS totalBooks, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID";
+    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerLastName, r1.readerNumber, r1.readerID, IFNULL((SELECT COUNT(r2rL.bookTitle) AS totalBooks FROM r2rLog r2rL WHERE r2rL.readerID = r1.readerID), 0) AS totalBooks, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID ORDER BY r1.readerFirstName";
     $classResults = $connection->query($statsQueryReader);
     foreach($classResults as $classResult){
+      if($titlePrint == 1){
+        echo "<h3 id='" . strtolower($classResult['readerLastName'][0]) . "'>" . $classResult['readerLastName'] . "</h3>";
+        $titlePrint = 0;
+      }
       echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students<br>";
       echo $classResult['totalBooks'] . " Books read<br>";
       ?>

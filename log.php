@@ -60,19 +60,20 @@ if($_POST['readerCategory'] == 'adult'){ //Starts code loop for younger child
 
 $barcode = $_COOKIE["Barcode"];
 
-$query = "SELECT accountID FROM account WHERE barcode = ?";
+$query = "SELECT accountID, branch FROM account WHERE barcode = ?";
 	
 	if( $stmt = $connection->prepare($query)){
 		$stmt->bind_param("s", $barcode);
 		$stmt->execute();
 		
-		$stmt->bind_result($accountID);
+		$stmt->bind_result($accountID, $branch);
 		$stmt->fetch();
 		
 		if(isset($accountID)){
 			
 			session_start();
 			$_SESSION['accountID'] = $accountID;
+      $_SESSION['branch'] = $branch;
 		}
     elseif( $barcode == "" ){
       header("Location: index.php");
@@ -157,7 +158,11 @@ window.onload = showlast;
   <div class="editInfo" style="text-align: right">
     <a style="color:white;" href="javascript:ShowHelp();">Help &nbsp &nbsp</a>
     <a style="color:white;" href="index.php?logout=true">Logoff &nbsp</a>
+    <?php
+    if( $_SESSION['branch'] != 'r2r'){
+    ?>
     <a style="color:white;" href="information.php">&nbsp Edit Information</a>
+    <?php } ?>
   </div>
   <?php
   foreach( $results as $result){ //Loops through found users in database
@@ -369,7 +374,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
       <form action="#<?php echo $readerID;?>" onsubmit="return bookTitleValidation(this)" method="post" name="<?php echo $readerID;?>" id="<?php echo $readerID;?>">
         <input type="hidden" name="readerID" id="readerID" value="<?php echo $readerID;?>">
         <input type="hidden" name="readerCategory" id="readerCategory" value="<?php echo $result['readerCategory'];?>">
-        <font size="+3">What book did <?php echo $result['readerSchool'];?> read?</font><br>
+        <font size="+3">What book did <?php echo $result['readerFirstName'];?> read?</font><br>
         <input class="title" type="text" id="title" name="title" style="vertical-align: middle">
         <input type="image" style="vertical-align: middle" width="50px" value="submit" src="assets/add.png" alt="submit Button">
       </form>
