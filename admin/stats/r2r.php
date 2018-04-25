@@ -51,7 +51,7 @@ $stmt = $connection->query($statsQuery);
     $classResults = $connection->query($statsQueryReader);
     foreach($classResults as $classResult){
       if($titlePrint == 1){
-        echo "<h3 id='" . strtolower($classResult['readerLastName'][0]) . "'>" . $classResult['readerLastName'] . "</h3>";
+        echo "<h3 id='" . strtolower($classResult['readerLastName'][0]) . "'>" . $classResult['readerLastName'] . " - LookupID: "  . $result['barcode'] . "</h3>";
         $titlePrint = 0;
       }
       echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students<br>";
