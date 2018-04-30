@@ -13,10 +13,14 @@ if(isset($_POST['bookType'])){
     $query->close();
 }
 
-$bookTotals['toddler'] = 0;
-$bookTotals['picture'] = 0;
-$bookTotals['easyReader'] = 0;
-$bookTotals['teacher'] = 0;
+$bookTotals['toddler1'] = 0;
+$bookTotals['picture1'] = 0;
+$bookTotals['easyReader1'] = 0;
+$bookTotals['teacher1'] = 0;
+$bookTotals['toddler2'] = 0;
+$bookTotals['picture2'] = 0;
+$bookTotals['easyReader2'] = 0;
+$bookTotals['teacher2'] = 0;
 
 $titlePrint = 1;
 
@@ -47,7 +51,7 @@ $stmt = $connection->query($statsQuery);
     $titlePrint = 1;
     
     $accountID = $result['accountID'];
-    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerLastName, r1.readerNumber, r1.readerID, IFNULL((SELECT COUNT(r2rL.bookTitle) AS totalBooks FROM r2rLog r2rL WHERE r2rL.readerID = r1.readerID), 0) AS totalBooks, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler' GROUP BY r2rA.awardType), 0) AS toddler, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture' GROUP BY r2rA.awardType), 0) AS picture, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader' GROUP BY r2rA.awardType), 0) AS easyReader, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher' GROUP BY r2rA.awardType), 0) AS teacher FROM reader r1 WHERE r1.accountID = $accountID ORDER BY r1.readerFirstName";
+    $statsQueryReader = "SELECT r1.readerFirstName, r1.readerLastName, r1.readerNumber, r1.readerID, IFNULL((SELECT COUNT(r2rL.bookTitle) AS totalBooks FROM r2rLog r2rL WHERE r2rL.readerID = r1.readerID), 0) AS totalBooks, IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler1' GROUP BY r2rA.awardType), 0) AS toddler1, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture1' GROUP BY r2rA.awardType), 0) AS picture1, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader1' GROUP BY r2rA.awardType), 0) AS easyReader1, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher1' GROUP BY r2rA.awardType), 0) AS teacher1,IFNULL((SELECT SUM(r2rA.booksAwarded) AS toddler FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'toddler2' GROUP BY r2rA.awardType), 0) AS toddler2, IFNULL((SELECT SUM(r2rA.booksAwarded) AS picture FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'picture2' GROUP BY r2rA.awardType), 0) AS picture2, IFNULL((SELECT SUM(r2rA.booksAwarded) AS easyReader FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'easyReader2' GROUP BY r2rA.awardType), 0) AS easyReader2, IFNULL((SELECT SUM(r2rA.booksAwarded) AS teacher FROM r2rAward r2rA WHERE r2rA.readerID = r1.readerID AND r2rA.awardType = 'teacher2' GROUP BY r2rA.awardType), 0) AS teacher2 FROM reader r1 WHERE r1.accountID = $accountID ORDER BY r1.readerFirstName";
     $classResults = $connection->query($statsQueryReader);
     foreach($classResults as $classResult){
       if($titlePrint == 1){
@@ -57,56 +61,99 @@ $stmt = $connection->query($statsQuery);
       echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students<br>";
       echo $classResult['totalBooks'] . " Books read<br>";
       ?>
-  <table width="200" border="0">
-  <tbody>
+  <table border="0">
+
     <tr>
       <form action="" method="post">
-      <td>Toddler</td>
+      <td>Toddler Round 1</td>
       <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
-      <input type="hidden" name="bookType" id="bookType" value="toddler">
+      <input type="hidden" name="bookType" id="bookType" value="toddler1">
       <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
       <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
-      <td><?php echo "Total Given: " . $classResult['toddler']; ?></td>
+      <td><?php echo "Total Given: " . $classResult['toddler1']; ?></td>
+      </form>
+      <form action="" method="post">
+      <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <td>Toddler Round 2</td>
+      <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
+      <input type="hidden" name="bookType" id="bookType" value="toddler2">
+      <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
+      <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
+      <td><?php echo "Total Given: " . $classResult['toddler2']; ?></td>
       </form>
     </tr>
     <tr>
       <form action="" method="post">
-      <td>Picture</td>
+      <td>Picture Round 1</td>
       <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
-      <input type="hidden" name="bookType" id="bookType" value="picture">
+      <input type="hidden" name="bookType" id="bookType" value="picture1">
       <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
       <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
-      <td><?php echo "Total Given: " . $classResult['picture']; ?></td>
+      <td><?php echo "Total Given: " . $classResult['picture1']; ?></td>
+      </form>
+      <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+         <form action="" method="post">
+      <td>Picture Round 2</td>
+      <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
+      <input type="hidden" name="bookType" id="bookType" value="picture2">
+      <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
+      <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
+      <td><?php echo "Total Given: " . $classResult['picture2']; ?></td>
       </form>
     </tr>
         <tr>
       <form action="" method="post">
-      <td>Easy Reader</td>
+      <td>Easy Reader Round 1</td>
       <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
-      <input type="hidden" name="bookType" id="bookType" value="easyReader">
+      <input type="hidden" name="bookType" id="bookType" value="easyReader1">
       <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
       <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
-      <td><?php echo "Total Given: " . $classResult['easyReader']; ?></td>
+      <td><?php echo "Total Given: " . $classResult['easyReader1']; ?></td>
+      </form>
+      <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <form action="" method="post">
+      <td>Easy Reader Round 2</td>
+      <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
+      <input type="hidden" name="bookType" id="bookType" value="easyReader2">
+      <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
+      <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
+      <td><?php echo "Total Given: " . $classResult['easyReader2']; ?></td>
       </form>
     </tr>
      <tr>
       <form action="" method="post">
-      <td>Teacher</td>
+      <td>Teacher Round 1</td>
       <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
-      <input type="hidden" name="bookType" id="bookType" value="teacher">
+      <input type="hidden" name="bookType" id="bookType" value="teacher1">
       <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
       <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
-      <td><?php echo "Total Given: " . $classResult['teacher']; ?></td>
+      <td><?php echo "Total Given: " . $classResult['teacher1']; ?></td>
+      </form>
+      <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <form action="" method="post">
+      <td>Teacher Round 2</td>
+      <input type="hidden" name="readerID" id="readerID" value="<?php echo $classResult['readerID']; ?>">
+      <input type="hidden" name="bookType" id="bookType" value="teacher2">
+      <td><input type="text" name="numberOfBooks" id="numberOfBooks" size="2" maxlength="2"></td>
+      <td><input type="image" style="vertical-align: middle" width="25px" value="submit" src="../../assets/add.png" alt="submit Button"></td>
+      <td><?php echo "Total Given: " . $classResult['teacher2']; ?></td>
       </form>
     </tr>
-  </tbody>
 </table>
 
       <?php
-      $bookTotals['toddler'] += $classResult['toddler'];
-      $bookTotals['picture'] += $classResult['picture'];
-      $bookTotals['easyReader'] += $classResult['easyReader'];
-      $bookTotals['teacher'] += $classResult['teacher'];
+      $bookTotals['toddler1'] += $classResult['toddler1'];
+      $bookTotals['picture1'] += $classResult['picture1'];
+      $bookTotals['easyReader1'] += $classResult['easyReader1'];
+      $bookTotals['teacher1'] += $classResult['teacher1'];
+      $bookTotals['toddler2'] += $classResult['toddler2'];
+      $bookTotals['picture2'] += $classResult['picture2'];
+      $bookTotals['easyReader2'] += $classResult['easyReader2'];
+      $bookTotals['teacher2'] += $classResult['teacher2'];
     }
   }
   $stmt->close();
