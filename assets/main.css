@@ -70,6 +70,8 @@ html, body {
   color: white;
   text-align: left;
   font-size: 12pt;
+  height: 90vh;
+  overflow: scroll;
 }
 
 .forgotPassword{

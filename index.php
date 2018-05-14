@@ -58,7 +58,7 @@ if(isset($_COOKIE["Barcode"])){
 	</div>
   <div id="left"> <!-- More information panel on left side of the page -->
     <div class="details">
-      Summer Reading Club Guidelines 
+      <h1>Summer Reading Club Guidelines<h1>
       <h2>CHILDREN (Ages 2-12)</h2>
       Pick up a book log at the Library or register at kentonlibrary.org/src and start reading or listening to books.
       After 5 books or 2.5 hours of reading, return the log to the Library or enter online to receive a book prize.
@@ -71,6 +71,9 @@ if(isset($_COOKIE["Barcode"])){
       Read or listen to books, audio books, e-books and periodicals to enter.
       Enter at kentonlibrary.org/src or by visiting a branch.
       Prizes awarded bi-weekly. 
+      <h2>Racing to Read</h2>
+      Read 30 books to your class, children will collect the book prize to take home to start their personal library! Their teacher will also get a FREE book to add to the classroom library.  Read another 30 books to your class, children may collect 2nd free book to take home (while book supplies last).  Prizes are delivered on Racing to Read’s regularly scheduled June & July visits to your centers.  **Extra prizes will not be left for children who are not at school on prize day. Children must be present to get a prize.  
+
     </div>
   </div>
   
