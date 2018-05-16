@@ -4,7 +4,7 @@ padding: 0;
 }
 body {
 font: 71%/1.5 Verdana, Sans-Serif;
-background: #eee;
+background: #5C176B;
 }
 #container {
 margin: 100px auto;
@@ -23,7 +23,7 @@ list-style: none;
     height: 80px;
     line-height: 80px;
     text-align: center;
-    background: #fff;
+    background: #B16FAE;
     border: 1px solid #f9f9f9;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;

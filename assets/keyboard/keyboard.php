@@ -1,4 +1,3 @@
-
 <div id="container">
     <ul id="keyboard">
         <li class="symbol">1</li>

@@ -26,9 +26,18 @@ if(!isset($_SESSION['event'])){
   ?>
   <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" src="/assets/onscreenkeyboard/css/bootstrap.min.css">
+    <link rel="stylesheet" src="/assets/onscreenkeyboard/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" src="/assets/onscreenkeyboard/css/main.css">
+    <link rel="stylesheet" href="/assets/onscreenkeyboard/css/jsKeyboard.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="/assets/onscreenkeyboard/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
   <body>
     <form method="post" action="">
-    Event Name<input type="text" name="eventName" id="eventName">
+    Event Name<input type="text" name="eventName" id="eventName" class="input">
     Branch<select name="branch" id="branch">
           <option value="Covington">Covington</option>
           <option value="Durr">William E. Durr</option>
@@ -44,6 +53,12 @@ if(!isset($_SESSION['event'])){
     <input type="hidden" name="adult" id="adult" value="0">
       <label><input type="checkbox" name="adult" id="adult" value="1">Adult<br></label>
     <input type="submit">
+      <div id="virtualKeyboard"></div>
+      
+      <script src="/assets/onscreenkeyboard/js/vendor/jquery-1.9.1.min.js"></script>
+      <script src="/assets/onscreenkeyboard/js/vendor/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/assets/onscreenkeyboard/js/jsKeyboard.js"></script>
+      <script src="/assets/onscreenkeyboard/js/main.js"></script>
   </body>
 </html>
 <?php
@@ -103,14 +118,19 @@ else{
     display: none;
   }
   
+  .cardScan{
+    height: 42px;
+    font-size: 40px;
+    background: #B16FAE;
+  }
 
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="">
-<div style="text-align: center; padding-top: 20%; ">
-<h2>Scan Library Card</h2>
+<div style="text-align: center; padding-top: 20px; ">
+<h2 style="color: #B16FAE; font-size: 56px;">Scan Library Card or Enter below</h2><br>
 
 <!-- Trigger/Open The Modal -->
   <form action="javascript:openModal()" method="post" name="card" id="card">
