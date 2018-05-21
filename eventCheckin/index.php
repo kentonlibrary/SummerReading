@@ -36,6 +36,7 @@ if(!isset($_SESSION['event'])){
     <script type="text/javascript" src="/assets/onscreenkeyboard/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body>
+		<?php echo $_SERVER['HTTP_CLIENT_IP']; ?>
     <form method="post" action="">
     Event Name<input type="text" name="eventName" id="eventName" class="input">
     Branch<select name="branch" id="branch">
