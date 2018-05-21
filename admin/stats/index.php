@@ -62,14 +62,14 @@
   //                               //
   ///////////////////////////////////
   //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY olderChildLog.readerID"); 
   $covingtonChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $covingtonChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/5) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY youngChildLog.readerID"); 
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $covingtonChildLogsTotal +=$individualYoungLogs['logs'];
   }
@@ -87,14 +87,14 @@
   //                                //
   ////////////////////////////////////
     //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY olderChildLog.readerID"); 
   $erlangerChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $erlangerChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/5) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY youngChildLog.readerID"); 
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $erlangerChildLogsTotal +=$individualYoungLogs['logs'];
   }
@@ -111,13 +111,13 @@
   //                                //
   ////////////////////////////////////
     //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/150) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY olderChildLog.readerID"); 
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $durrChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/5) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY youngChildLog.readerID"); 
   $durrChildLogsTotal = 0;
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $durrChildLogsTotal +=$individualYoungLogs['logs'];

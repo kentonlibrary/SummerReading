@@ -55,10 +55,10 @@ $stmt = $connection->query($statsQuery);
     $classResults = $connection->query($statsQueryReader);
     foreach($classResults as $classResult){
       if($titlePrint == 1){
-        echo "<h3 id='" . strtolower($classResult['readerLastName'][0]) . "'>" . $classResult['readerLastName'] . " - LookupID: "  . $result['barcode'] . "</h3>";
+        echo "<h3 id='" . strtolower($classResult['readerLastName'][0]) . "'>" . $classResult['readerLastName'] . " - LookupID: "  . $result['barcode'] . " <a href='r2rEdit.php?accountID=" . $accountID . "' onclick=\"window.open('r2rEdit.php?account&accountID=" . $accountID . "', 'newwindow', 'width=300,height=250'); return false;\" >Edit</a></h3>";
         $titlePrint = 0;
       }
-      echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students<br>";
+      echo "<br>" . $classResult['readerFirstName'] . "- " . $classResult['readerNumber'] . " Students <a href='r2rEdit.php?accountID=" . $accountID . "' onclick=\"window.open('r2rEdit.php?class&accountID=" . $classResult['readerID'] . "', 'newwindow', 'width=300,height=250'); return false;\" >Edit</a><br>";
       echo $classResult['totalBooks'] . " Books read<br>";
       ?>
   <table border="0">
