@@ -1,6 +1,6 @@
 <?php
 include('assets/scripts.php'); //File with connection information and functions
-//Comment
+
 if(isset($_GET['logout'])){
   unset($_COOKIE['Barcode']);
   setcookie("Barcode", '', time() - 3600);
