@@ -35,8 +35,7 @@ if(!isset($_SESSION['event'])){
     <link rel="stylesheet" href="/assets/onscreenkeyboard/css/jsKeyboard.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="/assets/onscreenkeyboard/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
-  <body>
-	<?php echo $_SERVER['REMOTE_ADDR']; ?>
+  <body style="padding: 30px;">
 		<form method="post" action="">
     Event Name<input type="text" name="eventName" id="eventName" class="input">
     Branch<select name="branch" id="branch">
@@ -129,7 +128,7 @@ else{
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body style="">
+<body style="cursor: none;">
 <div style="text-align: center; padding-top: 20px; ">
 <h2 style="color: #B16FAE; font-size: 56px;">Scan Library Card or Enter below</h2><br>
 
