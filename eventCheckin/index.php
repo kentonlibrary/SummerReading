@@ -69,7 +69,7 @@ if(!isset($_SESSION['event'])){
       <label><input type="checkbox" name="teen" id="teen" value="1">Teen<br></label>
     <input type="hidden" name="adult" id="adult" value="0">
       <label><input type="checkbox" name="adult" id="adult" value="1">Adult<br></label>
-    <input type="submit" style="width:300px; height:300px;">
+    <input type="submit" style="width: 150px;; height:75px;">
       <div id="virtualKeyboard"></div>
       
       <script src="/assets/onscreenkeyboard/js/vendor/jquery-1.9.1.min.js"></script>
