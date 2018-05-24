@@ -34,6 +34,23 @@ if(!isset($_SESSION['event'])){
     <link rel="stylesheet" src="/assets/onscreenkeyboard/css/main.css">
     <link rel="stylesheet" href="/assets/onscreenkeyboard/css/jsKeyboard.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="/assets/onscreenkeyboard/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<style>
+			input[type='checkbox']{
+				    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+			}
+			input[type='checkbox']:checked {
+    background: #abd;
+}
+			
+			label{
+				font-size: 24px;
+			}
+		</style>
   </head>
   <body style="padding: 30px;">
 		<form method="post" action="">
@@ -52,7 +69,7 @@ if(!isset($_SESSION['event'])){
       <label><input type="checkbox" name="teen" id="teen" value="1">Teen<br></label>
     <input type="hidden" name="adult" id="adult" value="0">
       <label><input type="checkbox" name="adult" id="adult" value="1">Adult<br></label>
-    <input type="submit">
+    <input type="submit" style="width:300px; height:300px;">
       <div id="virtualKeyboard"></div>
       
       <script src="/assets/onscreenkeyboard/js/vendor/jquery-1.9.1.min.js"></script>
