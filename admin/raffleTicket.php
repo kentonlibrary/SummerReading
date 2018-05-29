@@ -49,7 +49,9 @@
    jsPrintSetup.print();
    // next commands
   
+	window.print();
   window.close();
+	
 </script> 
 </body>
 </html>
