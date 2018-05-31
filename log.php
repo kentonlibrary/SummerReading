@@ -316,7 +316,7 @@ window.onload = showlast;
 </div>
     <div class="booksRight">
         <div class="bookContainer">
-          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in this week drawing.";?></font><br>
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entries in this week drawing.";?></font><br>
           <font color="#F26722" size="+2">
           <?php
           while($loggedBooks['count'] > 0){
@@ -428,7 +428,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
     </div>
     <div class="booksRight">
         <div class="bookContainer">
-          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entry's in Summer Reading.";?></font><br>
+          <font color="black" size="+2"><?php echo $result['readerFirstName'] . " has " . $loggedBooks['count'] . " entries in Summer Reading.";?></font><br>
           <font color="#00B0DB" size="+2">
           <?php
           while($loggedBooks['count'] > 0){
