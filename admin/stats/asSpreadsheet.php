@@ -17,7 +17,7 @@ $file = fopen('php://output', 'w');
 fputcsv($file, array('First Name', 'Last Name', 'Age', 'Branch', 'Phone Number', 'Email', 'Book Read'));
 
 
-$query = "SELECT reader.readerFirstName, reader.readerLastName, reader.readerAgeRange, account.branch, account.phoneNumber, account.emailAddress, adultLog.title FROM reader, account, adultLog WHERE reader.accountID = account.accountID AND reader.readerID = adultLog.readerID AND reader.readerCategory = 'adult'";
+$query = "SELECT reader.readerFirstName, reader.readerLastName, reader.readerAgeRange, account.branch, account.phoneNumber, account.emailAddress, adultLog.title , adultLog.timestamp FROM reader, account, adultLog WHERE reader.accountID = account.accountID AND reader.readerID = adultLog.readerID AND reader.readerCategory = 'adult'";
 
 if($rows = mysqli_query($connection, $query)){
   //loop over the rows, outputting them
