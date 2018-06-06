@@ -21,16 +21,14 @@ if(isset($_POST['submit'])){
 	$accountUpdate = "UPDATE account SET barcode = '$barcode', phoneNumber = '$phoneNumber', emailAddress = '$emailAddress', branch = '$branch' WHERE accountID = $accountID";
 	
 	$readerUpdate = "UPDATE reader SET readerFirstName = '$firstName', readerLastName = '$lastName', readerBirthDate = '$birthDate', readerCategory = '$category', readerAgeRange = '$ageRange', readerSchool = '$school', readerGrade = '$grade', readerNumber = '$number' WHERE readerID = $readerID";
-	
-	echo $accountUpdate . "<br>";
-	echo $readerUpdate . "<br>";
+
 	
 	mysqli_query($connection, $accountUpdate);
 	mysqli_query($connection, $readerUpdate);
 	
 	
 	
-	//header("Location:lookup.php");
+	header("Location:lookup.php");
 }
 
 
