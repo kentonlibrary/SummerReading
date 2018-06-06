@@ -1,9 +1,8 @@
-<?
+<?php
 include('../assets/scripts.php');
 if(isset($_COOKIE['Branch']) == false){
   header('Location: index.php');
 }
-
 $branch = $_COOKIE['Branch'];
 
 ?>
