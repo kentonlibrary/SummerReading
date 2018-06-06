@@ -89,7 +89,8 @@ foreach($results as $result){
 
       $remainingBooks = $totalBooks - $totalAwarded;
       $bookAward = $totalAwarded;
-      while($remainingBooks >= 5){
+			$totalBooksNeeded = 5;
+      while($remainingBooks >= $totalBooksNeeded){
         if( $bookAward == 0 ){
         ?>
           <input onChange="level1('<?php echo $result['readerID'] . "', '" . $readerCategory; ?>')" type="checkbox" id="<?php echo $readerID . 'book' . $bookAward?>" class="hiddenCheckbox" style="">
@@ -113,8 +114,9 @@ foreach($results as $result){
           <img src="../assets/challenge.jpg" height="80px"></label>
         <?php
         $bookAward++;
+				$totalBooksNeeded = 10;
       }
-          $remainingBooks = $remainingBooks - 5;
+          $remainingBooks = $remainingBooks - $totalBooksNeeded;
       }
     }
 }

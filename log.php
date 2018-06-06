@@ -219,7 +219,7 @@ window.onload = showlast;
       <?php 
         if($dn == ""){
       ?>
-      <p>Come claim your prize</p>
+      <p>Come to a branch for your next step</p>
       <?php
       }
         $complete--; //Subtract 1 from the added images loop counter
@@ -251,11 +251,17 @@ window.onload = showlast;
       $rewarded = 0;
       $complete = 0;
       $remainder = 0;
+			$totalBooksNeeded = 5;
+			$usingLong = false;
       
       while($loggedBooks > 0){ //While books still need placed on shelf
-        if($loggedBooks >= 5){ //If there are more than 5 books
+				if($complete > 1){ 
+						$totalBooksNeeded = 10;
+						$usingLong = true;
+				}
+        if($loggedBooks >= $totalBooksNeeded){ //If there are more than 5 books
           $complete += 1; //Add 1 to full shelf counter
-          $loggedBooks = $loggedBooks - 5; //Substract 5 books from unprocessed books
+          $loggedBooks = $loggedBooks - $totalBooksNeeded; //Substract 5 books from unprocessed books
         }
         else{ //If there are less than 5 books remaining
           $remainder = $loggedBooks;
@@ -276,23 +282,69 @@ window.onload = showlast;
     </div>
     <div class="booksRight">
       <?php
-      while ( $complete > 0){ //While there are completed shelves that need to be shown
-        if( $prized > 0 ){ //If not all prized awarded have been marked
-          $dn = "DN";
-          $prized--;
-        }
-        else{ //If all prizes have been marked
-          $dn = ""; //Do not mark out the next image
-        }
-       ?>
-        <img src="assets/book5.png" height="75px" alt="book" class="book <?php echo $dn; ?>">
-      <?php
-        $complete--; //Subtract 1 from completed loop
-      };
-      if($remainder > 0){ //If there is a remainder of books left
-      ?>
-      <img src="assets/book<?php echo $remainder;?>.png" height="75px" alt="book" class="book"> <!-- show image that corrisponds with the remaining books -->
-      <?php } ?>
+			if(!$usingLong){
+				while ( $complete > 0){ //While there are completed shelves that need to be shown
+					if( $prized > 0 ){ //If not all prized awarded have been marked
+						$dn = "DN";
+						$prized--;
+					}
+					else{ //If all prizes have been marked
+						$dn = ""; //Do not mark out the next image
+					}
+				 ?>
+					<img src="assets/book5.png" height="75px" alt="book" class="book <?php echo $dn; ?>">
+				<?php
+					$complete--; //Subtract 1 from completed loop
+				};
+				if($remainder > 0){ //If there is a remainder of books left
+				?>
+				<img src="assets/book<?php echo $remainder;?>.png" height="75px" alt="book" class="book"> <!-- show image that corrisponds with the remaining books -->
+				<?php } 
+			}
+			if($usingLong){
+				while ( $complete > 0){//While there are completed shelves that need to be shown
+					if($complete > 2){
+						if( $prized > 0 ){ //If not all prized awarded have been marked
+							$dn = "DN";
+							$prized--;
+						}
+						else{ //If all prizes have been marked
+							$dn = ""; //Do not mark out the next image
+						}
+					 ?>
+						<img src="assets/Lbook10.png" height="75px" alt="book" class="book <?php echo $dn; ?>">
+					<?php
+						$complete--; //Subtract 1 from completed loop
+					}
+					if($complete <= 2){
+						if( $prized > 0 ){ //If not all prized awarded have been marked
+							$dn = "DN";
+							$prized--;
+						}
+						else{ //If all prizes have been marked
+							$dn = ""; //Do not mark out the next image
+						}
+					 ?>
+						<img src="assets/book5.png" height="75px" alt="book" class="book <?php echo $dn; ?>">
+					<?php
+						$complete--; //Subtract 1 from completed loop
+					}
+				}
+				
+				if($usingLong){
+					if($remainder > 0){ //If there is a remainder of books left
+					?>
+					<img src="assets/Lbook<?php echo $remainder;?>.png" height="75px" alt="book" class="book"> <!-- show image that corrisponds with the remaining books -->
+					<?php } 
+				}
+				else{
+					if($remainder > 0){ //If there is a remainder of books left
+					?>
+					<img src="assets/book<?php echo $remainder;?>.png" height="75px" alt="book" class="book"> <!-- show image that corrisponds with the remaining books -->
+					<?php } 
+				}
+			}
+			?>
     </div> 
   </div>
 <?php
