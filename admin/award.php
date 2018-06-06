@@ -23,6 +23,7 @@ $branch = $_COOKIE['Branch'];
   <div class="main">
     <h3><a href="stats/index.php" target="_blank">Statistics</a></h3>
 		<h3><a href="raffleTicket2.php" target="_blank">Blank Ticket</a></h3>
+		<h3><a href="stats/lookup.php" target="_blank">Lookup</a></h3>
     <form action="javascript:loadDoc()" method="post">
       <input type="text" name="cardNumber" id="cardNumber" placeholder="Library Card" class="cardScan" maxlength="14" autofocus>
     </form>
