@@ -14,10 +14,10 @@ header('Expires: 0');
 $file = fopen('php://output', 'w');
  
 // save the column headers
-fputcsv($file, array('First Name', 'Last Name', 'Birthday', 'Branch', 'Phone Number', 'Email', 'Book Read', 'Rating', 'Timestamp'));
+fputcsv($file, array('First Name', 'Last Name', 'Birthday', 'Grade', 'School', 'Branch', 'Phone Number', 'Email', 'Book Read', 'Rating', 'Timestamp'));
 
 
-$query = "SELECT reader.readerFirstName, reader.readerLastName, reader.readerbirthDate, account.branch, account.phoneNumber, account.emailAddress, teenLog.title, teenLog.rating, teenLog.timeStamp FROM reader, account, teenLog WHERE reader.accountID = account.accountID AND reader.readerID = teenLog.readerID AND reader.readerCategory = 'teen'";
+$query = "SELECT reader.readerFirstName, reader.readerLastName, reader.readerbirthDate, reader.readerGrade, reader.readerSchool, account.branch, account.phoneNumber, account.emailAddress, teenLog.title, teenLog.rating, teenLog.timeStamp FROM reader, account, teenLog WHERE reader.accountID = account.accountID AND reader.readerID = teenLog.readerID AND reader.readerCategory = 'teen'";
 
 if($rows = mysqli_query($connection, $query)){
   //loop over the rows, outputting them
