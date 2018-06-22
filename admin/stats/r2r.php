@@ -160,25 +160,38 @@ $stmt = $connection->query($statsQuery);
   ?>
   <h2>Grand Totals</h2>
 <table>
-  <tbody>
-        <tr>
-      <td>Toddler</td>
-      <td><?php echo "Total Given: " . $bookTotals['toddler']; ?></td>
+	  <tr>
+      <td>Toddler Round 1</td>
+      <td><?php echo "Total Given: " . $bookTotals['toddler1']; ?></td>
+			<td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <td>Toddler Round 2</td>
+      <td><?php echo "Total Given: " . $bookTotals['toddler2']; ?></td>
     </tr>
     <tr>
-      <td>Picture</td>
-      <td><?php echo "Total Given: " . $bookTotals['picture']; ?></td>
-    </tr>
-    <tr>
-      <td>Easy Reader</td>
-      <td><?php echo "Total Given: " . $bookTotals['easyReader']; ?></td>
+      <td>Picture Round 1</td>
+      <td><?php echo "Total Given: " . $bookTotals['picture1']; ?></td>
+			<td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <td>Picture Round 2</td>
+      <td><?php echo "Total Given: " . $bookTotals['picture2']; ?></td>
     </tr>
      <tr>
-      <td>Teacher</td>
-      <td><?php echo "Total Given: " . $bookTotals['teacher']; ?></td>
-      </form>
+      <td>Easy Reader Round 1</td>
+      <td><?php echo "Total Given: " . $bookTotals['easyReader1']; ?></td>
+			 <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <td>Easy Reader Round 2</td>
+      <td><?php echo "Total Given: " . $bookTotals['easyReader2']; ?></td>
     </tr>
-  </tbody>
+     <tr>
+		  <td>Teacher Round 1</td>
+      <td><?php echo "Total Given: " . $bookTotals['teacher1']; ?></td>
+			 <td width="15"></td>
+      <td width="15" style="border-left: 5px solid black"></td>
+      <td>Teacher Round 2</td>
+      <td><?php echo "Total Given: " . $bookTotals['teacher2']; ?></td>
+    </tr>
 </table>
 </body>
 </html>
