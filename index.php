@@ -49,7 +49,7 @@ if(isset($_COOKIE["Barcode"])){
     <div id="login"> <!-- Login form for website -->
       <img src="assets/KCPL_Logo-Horiz_Color.png" width="90%" alt="logo"/>
       <form action="" method="post">
-        <input class="loginField" type="text" placeholder="Library Card Number" maxlength="14" name="card" id="card"><br>
+        <input class="loginField" type="text" placeholder="Library Card/Phone Number" maxlength="14" name="card" id="card"><br>
 <br>
         <input class="loginField" type="submit" value="Login" id="loginButton" name="loginButton"><br><br>
     </form>
