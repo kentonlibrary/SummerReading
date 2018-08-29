@@ -194,7 +194,7 @@ else{
                 <input type='hidden' name='<?php echo $readerID; ?>[readerSave]' id='<?php echo $readerID; ?>[readerSave]' value="existing">
                 <input placeholder='First Name' class='chfirstName forminput' type='text' name='<?php echo $readerID; ?>[firstName]' id='<?php echo $readerID; ?>[firstName]' value="<?php echo $readerFirstName ?>"><br>
                 <input placeholder='Last Name' class='chlastName forminput' type='text' name='<?php echo $readerID; ?>[lastName]' id='<?php echo $readerID; ?>[lastName]' value='<?php echo $readerLastName ?>'></font><br>
-                <font class='label' id='Labelch<?php echo $readerID; ?>[category]'>Reading Program: <select name='<?php echo $readerID; ?>[category]' id='<?php echo $readerID; ?>[category]' onChange='readingProgram(this)'>
+                <font class='label' id='Labelch<?php echo $readerID; ?>[category]'>Reading Program: <br><select class='forminput' name='<?php echo $readerID; ?>[category]' id='<?php echo $readerID; ?>[category]' onChange='readingProgram(this)'>
                 <option value ='' selected disabled>Select a Program</option>
                 <option value='olderChild' <?php if($readerCategory == "olderChild"){echo "Selected";} ?>>Track Time(Older Child)</option>
                 <option value='youngChild' <?php if($readerCategory == "youngChild"){echo "Selected";} ?>>Track Books(Younger Child)</option>
@@ -204,7 +204,7 @@ else{
                 </font><br><br>
                 </font><br>
                 <font class='label birthday' id='Labelch<?php echo $readerID; ?>[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='<?php echo $readerID; ?>[birthMonth]' id='<?php echo $readerID; ?>[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)' value="<?php echo $readerBirthMonth; ?>"><input class='birthday chbirthDay forminput' type='text' name='<?php echo $readerID; ?>[birthDay]' id='<?php echo $readerID; ?>[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'  value="<?php echo $readerBirthDay; ?>"><input class='birthday chbirthYear forminput' type='text' name='<?php echo $readerID; ?>[birthYear]' id='<?php echo $readerID; ?>[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)' value="<?php echo $readerBirthYear; ?>"></font><br class='birthday' id='br<?php echo $readerID; ?>[birthday]'>
-				 <font class='label grade' id='Labelch<?php echo $readerID; ?>[grade]'>Last Grade Completed: <select name='<?php echo $readerID; ?>[grade]' id='<?php echo $readerID; ?>[grade]' class='grade'>
+				 <font class='label grade' id='Labelch<?php echo $readerID; ?>[grade]'>Last Grade Completed: <br> <select class='forminput' name='<?php echo $readerID; ?>[grade]' id='<?php echo $readerID; ?>[grade]' class='grade'>
                 <option value='' selected disabled>Select a Grade</option>
                 <option value='2 Year Old' <?php if($readerGrade == "2 Year Old"){echo "Selected";} ?>>2 Year Old</option>
                 <option value='3 Year Old' <?php if($readerGrade == "3 Year Old"){echo "Selected";} ?>>3 Year Old</option>

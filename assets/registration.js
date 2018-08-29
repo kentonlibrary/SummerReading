@@ -12,7 +12,7 @@ var submitReadyChild = false;
                 "<input type='hidden' name='" + childCount + "[readerSave]' id='" + childCount + "[readerSave]' value='new'>"+
                 "<input placeholder='First Name' class='chfirstName forminput' type='text' name='" + childCount + "[firstName]' id='" + childCount + "[firstName]'><br>"+
                 "<input placeholder='Last Name' class='chlastName forminput' type='text' name='" + childCount + "[lastName]' id='" + childCount + "[lastName]' value='" + "'></font><br>"+
-                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <select name='" + childCount + "[category]' id='" + childCount + "[category]' onChange='readingProgram(this)'>" + 
+                "<font class='label' id='Labelch" + childCount + "[category]'>Reading Program: <br><select class='forminput' name='" + childCount + "[category]' id='" + childCount + "[category]' onChange='readingProgram(this)'>" + 
                 "<option value ='' selected disabled>Select a Program</option>" +
                 "<option value='olderChild'>Track Time(Older Child)</option>" +
                 "<option value='youngChild'>Track Books(Younger Child)</option>" +
@@ -22,7 +22,7 @@ var submitReadyChild = false;
                 "</font><br><br>"+
                 "</font><br>"+
                 "<font class='label birthday' id='Labelch" + childCount + "[birthday]'>Birthday: <input class='birthday chbirthMonth forminput' type='text' name='" + childCount + "[birthMonth]' id='" + childCount + "[birthMonth]' placeholder='MM' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthDay forminput' type='text' name='" + childCount + "[birthDay]' id='" + childCount + "[birthDay]' placeholder='DD' size='2' maxlength='2' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'><input class='birthday chbirthYear forminput' type='text' name='" + childCount + "[birthYear]' id='" + childCount + "[birthYear]' placeholder='YYYY' size='4' maxlength='4' onKeyUp='autoTab(this)' onKeyPress='return isNumberKey(event)'></font><br class='birthday' id='br" + childCount + "[birthday]'>"+
-				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <select name='" + childCount + "[grade]' id='" + childCount + "[grade]' class='grade'>" + 
+				 "<font class='label grade' id='Labelch" + childCount + "[grade]'>Last Grade Completed: <br><select class='forminput' name='" + childCount + "[grade]' id='" + childCount + "[grade]' class='grade'>" + 
                 "<option value='' selected disabled>Select a Grade</option>" +
                 "<option value='2 Year Old'>2 Year Old</option>" +
                 "<option value='3 Year Old'>3 Year Old</option>" +
