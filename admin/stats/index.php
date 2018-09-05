@@ -112,6 +112,14 @@
   foreach( $erlangerPatrons as $erlangerPatron ){
     $erlangerPatronsTotal +=$erlangerPatron['count'];
   }
+	
+		
+	   //Total Child Patrons Signed up
+  $erlangerChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $erlangerChildPatronsTotal = 0;
+  foreach( $erlangerChildPatrons as $erlangerChildPatron ){
+    $erlangerChildPatronsTotal +=$erlangerChildPatron['count'];
+  }
   ////////////////////////////////////
   //                                //
   //          Durr                  //
@@ -135,6 +143,13 @@
   $durrPatronsTotal = 0;
   foreach( $durrPatrons as $durrPatron ){
     $durrPatronsTotal +=$durrPatron['count'];
+  }
+	
+	   //Total Child Patrons Signed up
+  $durrChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $durrChildPatronsTotal = 0;
+  foreach( $durrChildPatrons as $durrChildPatron ){
+    $durrChildPatronsTotal +=$durrChildPatron['count'];
   }
   
   
@@ -170,10 +185,10 @@
       <p>Durr: <?php echo $awards['Durr'];?></p>
   <div>
 		    <div id="totalPatrons">
-      <h3>Total Patrons Signed Up: <?php echo $awards['Covington'] + $awards['Durr'] + $awards['Erlanger'];?></h3>
+      <h3>Total Patrons Signed Up: <?php echo $covingtonChildPatronsTotal + $durrChildPatronsTotal + $erlangerChildPatronsTotal;?></h3>
       <p>Covington: <?php echo $covingtonChildPatronsTotal;?></p>
-      <p>Erlanger: </p>
-      <p>Durr: </p>
+      <p>Erlanger: <?php echo $erlangerChildPatronsTotal;?></p>
+      <p>Durr: <?php echo $durrChildPatronsTotal;?></p>
   <div>
     
 <h2>Teen Stats</h2>
