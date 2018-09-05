@@ -80,6 +80,13 @@
   foreach( $covingtonPatrons as $covingtonPatron ){
     $covingtonPatronsTotal +=$covingtonPatron['count'];
   }
+	
+	   //Total Child Patrons Signed up
+  $covingtonChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $covingtonChildPatronsTotal = 0;
+  foreach( $covingtonChildPatrons as $covingtonChildPatron ){
+    $covingtonChildPatronsTotal +=$covingtonChildPatron['count'];
+  }
   
   ////////////////////////////////////
   //                                //
@@ -161,6 +168,12 @@
       <p>Covington: <?php echo $awards['Covington'];?></p>
       <p>Erlanger: <?php echo $awards['Erlanger'];?></p>
       <p>Durr: <?php echo $awards['Durr'];?></p>
+  <div>
+		    <div id="totalPatrons">
+      <h3>Total Patrons Signed Up: <?php echo $awards['Covington'] + $awards['Durr'] + $awards['Erlanger'];?></h3>
+      <p>Covington: <?php echo $covingtonChildPatronsTotal;?></p>
+      <p>Erlanger: </p>
+      <p>Durr: </p>
   <div>
     
 <h2>Teen Stats</h2>
