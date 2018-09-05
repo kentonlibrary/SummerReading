@@ -87,6 +87,11 @@
   foreach( $covingtonChildPatrons as $covingtonChildPatron ){
     $covingtonChildPatronsTotal +=$covingtonChildPatron['count'];
   }
+	
+	//Total Patrons completed program
+	$ProgramCompleted = $connection->query("SELECT (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND olderChildAward.awardType = 'book') as covingtonCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND olderChildAward.awardType = 'book') as erlangerCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND olderChildAward.awardType = 'book') as durrCount");
+	
+	
   
   ////////////////////////////////////
   //                                //
@@ -184,12 +189,23 @@
       <p>Erlanger: <?php echo $awards['Erlanger'];?></p>
       <p>Durr: <?php echo $awards['Durr'];?></p>
   <div>
-		    <div id="totalPatrons">
+	<div id="totalPatrons">
       <h3>Total Patrons Signed Up: <?php echo $covingtonChildPatronsTotal + $durrChildPatronsTotal + $erlangerChildPatronsTotal;?></h3>
       <p>Covington: <?php echo $covingtonChildPatronsTotal;?></p>
       <p>Erlanger: <?php echo $erlangerChildPatronsTotal;?></p>
       <p>Durr: <?php echo $durrChildPatronsTotal;?></p>
   <div>
+		<?php
+		foreach($ProgramCompleted as $programComplete){
+			
+		?>
+	<div id="firstAward">
+      <h3>Total Patrons Completed Program (First Prize): <?php echo $programComplete['covingtonCount'] + $programComplete['durrCount'] + $programComplete['erlangerCount'];?></h3>
+      <p>Covington: <?php echo $programComplete['covingtonCount'];?></p>
+      <p>Erlanger: <?php echo $programComplete['erlangerCount'];?></p>
+      <p>Durr: <?php echo $programComplete['durrCount'];?></p>
+  <div>
+	<?php } ?>
     
 <h2>Teen Stats</h2>
   <div>
