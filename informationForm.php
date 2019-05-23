@@ -101,8 +101,8 @@ if(isset($_POST['formType'])){
       print_r( $accountSave->error );
     }
 
-    $accountSave->execute();
-
+    $accountSave->execute(); 
+    header("Location: log.php");
   }
 }
 

@@ -170,8 +170,8 @@ window.onload = showlast;
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT SUM(timeRead) AS loggedTime FROM olderChildLog WHERE readerID = '$readerID'");
-      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM olderChildAward WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT SUM(timeRead) AS loggedTime FROM olderChildLog WHERE readerID = '$readerID' AND timestamp >= '$startDate'");
+      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM olderChildAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
       $timeLogged = mysqli_fetch_array($logs)['loggedTime'];
       $prized = mysqli_fetch_array($awarded)['awarded'];
       
@@ -219,7 +219,7 @@ window.onload = showlast;
       <?php 
         if($dn == ""){
       ?>
-      <p>Come to a branch for your next step</p>
+      <p>Come to the branch to claim your prize!</p>
       <?php
       }
         $complete--; //Subtract 1 from the added images loop counter
@@ -241,8 +241,8 @@ window.onload = showlast;
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM youngChildLog WHERE readerID = '$readerID') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID') AS loggedBooks");
-      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM youngChildAward WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM youngChildLog WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate') AS loggedBooks");
+      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM youngChildAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
       $loggedBooks = mysqli_fetch_array($logs)['loggedBooks']; //Find how many books child has logged
       $prized = mysqli_fetch_array($awarded)['awarded']; //How many book prizes have been awarded
       
@@ -398,8 +398,8 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT COUNT(bookTitle) AS booksLogged FROM r2rLog WHERE readerID = '$readerID'");
-      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM r2rAward WHERE readerID = '$readerID'");
+      $logs = $connection->query("SELECT COUNT(bookTitle) AS booksLogged FROM r2rLog WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
+      $awarded = $connection->query("SELECT COUNT(*) AS awarded FROM r2rAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
       $timeLogged = mysqli_fetch_array($logs)['booksLogged'];
       $prized = mysqli_fetch_array($awarded)['awarded'];
       
@@ -464,7 +464,7 @@ if($result['readerCategory'] == 'r2r'){ //Loop for Racing to Read
       $readerID = $result['readerID'];
       
       //SQL Block
-      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM adultLog WHERE readerID = '$readerID') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID') AS count");
+      $logs = $connection->query("SELECT (SELECT COUNT(*) FROM adultLog WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate') + (SELECT COUNT(*) FROM eventRating WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate') AS count");
       $loggedBooks = mysqli_fetch_array($logs, MYSQLI_ASSOC); //Find how many books child has logged
   ?>
   <br class="mobile-only"><button class="mobile-only mobileButton" data-toggle="collapse" data-target="#<?php echo $result['readerID'];?>"><?php echo $result['readerFirstName'] . " " . $result['readerLastName'];?></button>

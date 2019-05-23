@@ -26,17 +26,17 @@ foreach($results as $result){
   if($readerCategory == 'olderChild'){ //If child is older child
     $readerID = $result['readerID'];
     
-    $loggedHours = $connection->query("SELECT SUM(timeRead) AS minutes FROM olderChildLog WHERE readerID = '$readerID'");
+    $loggedHours = $connection->query("SELECT SUM(timeRead) AS minutes FROM olderChildLog WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
     $minutes = mysqli_fetch_array($loggedHours);
     $totalMinutes = $minutes['minutes'] ;
     
-    $awardedTime = $connection->query("SELECT SUM(timeAwarded) AS awarded FROM olderChildAward WHERE readerID = '$readerID'");
+    $awardedTime = $connection->query("SELECT SUM(timeAwarded) AS awarded FROM olderChildAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
     $awardedMinutes = mysqli_fetch_array($awardedTime);
     $totalAwarded = $awardedMinutes['awarded'];
     
     $remainingMinutes = $totalMinutes - $totalAwarded;
         
-      $bookGivenCheck = $connection->query("SELECT COUNT(*) AS book FROM olderChildAward WHERE readerID = '$readerID'");
+      $bookGivenCheck = $connection->query("SELECT COUNT(*) AS book FROM olderChildAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
       
       $bookGiven = mysqli_fetch_array($bookGivenCheck);
       $bookAward = $bookGiven['book'];
@@ -77,12 +77,12 @@ foreach($results as $result){
   }
     elseif($readerCategory == 'youngChild'){ //If reader is young child
       $readerID = $result['readerID'];
-      $loggedBooks = $connection->query("SELECT COUNT(*) AS books FROM youngChildLog WHERE readerID = '$readerID'");
+      $loggedBooks = $connection->query("SELECT COUNT(*) AS books FROM youngChildLog WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
 
       $books = mysqli_fetch_array($loggedBooks);
       $totalBooks = $books['books'] ;
 
-      $awardedBooksQuery = $connection->query("SELECT SUM(booksAwarded) AS awarded FROM youngChildAward WHERE readerID = '$readerID'");
+      $awardedBooksQuery = $connection->query("SELECT SUM(booksAwarded) AS awarded FROM youngChildAward WHERE readerID = '$readerID' AND DATE(timestamp) >= '$startDate'");
 
       $awardedBooks = mysqli_fetch_array($awardedBooksQuery);
       $totalAwarded = $awardedBooks['awarded'];

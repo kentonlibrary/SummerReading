@@ -49,10 +49,11 @@ if(isset($_COOKIE["Barcode"])){
     <div id="login"> <!-- Login form for website -->
       <img src="assets/KCPL_Logo-Horiz_Color.png" width="90%" alt="logo"/>
       <form action="" method="post">
-        <input class="loginField" type="text" placeholder="Library Card/Phone Number" maxlength="14" name="card" id="card"><br>
+        <input class="loginField" type="text" placeholder="Library Card/Phone #" maxlength="14" name="card" id="card"><br>
 <br>
-        <input class="loginField" type="submit" value="Login" id="loginButton" name="loginButton"><br><br>
+        <input class="loginField" type="submit" value="Login/Register" id="loginButton" name="loginButton"><br><br>
     </form>
+	<p>To register, please enter a Library card/phone number then click Login/Register to begin.</p>
 	  </div>
 	
 	</div>
@@ -62,7 +63,7 @@ if(isset($_COOKIE["Barcode"])){
       <h2>CHILDREN (Ages 2-12)</h2>
       Pick up a book log at the Library or register at kentonlibrary.org/src and start reading or listening to books.
       After 5 books or 2.5 hours of reading, return the log to the Library or enter online to receive a book prize.
-      After 10 books or 5 hours of reading, return the log or enter online to receive a T-shirt designed by illustrator Becca Stadtlander OR a drawstring backpack (while supplies last) and a raffle ticket to win a grand prize: your choice of an art, sport or technology basket. 
+      After 10 books or 5 hours of reading, return the log or enter online to receive a special glow-in-the-dark T-shirt OR a drawstring backpack (while supplies last) and a raffle ticket to win a grand prize: your choice of an art, science or technology basket.
       <h2>TEENS (Grades 6-12)</h2>
       Read or listen to any book or magazine or attend any program to enter.
       Enter at kentonlibrary.org/src or by visiting a branch.
