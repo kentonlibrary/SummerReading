@@ -62,34 +62,34 @@
   //                               //
   ///////////////////////////////////
   //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' AND DATE(timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' AND DATE(olderChildLog.timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
   $covingtonChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $covingtonChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' AND DATE(youngChildLog.timestamp) >= '$startDate' GROUP BY youngChildLog.readerID"); 
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $covingtonChildLogsTotal +=$individualYoungLogs['logs'];
   }
   
     //Total Patrons Signed up
-  $covingtonPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington'");
+  $covingtonPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington' AND DATE(account.lastLogin) >= '$startDate'");
   $covingtonPatronsTotal = 0;
   foreach( $covingtonPatrons as $covingtonPatron ){
     $covingtonPatronsTotal +=$covingtonPatron['count'];
   }
 	
 	   //Total Child Patrons Signed up
-  $covingtonChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $covingtonChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Covington' AND DATE(account.lastLogin) >= '$startDate' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
   $covingtonChildPatronsTotal = 0;
   foreach( $covingtonChildPatrons as $covingtonChildPatron ){
     $covingtonChildPatronsTotal +=$covingtonChildPatron['count'];
   }
 	
 	//Total Patrons completed program
-	$ProgramCompleted = $connection->query("SELECT (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND olderChildAward.awardType = 'book') as covingtonCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND olderChildAward.awardType = 'book') as erlangerCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND youngChildAward.awardType = 'book') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND olderChildAward.awardType = 'book') as durrCount");
+	$ProgramCompleted = $connection->query("SELECT (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND youngChildAward.awardType = 'book'  AND DATE(youngChlildAward.timestamp) >= '$startDate') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Covington' AND olderChildAward.awardType = 'book' AND DATE(olderChildAward.timestamp) >= '$startDate') as covingtonCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND youngChildAward.awardType = 'book' AND DATE(youngChildAward.timestamp) >= '$startDate') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Erlanger' AND olderChildAward.awardType = 'book' AND DATE(olderChildAward.timestamp) >= '$startDate') as erlangerCount, (SELECT COUNT(*) as youngCount FROM youngChildAward, account, reader WHERE account.accountID = reader.accountID AND youngChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND youngChildAward.awardType = 'book' AND DATE(youngChildAward.timestamp) >= '$startDate') + (SELECT COUNT(*) as olderCount FROM olderChildAward, account, reader WHERE account.accountID = reader.accountID AND olderChildAward.readerID = reader.readerID AND account.branch = 'Durr' AND olderChildAward.awardType = 'book' AND DATE(olderChildAward.timestamp) >= '$startDate') as durrCount");
 	
 	
   
@@ -99,20 +99,20 @@
   //                                //
   ////////////////////////////////////
     //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' AND DATE(olderChildLog.timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
   $erlangerChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $erlangerChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Erlanger' AND DATE(yongChildLog.timestamp) >= '$startDate' GROUP BY youngChildLog.readerID"); 
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $erlangerChildLogsTotal +=$individualYoungLogs['logs'];
   }
   
   //Total Patrons Signed up
-  $erlangerPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger'"); 
+  $erlangerPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger' AND DATE(account.lastLogin) >= '$startDate'"); 
   $erlangerPatronsTotal = 0;
   foreach( $erlangerPatrons as $erlangerPatron ){
     $erlangerPatronsTotal +=$erlangerPatron['count'];
@@ -120,7 +120,7 @@
 	
 		
 	   //Total Child Patrons Signed up
-  $erlangerChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $erlangerChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Erlanger' AND DATE(account.lastLogin) >= '$startDate' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
   $erlangerChildPatronsTotal = 0;
   foreach( $erlangerChildPatrons as $erlangerChildPatron ){
     $erlangerChildPatronsTotal +=$erlangerChildPatron['count'];
@@ -131,27 +131,27 @@
   //                                //
   ////////////////////////////////////
     //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' AND DATE(olderChildLog.timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $durrChildLogsTotal +=$individualOlderLogs['logs'];
   }
   
   //Younger Child Logs
-  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' GROUP BY youngChildLog.readerID"); 
+  $covingtonYoungChildrensLogs = $connection->query("SELECT CEIL(COUNT(*)/10) as logs FROM youngChildLog, reader, account WHERE youngChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' AND DATE(youngChildLog.timestamp) >= '$startDate' GROUP BY youngChildLog.readerID"); 
   $durrChildLogsTotal = 0;
   foreach( $covingtonYoungChildrensLogs as $individualYoungLogs ){
     $durrChildLogsTotal +=$individualYoungLogs['logs'];
   }
   
   //Total Patrons Signed up
-  $durrPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr'");
+  $durrPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr' AND DATE(account.lastLogin) >= '$startDate'");
   $durrPatronsTotal = 0;
   foreach( $durrPatrons as $durrPatron ){
     $durrPatronsTotal +=$durrPatron['count'];
   }
 	
 	   //Total Child Patrons Signed up
-  $durrChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
+  $durrChildPatrons = $connection->query("SELECT COUNT(*) as count FROM reader, account WHERE reader.accountID = account.accountID and account.branch = 'Durr' AND DATE(account.lastLogin) >= '$startDate' AND (reader.readerCategory = 'olderChild' OR reader.readerCategory = 'youngChild')");
   $durrChildPatronsTotal = 0;
   foreach( $durrChildPatrons as $durrChildPatron ){
     $durrChildPatronsTotal +=$durrChildPatron['count'];
@@ -159,14 +159,14 @@
   
   
   //Awards Given.
-  $youngAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward GROUP BY branch");
+  $youngAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward AND DATE(youngChildAward.timestamp) >= '$startDate' GROUP BY branch");
   
   foreach( $youngAwardsGiven as $awardCount){
     $key = $awardCount['branch'];
     $awards[$key] = $awardCount['awarded'];
   }
   
-   $olderAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM olderChildAward GROUP BY branch");
+   $olderAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM olderChildAward AND DATE(olderChildAward.timestamp) >= '$startDate' GROUP BY branch");
   
   foreach( $olderAwardsGiven as $awardCount){
     $key = $awardCount['branch'];
