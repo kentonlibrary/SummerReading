@@ -62,7 +62,7 @@
   //                               //
   ///////////////////////////////////
   //Older Child Logs
-  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' GROUP BY olderChildLog.readerID"); 
+  $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Covington' AND DATE(timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
   $covingtonChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $covingtonChildLogsTotal +=$individualOlderLogs['logs'];
