@@ -59,7 +59,7 @@ if(isset($_COOKIE["Barcode"])){
 	</div>
   <div id="left"> <!-- More information panel on left side of the page -->
     <div class="details">
-      <h1>Summer Reading Club Guidelines<h1>
+      <h1>Summer Reading Celebration Guidelines<h1>
       <h2>CHILDREN (Ages 2-12)</h2>
       Pick up a book log at the Library or register at kentonlibrary.org/src and start reading or listening to books.
       After 5 books or 2.5 hours of reading, return the log to the Library or enter online to receive a book prize.
