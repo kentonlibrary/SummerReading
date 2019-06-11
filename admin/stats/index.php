@@ -159,14 +159,14 @@
   
   
   //Awards Given.
-  $youngAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward AND DATE(youngChildAward.timestamp) >= '$startDate' GROUP BY branch");
+  $youngAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM youngChildAward WHERE DATE(youngChildAward.timestamp) >= '$startDate' GROUP BY branch");
   
   foreach( $youngAwardsGiven as $awardCount){
     $key = $awardCount['branch'];
     $awards[$key] = $awardCount['awarded'];
   }
   
-   $olderAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM olderChildAward AND DATE(olderChildAward.timestamp) >= '$startDate' GROUP BY branch");
+   $olderAwardsGiven = $connection->query("SELECT branch, COUNT(*) as awarded FROM olderChildAward WHERE DATE(olderChildAward.timestamp) >= '$startDate' GROUP BY branch");
   
   foreach( $olderAwardsGiven as $awardCount){
     $key = $awardCount['branch'];
