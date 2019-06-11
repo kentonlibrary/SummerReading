@@ -65,9 +65,8 @@ if(isset($_COOKIE["Barcode"])){
       After 5 books or 2.5 hours of reading, return the log to the Library or enter online to receive a book prize.
       After 10 books or 5 hours of reading, return the log or enter online to receive a special glow-in-the-dark T-shirt OR a drawstring backpack (while supplies last) and a raffle ticket to win a grand prize: your choice of an art, science or technology basket.
       <h2>TEENS (Grades 6-12)</h2>
-      Read or listen to any book or magazine or attend any program to enter.
-      Enter at kentonlibrary.org/src or by visiting a branch.
-      One winner per branch will be drawn every week for prizes. 
+      Read or listen to books, audio books, E-books and magazine or attend a book related program to enter.
+      Prizes awarded bi-weekly.
       <h2>ADULTS</h2>
       Read or listen to books, audio books, e-books and periodicals to enter.
       Enter at kentonlibrary.org/src or by visiting a branch.

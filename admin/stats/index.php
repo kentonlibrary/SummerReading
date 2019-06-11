@@ -132,6 +132,7 @@
   ////////////////////////////////////
     //Older Child Logs
   $covingtonOlderChildrensLogs = $connection->query("SELECT CEIL(SUM(timeRead)/300) as logs FROM olderChildLog, reader, account WHERE olderChildLog.readerID = reader.readerID AND account.accountID = reader.accountID AND account.branch = 'Durr' AND DATE(olderChildLog.timestamp) >= '$startDate' GROUP BY olderChildLog.readerID"); 
+  $durrChildLogsTotal = 0;
   foreach( $covingtonOlderChildrensLogs as $individualOlderLogs ){
     $durrChildLogsTotal +=$individualOlderLogs['logs'];
   }
