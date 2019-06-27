@@ -64,7 +64,7 @@ $stmt = $connection->query($statsQuery);
       r2rL 
     WHERE 
       r2rL.readerID = r1.readerID 
-      AND DATE(r2rL.timestamp) > $startDate), 0) AS totalBooks, 
+      AND DATE(r2rL.timestamp) > '$startDate'), 0) AS totalBooks, 
   IFNULL((
     SELECT 
       SUM(r2rA.booksAwarded) AS toddler 
@@ -73,7 +73,7 @@ $stmt = $connection->query($statsQuery);
       WHERE 
         r2rA.readerID = r1.readerID 
         AND r2rA.awardType = 'toddler1' 
-        AND DATE(r2rA.timestamp) > $startDate 
+        AND DATE(r2rA.timestamp) > '$startDate' 
       GROUP BY 
         r2rA.awardType), 0) AS toddler1, 
     IFNULL((
@@ -84,7 +84,7 @@ $stmt = $connection->query($statsQuery);
       WHERE 
         r2rA.readerID = r1.readerID 
         AND r2rA.awardType = 'picture1' 
-        AND DATE(r2rA.timestamp) > $startDate 
+        AND DATE(r2rA.timestamp) > '$startDate' 
       GROUP BY r2rA.awardType), 0) AS picture1, 
     IFNULL((
       SELECT 
@@ -95,7 +95,7 @@ $stmt = $connection->query($statsQuery);
       WHERE 
           r2rA.readerID = r1.readerID 
           AND r2rA.awardType = 'easyReader1' 
-          AND DATE(r2rA.timestamp) > $startDate 
+          AND DATE(r2rA.timestamp) > '$startDate' 
       GROUP BY 
           r2rA.awardType), 0) AS easyReader1, 
       IFNULL((
@@ -107,7 +107,7 @@ $stmt = $connection->query($statsQuery);
         WHERE 
           r2rA.readerID = r1.readerID 
           AND r2rA.awardType = 'teacher1' 
-          AND DATE(r2rA.timestamp) > $startDate 
+          AND DATE(r2rA.timestamp) > '$startDate' 
         GROUP BY r2rA.awardType), 0) AS teacher1, 
       IFNULL((
         SELECT 
@@ -118,7 +118,7 @@ $stmt = $connection->query($statsQuery);
         WHERE 
           r2rA.readerID = r1.readerID 
           AND r2rA.awardType = 'toddler2' 
-          AND DATE(r2rA.timestamp) > $startDate 
+          AND DATE(r2rA.timestamp) > '$startDate'
         GROUP BY r2rA.awardType), 0) AS toddler2, 
       IFNULL((
         SELECT 
@@ -129,7 +129,7 @@ $stmt = $connection->query($statsQuery);
         WHERE 
           r2rA.readerID = r1.readerID 
           AND r2rA.awardType = 'picture2' 
-          AND DATE(r2rA.timestamp) > $startDate 
+          AND DATE(r2rA.timestamp) > '$startDate' 
         GROUP BY r2rA.awardType), 0) AS picture2, 
       IFNULL((
         SELECT 
@@ -140,7 +140,7 @@ $stmt = $connection->query($statsQuery);
         WHERE 
           r2rA.readerID = r1.readerID 
           AND r2rA.awardType = 'easyReader2' 
-          AND DATE(r2rA.timestamp) > $startDate 
+          AND DATE(r2rA.timestamp) > '$startDate' 
         GROUP BY r2rA.awardType), 0) AS easyReader2, 
       IFNULL((
         SELECT 
@@ -151,7 +151,7 @@ $stmt = $connection->query($statsQuery);
           WHERE 
             r2rA.readerID = r1.readerID 
             AND r2rA.awardType = 'teacher2' 
-            AND DATE(r2rA.timestamp) > $startDate 
+            AND DATE(r2rA.timestamp) > '$startDate' 
           GROUP BY r2rA.awardType), 0) AS teacher2 
 FROM 
   reader r1 

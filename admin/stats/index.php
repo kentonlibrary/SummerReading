@@ -47,6 +47,10 @@
     $( "#startDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
     $( "#stopDate" ).datepicker();
     $( "#stopDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#adultstartDate" ).datepicker();
+    $( "#adultstartDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#adultstopDate" ).datepicker();
+    $( "#adultstopDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
   } );
   </script>
 </head>
@@ -233,6 +237,21 @@
 
 </div>
 
+<h2>Adult Stats</h2>
+  <div>
+    <h3>Date Range</h3>
+    <form action="asSpreadsheet.php" method="POST">
+      Start Date:<input type="datetime" name="adultstartDate" id="adultstartDate">
+      Stop Date:<input type="datetime" name="adultstopDate" id="adultstopDate">
+      <select name="branch" id="branch">
+	  <option value="All">All</option>
+          <option value="Covington">Covington</option>
+          <option value="Durr">William E. Durr</option>
+          <option value="Erlanger">Erlanger</option>
+        </select>
+      <input type="submit">
+    </form>
+  </div>
     
 <h2>All Stats</h2>
 <div id="totalPatrons">
